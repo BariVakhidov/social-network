@@ -1,0 +1,32 @@
+.navbar {
+    margin: 10px 0px 10px 10px;
+    padding: 20px;
+    grid-area: n;
+    background-color: indigo;
+    text-align: center;
+}
+.nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.friends {
+    margin-top: 40px;
+
+}
+.friendsItems {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+
+}
+.item a{
+    color: white;
+    text-decoration: none;
+}
+
+.item a.active {
+    color: gold;
+}

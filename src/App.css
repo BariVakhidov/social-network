@@ -1,0 +1,23 @@
+h1, h2, h3, h4, p, a {
+    margin: 0;
+    font-size: 100%;
+    font-weight: normal;
+}
+
+.app-wrapper {
+    display: grid;
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 3fr 13fr;
+    grid-template-areas:
+     "h h"
+     "n c";
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.app-wrapper-content {
+    margin: 10px;
+    grid-area: c;
+    background-color: lightblue;
+}

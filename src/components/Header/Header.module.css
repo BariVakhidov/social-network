@@ -1,0 +1,16 @@
+.header{
+    margin: 10px 10px 0px;
+    padding: 5px;
+    grid-area: h;
+    background-color: gray;
+    background-size: 400px 400px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.header img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
