@@ -1,10 +1,12 @@
+import {renderEntireTree} from "../render";
+
 let state = {
     profilePage: {
         posts: [
             {id: 1, message: "Hi, how are you?", likes: 15},
             {id: 2, message: "It is my firs post", likes: 45},
-            {id: 1, message: "Hi, how are you?", likes: 5},
-            {id: 1, message: "Hi, how are you?", likes: 15}
+            {id: 3, message: "Hi, how are you?", likes: 5},
+            {id: 4, message: "Hi, how are you?", likes: 15}
         ]
     },
     dialogsPage: {
@@ -20,12 +22,12 @@ let state = {
 
         messagesData: [
             {id: 1, message: "Hi!"},
-            {id: 2, message: "How are you?"},
+            {id: 1, message: "How are you?"},
             {id: 3, message: "Nigga"},
             {id: 4, message: "Urot"},
-            {id: 5, message: "Kus'"},
+            {id: 1, message: "Kus'"},
             {id: 6, message: "Sup"},
-            {id: 7, message: "Yo"},
+            {id: 1, message: "Yo"},
         ]
     },
     navbar: {
@@ -103,5 +105,28 @@ let state = {
 
         ]
     }
+};
+export let postMessage = (postMessage) => {
+    let newPost = {
+        id:5,
+        message:postMessage,
+        likes:0
+    };
+    state.profilePage.posts.push(newPost);
+    renderEntireTree(state);
+};
+
+export let addLike = (id) => {
+    state.profilePage.posts[id-1].likes++;
+    renderEntireTree(state);
+}
+
+export let addMessage = (message) => {
+    let newMessage = {
+        id: 1,
+        message: message
+    };
+    state.dialogsPage.messagesData.push(newMessage);
+    renderEntireTree(state);
 };
 export default state;

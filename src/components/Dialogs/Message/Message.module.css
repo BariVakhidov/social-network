@@ -1,11 +1,27 @@
 .message {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
     margin: 10px;
+    border-radius: 10px;
+}
+.myMessage {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px;
+    border-radius: 10px;
+}
+.myMessage:hover {
+    background-color: rgba(133, 133, 133, 0.3);
+}
+.message:hover{
+    background-color: rgba(133, 133, 133, 0.3);
 }
 .userImg {
-    background-image: url("https://static01.nyt.com/images/2016/09/28/us/17xp-pepethefrog_web1/28xp-pepefrog-articleLarge.jpg?quality=75&auto=webp&disable=upscale");
+    background-image: url('https://36.media.tumblr.com/5f95de2096cf952d46b92187140b32d3/tumblr_ngkinytY101s6enrfo1_500.jpg');
     background-size: cover;
     height: 50px;
     width: 50px;
