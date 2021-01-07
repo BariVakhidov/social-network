@@ -1,4 +1,11 @@
-import {renderEntireTree} from "../render";
+
+let renderEntireTree = () => {
+
+};
+
+export let subscriber = (observer) => {
+    renderEntireTree = observer;
+}
 
 let state = {
     profilePage: {
@@ -49,65 +56,10 @@ let state = {
                 name: "Lerchick",
                 imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
             },
-            {
-                id: 3,
-                name: "Lerchick",
-                imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
-            },
-            {
-                id: 3,
-                name: "Lerchick",
-                imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
-            },
-            {
-                id: 3,
-                name: "Lerchick",
-                imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
-            },
-            {
-                id: 3,
-                name: "Lerchick",
-                imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
-            },
-            {
-                id: 3,
-                name: "Lerchick",
-                imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
-            },
-            {
-                id: 3,
-                name: "Lerchick",
-                imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
-            },
-            {
-                id: 3,
-                name: "Lerchick",
-                imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
-            },
-            {
-                id: 3,
-                name: "Lerchick",
-                imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
-            },
-            {
-                id: 3,
-                name: "Lerchick",
-                imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
-            },
-            {
-                id: 3,
-                name: "Lerchick",
-                imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
-            },
-            {
-                id: 3,
-                name: "Lerchick",
-                imageURL: "https://i.guim.co.uk/img/media/327e46c3ab049358fad80575146be9e0e65686e7/0_0_1023_742/master/1023.jpg?width=700&quality=85&auto=format&fit=max&s=3d74c30c02485d03b0166f4908ddaa35"
-            }
-
         ]
     }
 };
+
 export let postMessage = () => {
     let newPost = {
         id:5,
@@ -143,4 +95,5 @@ export let addMessage = () => {
     state.dialogsPage.newMessageText = "";
     renderEntireTree(state);
 };
+
 export default state;

@@ -9,7 +9,8 @@ const ProfileInfo = () => {
                 <div>
                     <img
                         className={s.avatar}
-                        src="https://upload.wikimedia.org/wikipedia/ru/0/00/The_Child_aka_Baby_Yoda_%28Star_Wars%29.jpg"
+                        alt="ava"
+                            src="https://upload.wikimedia.org/wikipedia/ru/0/00/The_Child_aka_Baby_Yoda_%28Star_Wars%29.jpg"
                     />
                 </div>
                 <div className={s.aboutYourself}>

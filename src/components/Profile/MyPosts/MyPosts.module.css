@@ -5,7 +5,7 @@
 .posts {
     display: flex;
     flex-direction: column-reverse;
-    background-color: azure;
+
 }
 .newPost {
     margin-top: 10px;
