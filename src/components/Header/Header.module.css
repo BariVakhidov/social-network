@@ -1,5 +1,5 @@
 .header{
-    margin: 10px 10px 0px;
+    margin: 10px 10px 0;
     padding: 5px;
     grid-area: h;
     background-color: gray;
@@ -7,10 +7,15 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    border-radius: 10px;
+    border: 2px solid #5a5a5a;
 }
 
 .header img {
     width: 40px;
     height: 40px;
     margin-right: 10px;
+    border-radius: 10px;
+    border: 2px solid #5a5a5a;
 }
+

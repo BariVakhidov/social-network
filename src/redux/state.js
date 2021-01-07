@@ -29,7 +29,8 @@ let state = {
             {id: 1, message: "Kus'"},
             {id: 6, message: "Sup"},
             {id: 1, message: "Yo"},
-        ]
+        ],
+        newMessageText: "New message"
     },
     navbar: {
         friends: [
@@ -121,19 +122,25 @@ export let postMessage = () => {
 export let updateNewPostMessage = (newText) => {
     state.profilePage.newPostText = newText;
     renderEntireTree(state);
-}
+};
+
+export let updateNewMessageText = (newText) => {
+    state.dialogsPage.newMessageText = newText;
+    renderEntireTree(state);
+};
 
 export let addLike = (id) => {
     state.profilePage.posts[id-1].likes++;
     renderEntireTree(state);
-}
+};
 
-export let addMessage = (message) => {
+export let addMessage = () => {
     let newMessage = {
         id: 1,
-        message: message
+        message: state.dialogsPage.newMessageText
     };
     state.dialogsPage.messagesData.push(newMessage);
+    state.dialogsPage.newMessageText = "";
     renderEntireTree(state);
 };
 export default state;

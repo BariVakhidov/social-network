@@ -1,9 +1,11 @@
 .navbar {
-    margin: 10px 0px 10px 10px;
+    margin: 10px 0 10px 10px;
     padding: 20px;
     grid-area: n;
-    background-color: indigo;
+    background-color: #8aa3fc;
     text-align: center;
+    border-radius: 10px;
+    border: 2px solid #5a5a5a;
 }
 .nav {
     display: flex;
