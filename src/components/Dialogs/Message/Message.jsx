@@ -3,7 +3,7 @@ import s from "./Message.module.css";
 import {NavLink} from "react-router-dom";
 
 const Message = (props) => {
-    if (props.id === 1){
+    if (props.id % 2 === 0){
         return (
             <div className={s.myMessage}>
                 <div>

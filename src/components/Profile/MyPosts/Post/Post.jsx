@@ -5,7 +5,7 @@ const Post = (props) => {
     console.log(props.message);
 
     let addLike = () => {
-        props.addLike(props.id)
+        props.dispatch({type:"ADD-LIKE", id: props.id});
     };
 
     return (
