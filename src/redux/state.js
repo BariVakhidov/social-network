@@ -1,3 +1,9 @@
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-MESSAGE";
+const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+const ADD_LIKE = "ADD-LIKE";
+const ADD_MESSAGE = "ADD-MESSAGE";
+
 let store = {
     _state: {
         profilePage: {
@@ -61,28 +67,28 @@ let store = {
         this._callSubscriber = observer;
     },
 
-   /* postMessage() {
-        let newPost = {
-            id: this._state.profilePage.posts.length + 1,
-            message: this._state.profilePage.newPostText,
-            likes: 0
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = "";
-        this._callSubscriber(this._state);
-    },*/
-   /* updateNewPostMessage(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },*/
+    /* postMessage() {
+         let newPost = {
+             id: this._state.profilePage.posts.length + 1,
+             message: this._state.profilePage.newPostText,
+             likes: 0
+         };
+         this._state.profilePage.posts.push(newPost);
+         this._state.profilePage.newPostText = "";
+         this._callSubscriber(this._state);
+     },*/
+    /* updateNewPostMessage(newText) {
+         this._state.profilePage.newPostText = newText;
+         this._callSubscriber(this._state);
+     },*/
     /*updateNewMessageText(newText) {
         this._state.dialogsPage.newMessageText = newText;
         this._callSubscriber(this._state);
     },*/
-   /* addLike(id) {
-        this._state.profilePage.posts[id - 1].likes++;
-        this._callSubscriber(this._state);
-    },*/
+    /* addLike(id) {
+         this._state.profilePage.posts[id - 1].likes++;
+         this._callSubscriber(this._state);
+     },*/
     /*addMessage() {
         let newMessage = {
             id: Math.random() * 10,
@@ -95,7 +101,7 @@ let store = {
 
     dispatch(action) {
         switch (action.type) {
-            case "ADD-POST":
+            case ADD_POST:
                 let newPost = {
                     id: this._state.profilePage.posts.length + 1,
                     message: this._state.profilePage.newPostText,
@@ -105,19 +111,19 @@ let store = {
                 this._state.profilePage.newPostText = "";
                 this._callSubscriber(this._state);
                 break;
-            case "UPDATE-NEW-POST-MESSAGE":
+            case UPDATE_NEW_POST_TEXT:
                 this._state.profilePage.newPostText = action.newText;
                 this._callSubscriber(this._state);
                 break;
-            case "UPDATE-NEW-MESSAGE-TEXT":
+            case UPDATE_NEW_MESSAGE_TEXT:
                 this._state.dialogsPage.newMessageText = action.newText;
                 this._callSubscriber(this._state);
                 break;
-            case "ADD-LIKE":
+            case ADD_LIKE:
                 this._state.profilePage.posts[action.id - 1].likes++;
                 this._callSubscriber(this._state);
                 break;
-            case "ADD-MESSAGE":
+            case ADD_MESSAGE:
                 let newMessage = {
                     id: Math.floor(Math.random() * 10),
                     message: this._state.dialogsPage.newMessageText
@@ -131,5 +137,12 @@ let store = {
         }
     }
 };
+
+export const addLikeActionCreator = (id) => ({type: ADD_LIKE, id:id});
+export const addMessageActionCreator = () => ({type:ADD_MESSAGE});
+export const updateNewMessageText = (text) => ({type:UPDATE_NEW_MESSAGE_TEXT, newText:text});
+export const updateNewPostTextActionCreator = (text) => ({type:UPDATE_NEW_POST_TEXT, newText: text});
+export const addPostActionCreator = () => ({type:ADD_POST});
+
 export default store;
 window.state = store.getState().dialogsPage.messagesData;

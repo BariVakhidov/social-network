@@ -1,11 +1,12 @@
 import React from "react";
 import s from './Posts.module.css';
+import {addLikeActionCreator} from "../../../../redux/state";
 
 const Post = (props) => {
     console.log(props.message);
 
     let addLike = () => {
-        props.dispatch({type:"ADD-LIKE", id: props.id});
+        props.dispatch(addLikeActionCreator(props.id));
     };
 
     return (

@@ -3,6 +3,7 @@ import s from './Dialogs.module.css';
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import {NavLink} from "react-router-dom";
+import {addMessageActionCreator, updateNewMessageText} from "../../redux/state";
 
 const Dialogs = (props) => {
     let dialogsItems = props.dialogsPage.dialogsData.map(d => <DialogsItem name={d.name} id={d.id}/>);
@@ -11,12 +12,12 @@ const Dialogs = (props) => {
     let newMessage = React.createRef();
 
     let sentMessage = () => {
-        props.dispatch({type:"ADD-MESSAGE"});
+        props.dispatch(addMessageActionCreator());
     };
 
     let onChange = () => {
         let text = newMessage.current.value;
-        props.dispatch({type:"UPDATE-NEW-MESSAGE-TEXT", newText: text});
+        props.dispatch(updateNewMessageText(text));
     };
     console.log(props.dialogsPage.newMessageText);
     return (
@@ -24,7 +25,7 @@ const Dialogs = (props) => {
             <div className={s.dialogsItems}>
                 {dialogsItems}
                 <div className={s.addDialog}>
-                    <NavLink to='/friends'> <img alt="friend" src="https://icons-for-free.com/iconfiles/png/512/add+character+increase+math+plus+sign+icon-1320184998988139546.png"/></NavLink>
+                    <NavLink to='/friends'> <img onClick={sentMessage} alt="friend" src="https://icons-for-free.com/iconfiles/png/512/add+character+increase+math+plus+sign+icon-1320184998988139546.png"/></NavLink>
                 </div>
             </div>
             <div>
