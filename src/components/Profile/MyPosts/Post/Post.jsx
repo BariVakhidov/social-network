@@ -1,9 +1,8 @@
 import React from "react";
 import s from './Posts.module.css';
-import {addLikeActionCreator} from "../../../../redux/state";
+import {addLikeActionCreator} from "../../../../redux/profile-reducer";
 
 const Post = (props) => {
-    console.log(props.message);
 
     let addLike = () => {
         props.dispatch(addLikeActionCreator(props.id));
@@ -21,13 +20,13 @@ const Post = (props) => {
                     {props.message}
                 </div>
             </div>
-                <div className={s.like}>
-                    <button className='button' onClick={addLike}>
-                        <img className={s.likeLogo} alt="like button" src='https://cdn.worldvectorlogo.com/logos/like-2.svg'
-                             title='Like'/>
-                    </button>
-                    <span className="like"> likes: </span>{props.likes}
-                </div>
+            <div className={s.like}>
+                <button className='button' onClick={addLike}>
+                    <img className={s.likeLogo} alt="like button" src='https://cdn.worldvectorlogo.com/logos/like-2.svg'
+                         title='Like'/>
+                </button>
+                <span className="like"> likes: </span>{props.likes}
+            </div>
         </div>
     );
 };

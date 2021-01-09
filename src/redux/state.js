@@ -1,8 +1,6 @@
-const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
-const ADD_LIKE = "ADD-LIKE";
-const ADD_MESSAGE = "ADD-MESSAGE";
+import profileReducer from "./profile-reducer";
+import dialogReducer from "./dialogs-reducer";
+import navbarReducer from "./navbar-reducer";
 
 let store = {
     _state: {
@@ -13,7 +11,7 @@ let store = {
                 {id: 3, message: "Hi, how are you?", likes: 5},
                 {id: 4, message: "Hi, how are you?", likes: 15}
             ],
-            newPostText: "New post"
+            newPostText: ""
         },
         dialogsPage: {
             dialogsData: [
@@ -35,7 +33,7 @@ let store = {
                 {id: 6, message: "Sup"},
                 {id: 1, message: "Yo"},
             ],
-            newMessageText: "New message"
+            newMessageText: ""
         },
         navbar: {
             friends: [
@@ -67,82 +65,13 @@ let store = {
         this._callSubscriber = observer;
     },
 
-    /* postMessage() {
-         let newPost = {
-             id: this._state.profilePage.posts.length + 1,
-             message: this._state.profilePage.newPostText,
-             likes: 0
-         };
-         this._state.profilePage.posts.push(newPost);
-         this._state.profilePage.newPostText = "";
-         this._callSubscriber(this._state);
-     },*/
-    /* updateNewPostMessage(newText) {
-         this._state.profilePage.newPostText = newText;
-         this._callSubscriber(this._state);
-     },*/
-    /*updateNewMessageText(newText) {
-        this._state.dialogsPage.newMessageText = newText;
-        this._callSubscriber(this._state);
-    },*/
-    /* addLike(id) {
-         this._state.profilePage.posts[id - 1].likes++;
-         this._callSubscriber(this._state);
-     },*/
-    /*addMessage() {
-        let newMessage = {
-            id: Math.random() * 10,
-            message: this._state.dialogsPage.newMessageText
-        };
-        this._state.dialogsPage.messagesData.push(newMessage);
-        this._state.dialogsPage.newMessageText = "";
-        this._callSubscriber(this._state);
-    },*/
-
     dispatch(action) {
-        switch (action.type) {
-            case ADD_POST:
-                let newPost = {
-                    id: this._state.profilePage.posts.length + 1,
-                    message: this._state.profilePage.newPostText,
-                    likes: 0
-                };
-                this._state.profilePage.posts.push(newPost);
-                this._state.profilePage.newPostText = "";
-                this._callSubscriber(this._state);
-                break;
-            case UPDATE_NEW_POST_TEXT:
-                this._state.profilePage.newPostText = action.newText;
-                this._callSubscriber(this._state);
-                break;
-            case UPDATE_NEW_MESSAGE_TEXT:
-                this._state.dialogsPage.newMessageText = action.newText;
-                this._callSubscriber(this._state);
-                break;
-            case ADD_LIKE:
-                this._state.profilePage.posts[action.id - 1].likes++;
-                this._callSubscriber(this._state);
-                break;
-            case ADD_MESSAGE:
-                let newMessage = {
-                    id: Math.floor(Math.random() * 10),
-                    message: this._state.dialogsPage.newMessageText
-                };
-                this._state.dialogsPage.messagesData.push(newMessage);
-                this._state.dialogsPage.newMessageText = "";
-                this._callSubscriber(this._state);
-                break;
-            default:
-                console.log("Nothing happens...")
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage,action);
+        this._state.dialogsPage = dialogReducer(this._state.dialogsPage,action);
+        this._state.navbar = navbarReducer(this._state.navbar,action);
+        this._callSubscriber(this._state);
     }
 };
-
-export const addLikeActionCreator = (id) => ({type: ADD_LIKE, id:id});
-export const addMessageActionCreator = () => ({type:ADD_MESSAGE});
-export const updateNewMessageText = (text) => ({type:UPDATE_NEW_MESSAGE_TEXT, newText:text});
-export const updateNewPostTextActionCreator = (text) => ({type:UPDATE_NEW_POST_TEXT, newText: text});
-export const addPostActionCreator = () => ({type:ADD_POST});
 
 export default store;
 window.state = store.getState().dialogsPage.messagesData;
