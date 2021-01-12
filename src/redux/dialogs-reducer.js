@@ -16,12 +16,12 @@ let initialState = {
 
     messagesData: [
         {id: 1, message: "Hi!"},
-        {id: 1, message: "How are you?"},
+        {id: 2, message: "How are you?"},
         {id: 3, message: "Nigga"},
         {id: 4, message: "Urot"},
-        {id: 1, message: "Kus'"},
+        {id: 5, message: "Kus'"},
         {id: 6, message: "Sup"},
-        {id: 1, message: "Yo"},
+        {id: 7, message: "Yo"},
     ],
     newMessageText: ""
 };
@@ -29,16 +29,20 @@ let initialState = {
 const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newText;
-            return state;
+            return {
+                ...state,
+                newMessageText: action.newText
+            };
         case SEND_MESSAGE:
             let newMessage = {
                 id: Math.floor(Math.random() * 10),
                 message: state.newMessageText
             };
-            state.messagesData.push(newMessage);
-            state.newMessageText = "";
-            return state;
+            return {
+                ...state,
+                newMessageText: "",
+                messagesData: [...state.messagesData, newMessage]
+            };
         default:
             return state;
     }

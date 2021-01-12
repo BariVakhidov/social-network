@@ -8,6 +8,7 @@ import Friends from "./Friend/Friends";
 
 const Nav = (props) => {
    /* let friends = (props.state.friends).map(f => <Friend.jsx image={f.imageURL} />);*/
+
     return (
         <nav className={s.navbar}>
             <div className={s.nav}>
@@ -30,7 +31,7 @@ const Nav = (props) => {
             <div className={s.item + " " + s.friends}>
                 <NavLink to="/friends" activeClassName={s.active}>Friends</NavLink>
                 <div className={s.friendsItems}>
-                    {props.navbar.friends.map(f => <Friends name = {f.name} id={f.id} image={f.imageURL}/>) }
+                    {props.navbar.friends.map(f => <Friends name = {f.name} id={f.id} image={f.imageURL} key={f.id}/>) }
                 </div>
             </div>
         </nav>

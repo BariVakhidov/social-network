@@ -26,12 +26,12 @@ let store = {
 
             messagesData: [
                 {id: 1, message: "Hi!"},
-                {id: 1, message: "How are you?"},
+                {id: 2, message: "How are you?"},
                 {id: 3, message: "Nigga"},
                 {id: 4, message: "Urot"},
-                {id: 1, message: "Kus'"},
+                {id: 5, message: "Kus'"},
                 {id: 6, message: "Sup"},
-                {id: 1, message: "Yo"},
+                {id: 7, message: "Yo"},
             ],
             newMessageText: ""
         },

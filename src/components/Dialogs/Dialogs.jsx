@@ -6,8 +6,8 @@ import {NavLink} from "react-router-dom";
 
 const Dialogs = (props) => {
 
-    let dialogsItems = props.dialogsPage.dialogsData.map(d => <DialogsItem name={d.name} id={d.id}/>);
-    let messages = props.dialogsPage.messagesData.map(m => <Message message={m.message} id={m.id}/>);
+    let dialogsItems = props.dialogsPage.dialogsData.map(d => <DialogsItem name={d.name} id={d.id} key={d.id}/>);
+    let messages = props.dialogsPage.messagesData.map(m => <Message message={m.message} id={m.id} key={m.id}/>);
 
 
     let onSendMessageClick = () => {
@@ -18,7 +18,7 @@ const Dialogs = (props) => {
         let text = event.target.value;
         props.updateNewMessageText(text);
     };
-
+    console.log(props.dialogsPage.newMessageText);
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>

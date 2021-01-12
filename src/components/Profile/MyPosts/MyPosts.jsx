@@ -7,7 +7,8 @@ const MyPosts = (props) => {
     let postsElements = props.posts.map(p => <Post message={p.message}
                                                    likes={p.likes}
                                                    addLike={props.addLike}
-                                                   id={p.id}/>);
+                                                   id={p.id}
+                                                   key={p.id}/>);
 
     let onAddPostClick = () => {
         props.addPost();
