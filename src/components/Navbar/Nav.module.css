@@ -32,3 +32,10 @@
 .item a.active {
     color: gold;
 }
+.item {
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+.item:hover {
+    background-color: rgba(133, 133, 133, 0.3);
+}

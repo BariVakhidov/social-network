@@ -31,10 +31,16 @@ const profileReducer = (state = initialState, action) => {
                 posts: [...state.posts, newPost]
             };
         case ADD_LIKE:
-            let stateCopy = {...state};
-            stateCopy.posts = [...state.posts];
-            stateCopy.posts[action.id - 1].likes++;
-            return stateCopy;
+            return ({
+                    ...state,
+                    posts: state.posts.map(p => {
+                        if (p.id === action.id) {
+                            let likesCount = p.likes;
+                            return {...p, likes: ++likesCount}
+                        }
+                        return p;
+                    })
+                });
         case UPDATE_NEW_POST_TEXT:
             return {
                 ...state,
