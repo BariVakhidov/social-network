@@ -10,7 +10,8 @@ const MyPosts = (props) => {
                                            likesCount={p.likesCount}
                                            comments={p.comments}
                                            addLike={props.addLike}
-                                           deletePost={props.deletePost}/>);
+                                           deletePost={props.deletePost}
+                                           key={p.id}/>);
 
     let onPostChange = (event) => {
         let text = event.target.value;
