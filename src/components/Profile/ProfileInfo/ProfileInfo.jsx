@@ -1,7 +1,12 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
+import Preloader from "../../common/Preloader/Preloader";
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+    if (!props.profile) {
+        return <Preloader/>
+    }
+
     return (
         <div>
             <div className={s.back}></div>
@@ -10,14 +15,17 @@ const ProfileInfo = () => {
                     <img
                         className={s.avatar}
                         alt="ava"
-                            src="https://upload.wikimedia.org/wikipedia/ru/0/00/The_Child_aka_Baby_Yoda_%28Star_Wars%29.jpg"
+                            src={props.profile.photos.large ? props.profile.photos.large: "https://upload.wikimedia.org/wikipedia/ru/0/00/The_Child_aka_Baby_Yoda_%28Star_Wars%29.jpg"}
                     />
                 </div>
                 <div className={s.aboutYourself}>
+                    {props.profile.aboutMe}
                     <p>Status</p>
-                    <h3>Vakhidov B.K.</h3>
-                    <p>22 years old</p>
-                    <p>Worst programmer</p>
+                    <h3>{props.profile.fullName}</h3>
+                    <p>{props.profile.lookingForAJob ? "lookingForAJob" : "-"}</p>
+                    <p>{props.profile.lookingForAJobDescription}</p>
+                </div>
+                <div className={s.contacts}>
                 </div>
             </div>
         </div>
