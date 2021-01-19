@@ -5,7 +5,7 @@
     background-color: gray;
     background-size: 400px 400px;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
     border-radius: 10px;
     border: 2px solid #5a5a5a;
@@ -18,4 +18,16 @@
     border-radius: 10px;
     border: 2px solid #5a5a5a;
 }
-
+.logo {
+    display: flex;
+    align-items: center;
+}
+.auth {
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px;
+}
+.auth:hover {
+    background-color: #5a5a5a ;
+}

@@ -3,12 +3,14 @@ import dialogReducer from "./dialogs-reducer";
 import navbarReducer from "./navbar-reducer";
 import usersReducer from "./users-reducer";
 import profileReducer from "./profile-reducer";
+import authReducer from "./auth-reducer";
 
 let reducers = combineReducers({
         profilePage: profileReducer,
         dialogsPage: dialogReducer,
         navbar: navbarReducer,
-        usersPage: usersReducer
+        usersPage: usersReducer,
+        auth: authReducer
     }
 );
 
