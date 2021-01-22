@@ -1,3 +1,6 @@
+import {usersAPI} from "../api/api";
+import {setFriendsCount} from "./navbar-reducer";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
@@ -6,8 +9,8 @@ const SET_TOTAL_USERS = "SET_TOTAL_USERS";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
 
-export const follow = (userId) => ({type: FOLLOW, userId});
-export const unFollow = (userId) => ({type: UNFOLLOW, userId});
+export const followSuccess = (userId) => ({type: FOLLOW, userId});
+export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId});
 export const setUsers = (users) => ({type: SET_USERS, users});
 export const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber});
 export const setTotalUsers = (totalUsers) => ({type: SET_TOTAL_USERS, totalUsers});
@@ -62,10 +65,41 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 followingProgress: action.isFetching ? [...state.followingProgress,action.userId]
-        :state.followingProgress.filter(id => id != action.userId)
+        :state.followingProgress.filter(id => id !== action.userId)
                 }
         default:
             return state;
     }
 };
 export default usersReducer;
+
+export const getUsers = (currentPage,pageSize) => (dispatch) => {
+   dispatch(toggleIsFetching(true));
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsers(data.totalCount));
+
+    });
+};
+export const unfollowUser = (userId, friendsCount) => (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    usersAPI.unFollowUser(userId).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(unfollowSuccess(userId));
+            dispatch(setFriendsCount(friendsCount-1));
+        }
+       dispatch(toggleFollowingProgress(false,userId));
+    })
+};
+
+export const followUser = (userId,friendsCount) => (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    usersAPI.followUser(userId).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(followSuccess(userId));
+            dispatch(setFriendsCount(friendsCount+1));
+        }
+        dispatch(toggleFollowingProgress(false,userId));
+    })
+};

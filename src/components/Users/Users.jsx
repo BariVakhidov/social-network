@@ -28,23 +28,16 @@ const Users = (props) => {
                             </NavLink>
                         </div>
                         <div className={s.followButton}>
-                            {u.followed ? <button disabled={props.followingProgress.some(id=> id===u.id)} onClick={() => {
-                                props.toggleFollowingProgress(true, u.id);
-                                props.unFollowUser(u.id).then(data => {
-                                    if (data.resultCode == 0) {
-                                        props.unFollow(u.id);
-                                    }
-                                    props.toggleFollowingProgress(false,u.id);
-                                })
-                            }}>Unfollow</button> : <button disabled={props.followingProgress.some(id => id === u.id)} onClick={() => {
-                                props.toggleFollowingProgress(true,u.id);
-                                props.followUser(u.id).then(data => {
-                                    if (data.resultCode == 0) {
-                                        props.follow(u.id);
-                                    }
-                                    props.toggleFollowingProgress(false,u.id);
-                                });
-                            }}>Follow</button>}
+                            {u.followed ? <button disabled={props.followingProgress.some(id => id === u.id)}
+                                                  onClick={() => {
+                                                      props.unfollowUser(u.id, props.friendsCount);
+                                                  }}>
+                                    Unfollow</button>
+                                : <button disabled={props.followingProgress.some(id => id === u.id)}
+                                          onClick={() => {
+                                              props.followUser(u.id, props.friendsCount);
+                                          }}>
+                                    Follow</button>}
                         </div>
                     </div>
                     <div className={s.userInfo}>

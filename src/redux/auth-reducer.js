@@ -1,3 +1,5 @@
+import {loginAPI, profileAPI} from "../api/api";
+
 let initialState = {
     userId: null,
     login: null,
@@ -33,3 +35,16 @@ const authReducer = (state = initialState, action) => {
 };
 
 export default authReducer;
+
+export const auth = () => (dispatch) => {
+    loginAPI.login().then(data => {
+        if (data.resultCode === 0) {
+            let {id, login, email} = data.data;
+           dispatch(setUserData(id, login, email));
+            profileAPI.getProfile(id).then(response => {
+                dispatch(setCurrentUser(response.data));
+            });
+        }
+
+    });
+}

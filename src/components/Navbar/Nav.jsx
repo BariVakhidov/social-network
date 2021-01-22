@@ -33,6 +33,7 @@ const Nav = (props) => {
             </div>
             <div className={s.item + " " + s.friends}>
                 <NavLink to="/friends" activeClassName={s.active}>Friends</NavLink>
+                <div>{props.friendsCount}</div>
                 <div className={s.friendsItems}>
                     {props.friends.map(f => <Friends name = {f.name} id={f.id} image={f.photos.small} key={f.id}/>) }
                 </div>
