@@ -23,14 +23,27 @@ const Users = (props) => {
                     <div className={s.firstUserInfo}>
                         <div>
                             <NavLink to={'/profile/' + u.id}>
-                            <img className={s.userPhoto} src={u.photos.small != null ? u.photos.small : userPhoto} alt=""/>
+                                <img className={s.userPhoto} src={u.photos.small != null ? u.photos.small : userPhoto}
+                                     alt=""/>
                             </NavLink>
                         </div>
                         <div className={s.followButton}>
-                            {u.isFollow ? <button onClick={() => {
-                                props.unfollow(u.id)
-                            }}>Unfollow</button> : <button onClick={() => {
-                                props.follow(u.id)
+                            {u.followed ? <button disabled={props.followingProgress.some(id=> id===u.id)} onClick={() => {
+                                props.toggleFollowingProgress(true, u.id);
+                                props.unFollowUser(u.id).then(data => {
+                                    if (data.resultCode == 0) {
+                                        props.unFollow(u.id);
+                                    }
+                                    props.toggleFollowingProgress(false,u.id);
+                                })
+                            }}>Unfollow</button> : <button disabled={props.followingProgress.some(id => id === u.id)} onClick={() => {
+                                props.toggleFollowingProgress(true,u.id);
+                                props.followUser(u.id).then(data => {
+                                    if (data.resultCode == 0) {
+                                        props.follow(u.id);
+                                    }
+                                    props.toggleFollowingProgress(false,u.id);
+                                });
                             }}>Follow</button>}
                         </div>
                     </div>

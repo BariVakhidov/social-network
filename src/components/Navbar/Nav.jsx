@@ -34,7 +34,10 @@ const Nav = (props) => {
             <div className={s.item + " " + s.friends}>
                 <NavLink to="/friends" activeClassName={s.active}>Friends</NavLink>
                 <div className={s.friendsItems}>
-                    {props.navbar.friends.map(f => <Friends name = {f.name} id={f.id} image={f.imageURL} key={f.id}/>) }
+                    {props.friends.map(f => <Friends name = {f.name} id={f.id} image={f.photos.small} key={f.id}/>) }
+                </div>
+                <div>
+                    <button>Show more</button>
                 </div>
             </div>
         </nav>

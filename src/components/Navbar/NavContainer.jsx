@@ -1,20 +1,25 @@
-
+import React from "react"
 import {connect} from "react-redux";
 import Nav from "./Nav";
+import {setFriends} from "../../redux/navbar-reducer";
+import {friendsAPI} from "../../api/api";
 
+class NavContainer extends React.Component {
+    componentDidMount() {
+        friendsAPI.displayFriends().then(data => {
+            this.props.setFriends(data.items);
+        });
+    };
+
+    render() {
+        return <Nav {...this.props}/>
+    };
+}
 
 let mapStateToProps = (state) => {
     return {
-        navbar: state.navbar
+        friends: state.navbar.friends
     };
 };
 
-let mapDispatchToProps = () => {
-    return {
-
-    }
-}
-
-const NavContainer = connect(mapStateToProps, mapDispatchToProps)(Nav);
-
-export default NavContainer;
+export default connect(mapStateToProps, {setFriends})(NavContainer);

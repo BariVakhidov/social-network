@@ -1,14 +1,15 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import s from './Friends.module.css';
+import userPhoto from '../../../assets/pepe.gif';
 
 const Friends = (props) => {
-    let path = "/friends" + props.id;
+    let path = "/friends/" + props.id;
     return (
         <div className={s.friend}>
             <NavLink to={path}>
                 <div className={s.container}>
-                <img src={props.image}/>
+                <img alt="userPhoto" src={props.image != null ? props.image : userPhoto}/>
                 <div className={s.name}>
                     {props.name}
                 </div>
