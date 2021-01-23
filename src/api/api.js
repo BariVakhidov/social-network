@@ -23,11 +23,17 @@ export const loginAPI = {
 export const profileAPI = {
     getProfile(id) {
         return(instance.get(`profile/${id}`));
-    }
+    },
+    getStatus(userId) {
+        return (instance.get(`profile/status/${userId}`));
+    },
+    updateStatus(status) {
+        return (instance.put(`profile/status`, {status: status}));
+    },
 };
 
 export const friendsAPI = {
     displayFriends() {
-        return (instance.get(`users?page=1&count=3&friend=true`).then(response => response.data));
+        return (instance.get(`users?page=1&count=+3&friend=true`).then(response => response.data));
     }
 }
