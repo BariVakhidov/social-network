@@ -54,7 +54,6 @@ let initialState = {
             newCommentText: ""
         },
     ],
-    newPostText: '',
     profile: null,
     status: ""
 }
@@ -62,16 +61,14 @@ const ADD_POST = "ADD_POST";
 const DELETE_POST = "DELETE_POST";
 const ADD_LIKE = "ADD_LIKE";
 const LIKE_COMMENT = "LIKE_COMMENT";
-const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
 const SET_PROFILE = "SET_PROFILE";
 const SET_STATUS = "SET_STATUS";
 
 
-export const addPostAC = () => ({type: ADD_POST});
+export const addPostAC = (newText) => ({type: ADD_POST, newText});
 export const deletePostAC = (postId) => ({type: DELETE_POST, postId});
 export const addLikeAC = (postId) => ({type: ADD_LIKE, postId});
 export const likeCommentAC = (commentId) => ({type: LIKE_COMMENT, commentId});
-export const updateNewPostTextAC = (newText) => ({type: UPDATE_NEW_POST_TEXT, newText});
 export const setUserProfile = (profile) => ({type: SET_PROFILE, profile});
 export const setStatus = (status) => ({type: SET_STATUS, status});
 
@@ -83,7 +80,7 @@ const profileReducer = (state = initialState, action) => {
                 id: state.posts.length + 1,
                 name: "Bary",
                 userImage: "https://media.pri.org/s3fs-public/styles/open_graph/public/story/images/Crying-Frog-Meme-06.jpg?itok=79C7E-DY",
-                postText: state.newPostText,
+                postText: action.newText,
                 likesCount: 0,
                 comments: [],
                 newCommentText: ""
@@ -102,11 +99,6 @@ const profileReducer = (state = initialState, action) => {
                     }
                     return p;
                 })
-            }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText,
             }
         case SET_PROFILE:
             return {...state,  profile: action.profile};

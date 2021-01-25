@@ -15,8 +15,11 @@ export const usersAPI = {
 };
 
 export const loginAPI = {
-    login() {
+    loginMe() {
         return(instance.get('auth/me').then(response => response.data));
+    },
+    auth(loginInformation) {
+        return(instance.post('auth/login', loginInformation).then(response => response.data));
     }
 };
 

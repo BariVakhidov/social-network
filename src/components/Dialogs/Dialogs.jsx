@@ -4,21 +4,17 @@ import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
 import {NavLink} from "react-router-dom";
 import {Redirect} from "react-router";
+import {Field, reduxForm} from "redux-form";
 
 const Dialogs = (props) => {
 
     let dialogsItems = props.dialogsPage.dialogsData.map(d => <DialogsItem name={d.name} id={d.id} key={d.id}/>);
     let messages = props.dialogsPage.messagesData.map(m => <Message message={m.message} id={m.id} key={m.id}/>);
 
-
-    let onSendMessageClick = () => {
-        props.sendMessage();
-    };
-
-    let onNewMessageChange = (event) => {
-        let text = event.target.value;
-        props.updateNewMessageText(text);
-    };
+    const onSubmit = (formData)=> {
+        console.log(formData);
+        props.sendMessage(formData.newMessage);
+    }
     if (!props.isAuth) return <Redirect to='/login'/>
     return (
         <div className={s.dialogs}>
@@ -35,17 +31,23 @@ const Dialogs = (props) => {
                     {messages}
                 </div>
                 <div className={s.sentMessage}>
-                    <div>
-                        <textarea value={props.dialogsPage.newMessageText}
-                                  placeholder="Enter your message" onChange={onNewMessageChange}/>
-                    </div>
-                    <div className={s.button}>
-                        <button onClick={onSendMessageClick}>Send</button>
-                    </div>
+                    <NewMessageReduxForm onSubmit={onSubmit}/>
                 </div>
             </div>
         </div>
     );
 };
-
+const NewMessageForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field placeholder={"New message"} name={"newMessage"} component={'textarea'}/>
+            </div>
+            <div>
+                <button>Send</button>
+            </div>
+        </form>
+    );
+};
+const NewMessageReduxForm = reduxForm({form: 'newMessage'})(NewMessageForm)
 export default Dialogs;
