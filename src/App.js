@@ -22,7 +22,7 @@ const App = () => {
                 <Route path="/login" render={() => <Login/>}/>
                 <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
                 <Route path="/news" component={News}/>
-                <Route path="/users" render={() => <UsersContainer/>}/>
+                <Route path="/users/:friends?" render={() => <UsersContainer/>}/>
                 <Route path="/music" component={Music}/>
                 <Route path="/settings" component={Settings}/>
             </div>

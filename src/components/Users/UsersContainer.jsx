@@ -9,16 +9,24 @@ import {
     unfollowSuccess, getUsers, unfollowUser, followUser
 } from "../../redux/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
+import {compose} from "redux";
+import {withRouter} from "react-router";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        if(this.props.match.params.friends) {
+            this.props.getUsers(this.props.currentPage, this.props.pageSize, true);
+        }
+        this.props.getUsers(this.props.currentPage, this.props.pageSize, false);
     };
 
     onPageChange = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
-        this.props.getUsers(pageNumber, this.props.pageSize);
+        if(this.props.match.params.friends) {
+            this.props.getUsers(pageNumber, this.props.pageSize, true);
+        }
+        this.props.getUsers(pageNumber, this.props.pageSize, false);
     }
 
     render() {
@@ -68,7 +76,7 @@ let mapStateToProps = (state) => {
     }
 };*/
 
-export default connect(mapStateToProps, {
+export default compose(connect(mapStateToProps, {
     follow: followSuccess,
     unFollow: unfollowSuccess,
     setUsers,
@@ -77,4 +85,4 @@ export default connect(mapStateToProps, {
     getUsers,
     unfollowUser,
     followUser
-})(UsersContainer);
+}), withRouter)(UsersContainer);

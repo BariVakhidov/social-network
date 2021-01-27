@@ -1,5 +1,5 @@
 
-.post{
+.post {
     color: #a52a2a;
     background-color: #a1d287;
     margin: 10px 0 10px;
@@ -9,23 +9,28 @@
     border: 2px solid #5a5a5a;
     padding: 5px;
 }
+
 .cont {
     margin: 10px 0;
     display: flex;
     align-items: center;
 }
+
 .postMessage {
 
 }
-.userAvatar{
+
+.userAvatar {
     width: 50px;
     height: 50px;
     border-radius: 30px;
     margin-right: 10px;
 }
+
 .like {
     margin: 0 10px 10px 10px;
 }
+
 .likeLogo {
     width: 15px;
 }

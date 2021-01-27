@@ -4,10 +4,8 @@ import {NavLink} from "react-router-dom";
 import Friends from "./Friend/Friends";
 
 
-
-
 const Nav = (props) => {
-   /* let friends = (props.state.friends).map(f => <Friend.jsx image={f.imageURL} />);*/
+    /* let friends = (props.state.friends).map(f => <Friend.jsx image={f.imageURL} />);*/
 
     return (
         <nav className={s.navbar}>
@@ -32,14 +30,16 @@ const Nav = (props) => {
                 </div>
             </div>
             <div className={s.item + " " + s.friends}>
-                <NavLink to="/friends" activeClassName={s.active}>Friends</NavLink>
-                <div>{props.friendsCount}</div>
-                <div className={s.friendsItems}>
-                    {props.friends.map(f => <Friends name = {f.name} id={f.id} image={f.photos.small} key={f.id}/>) }
-                </div>
-                <div>
-                    <button>Show more</button>
-                </div>
+                <NavLink to="/users/friends" activeClassName={s.active}>Friends</NavLink>
+                <div>{props.isAuth && <div>
+                    <div>{props.friendsCount}</div>
+                    <div className={s.friendsItems}>
+                        {props.friends.map(f => <Friends name={f.name} id={f.id} image={f.photos.small} key={f.id}/>)}
+                    </div>
+                    <div>
+                        <button>Show more</button>
+                    </div>
+                </div>}</div>
             </div>
         </nav>
     );

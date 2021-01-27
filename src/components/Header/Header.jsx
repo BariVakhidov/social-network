@@ -12,7 +12,9 @@ const Header = (props) => {
                 <div>Rebellion</div>
             </div>
             <div className={s.auth}>
-                {props.isAuth && props.profile? <div>{props.profile.userId} <div> {props.login}</div></div> : <NavLink to="/login">Login</NavLink> }
+                {props.isAuth && props.profile? <div>{props.profile.userId} {props.login}
+                    <button  onClick={props.logout}>Logout</button>
+                </div> : <NavLink to="/login">Login</NavLink> }
             </div>
         </header>
     );

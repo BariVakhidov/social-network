@@ -15,6 +15,7 @@ class NavContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
+        isAuth: state.auth.isAuth,
         friends: state.navbar.friends,
         friendsCount: state.navbar.friendsCount
     };

@@ -1,5 +1,6 @@
 import React from "react";
 import s from './Posts.module.css';
+import {Button} from "../../../../MainButton";
 
 const Post = (props) => {
 
@@ -14,17 +15,17 @@ const Post = (props) => {
                     <img className={s.userAvatar}
                          alt="user avatar"
                          src={props.userImg}/>
-                         <div>{props.name}</div>
+                    <div>{props.name}</div>
                 </div>
                 <div className={s.postMessage}>
                     {props.postText}
                 </div>
             </div>
             <div className={s.like}>
-                <button className='button' onClick={addLike}>
+                <Button onClick={addLike}>
                     <img className={s.likeLogo} alt="like button" src='https://cdn.worldvectorlogo.com/logos/like-2.svg'
                          title='Like'/>
-                </button>
+                </Button>
                 <span className="like"> likes: </span>{props.likesCount}
             </div>
 
