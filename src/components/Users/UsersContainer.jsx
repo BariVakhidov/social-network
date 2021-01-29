@@ -6,27 +6,30 @@ import {
     setCurrentPage,
     setTotalUsers,
     setUsers,
-    unfollowSuccess, getUsers, unfollowUser, followUser
+    unfollowSuccess, requestUsers, unfollowUser, followUser, setPage
 } from "../../redux/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 import {withRouter} from "react-router";
+import {
+    getCurrentPage,
+    getFollowingProgress, getFriendsCount,
+    getIsFetching,
+    getPageSize,
+    getTotalUsers,
+    getUsers
+} from "../../redux/users-selectors";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        if(this.props.match.params.friends) {
-            this.props.getUsers(this.props.currentPage, this.props.pageSize, true);
-        }
-        this.props.getUsers(this.props.currentPage, this.props.pageSize, false);
+        this.props.setPage();
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     };
 
     onPageChange = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
-        if(this.props.match.params.friends) {
-            this.props.getUsers(pageNumber, this.props.pageSize, true);
-        }
-        this.props.getUsers(pageNumber, this.props.pageSize, false);
+        this.props.getUsers(pageNumber, this.props.pageSize);
     }
 
     render() {
@@ -40,6 +43,7 @@ class UsersContainer extends React.Component {
     }
 }
 
+/*
 let mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
@@ -49,6 +53,19 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching,
         followingProgress:state.usersPage.followingProgress,
         friendsCount: state.navbar.friendsCount
+    };
+
+};
+*/
+let mapStateToProps = (state) => {
+    return {
+        users: getUsers(state),
+        totalUsers: getTotalUsers(state),
+        pageSize: getPageSize(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingProgress: getFollowingProgress(state),
+        friendsCount: getFriendsCount(state)
     };
 
 };
@@ -82,7 +99,8 @@ export default compose(connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalUsers,
-    getUsers,
+    getUsers: requestUsers,
     unfollowUser,
-    followUser
+    followUser,
+    setPage
 }), withRouter)(UsersContainer);

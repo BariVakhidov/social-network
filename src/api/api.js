@@ -2,10 +2,7 @@ import {instance} from "./axiosInstance";
 
 
 export const usersAPI = {
-    getUsers(currentPage, pageSize, isFriend) {
-        if(isFriend) {
-            return (instance.get(`users?page=${currentPage}&count=${pageSize}&friend=true`).then(response => response.data));
-        }
+    getUsers(currentPage, pageSize) {
         return (instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data));
     },
     followUser(userId) {
@@ -44,5 +41,8 @@ export const profileAPI = {
 export const friendsAPI = {
     displayFriends() {
         return (instance.get(`users?page=1&count=+3&friend=true`).then(response => response.data));
+    },
+    getFriends(currentPage, pageSize) {
+        return (instance.get(`users?page=${currentPage}&count=${pageSize}&friend=true`).then(response => response.data));
     }
 }

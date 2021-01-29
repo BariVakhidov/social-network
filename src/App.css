@@ -22,6 +22,6 @@ body {
 .app-wrapper-content {
     margin: 10px;
     grid-area: c;
-    background-color: lightblue;
+    background-color: #add8e6;
     border-radius: 10px;
 }

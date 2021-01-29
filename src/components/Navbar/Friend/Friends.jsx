@@ -4,7 +4,7 @@ import s from './Friends.module.css';
 import userPhoto from '../../../assets/pepe.gif';
 
 const Friends = (props) => {
-    let path = "/friends/" + props.id;
+    let path = "/profile/" + props.id;
     return (
         <div className={s.friend}>
             <NavLink to={path}>

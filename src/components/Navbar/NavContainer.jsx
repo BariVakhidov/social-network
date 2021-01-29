@@ -1,11 +1,10 @@
 import React from "react"
 import {connect} from "react-redux";
 import Nav from "./Nav";
-import {setFriends, showingFriends} from "../../redux/navbar-reducer";
+import {showingFriends} from "../../redux/navbar-reducer";
 
 class NavContainer extends React.Component {
     componentDidMount() {
-        this.props.showingFriends();
     };
 
     render() {
@@ -17,8 +16,8 @@ let mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
         friends: state.navbar.friends,
-        friendsCount: state.navbar.friendsCount
+        friendsCount: state.navbar.friendsCount,
     };
 };
 
-export default connect(mapStateToProps, {setFriends, showingFriends})(NavContainer);
+export default connect(mapStateToProps, {showingFriends})(NavContainer);

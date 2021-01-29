@@ -1,5 +1,6 @@
 import {authAPI, profileAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {showingFriends} from "./navbar-reducer";
 
 let initialState = {
     userId: null,
@@ -36,13 +37,14 @@ const authReducer = (state = initialState, action) => {
 export default authReducer;
 
 export const getAuthUserData = () => (dispatch) => {
-    authAPI.authMe().then(data => {
+   return  authAPI.authMe().then(data => {
         if (data.resultCode === 0) {
             let {id, login, email} = data.data;
             dispatch(setUserData(id, login, email, true));
             profileAPI.getProfile(id).then(response => {
                 dispatch(setCurrentUser(response.data));
             });
+            dispatch(showingFriends());
         }
 
     });

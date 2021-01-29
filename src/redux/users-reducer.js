@@ -1,9 +1,10 @@
-import {usersAPI} from "../api/api";
+import {friendsAPI, usersAPI} from "../api/api";
 import {setFriendsCount} from "./navbar-reducer";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
+const SET_PAGE = "SET_PAGE";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS = "SET_TOTAL_USERS";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
@@ -12,6 +13,7 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
 export const followSuccess = (userId) => ({type: FOLLOW, userId});
 export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId});
 export const setUsers = (users) => ({type: SET_USERS, users});
+export const setPage = () => ({type: SET_PAGE});
 export const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber});
 export const setTotalUsers = (totalUsers) => ({type: SET_TOTAL_USERS, totalUsers});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
@@ -19,11 +21,11 @@ export const toggleFollowingProgress = (isFetching,userId) => ({type: TOGGLE_IS_
 
 let initialState = {
     users: [],
-    totalUsers: 33,
+    totalUsers: 0,
     pageSize: 5,
     currentPage: 1,
     isFetching: true,
-    followingProgress: [],
+    followingProgress: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -53,6 +55,8 @@ const usersReducer = (state = initialState, action) => {
                     )
                 }
             );
+        case SET_PAGE:
+            return {...state, currentPage: 1}
         case SET_USERS:
             return {...state, users: action.users};
         case SET_CURRENT_PAGE:
@@ -73,9 +77,19 @@ const usersReducer = (state = initialState, action) => {
 };
 export default usersReducer;
 
-export const getUsers = (currentPage,pageSize, isFriend) => (dispatch) => {
+export const requestUsers = (currentPage, pageSize) => (dispatch) => {
    dispatch(toggleIsFetching(true));
-    usersAPI.getUsers(currentPage, pageSize, isFriend).then(data => {
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsers(data.totalCount));
+
+    });
+};
+
+export const getFriends = (currentPage,pageSize) => (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    friendsAPI.getFriends(currentPage, pageSize).then(data => {
         dispatch(toggleIsFetching(false));
         dispatch(setUsers(data.items));
         dispatch(setTotalUsers(data.totalCount));
