@@ -55,7 +55,8 @@ let initialState = {
         },
     ],
     profile: null,
-    status: ""
+    status: "",
+    showingUserId: null
 }
 const ADD_POST = "ADD_POST";
 const DELETE_POST = "DELETE_POST";
@@ -63,6 +64,7 @@ const ADD_LIKE = "ADD_LIKE";
 const LIKE_COMMENT = "LIKE_COMMENT";
 const SET_PROFILE = "SET_PROFILE";
 const SET_STATUS = "SET_STATUS";
+const SET_SHOWING_USER_ID = "SET_SHOWING_USER_ID";
 
 
 export const addPostAC = (newText) => ({type: ADD_POST, newText});
@@ -71,6 +73,7 @@ export const addLikeAC = (postId) => ({type: ADD_LIKE, postId});
 export const likeCommentAC = (commentId) => ({type: LIKE_COMMENT, commentId});
 export const setUserProfile = (profile) => ({type: SET_PROFILE, profile});
 export const setStatus = (status) => ({type: SET_STATUS, status});
+export const setShowingUserId = (showingUserId) => ({type: SET_SHOWING_USER_ID, showingUserId});
 
 
 const profileReducer = (state = initialState, action) => {
@@ -104,6 +107,11 @@ const profileReducer = (state = initialState, action) => {
             return {...state,  profile: action.profile};
         case SET_STATUS:
             return {...state, status: action.status}
+        case SET_SHOWING_USER_ID:
+            return {
+                ...state,
+                showingUserId: action.showingUserId
+            }
         default:
             return state;
     }
@@ -113,8 +121,12 @@ const profileReducer = (state = initialState, action) => {
 export default profileReducer;
 
 export const getProfilePage = (userId) => (dispatch) => {
+    dispatch(setShowingUserId(userId));
     profileAPI.getProfile(userId).then(response => {
         dispatch(setUserProfile(response.data));
+    });
+    profileAPI.getStatus(userId).then(response => {
+        dispatch(setStatus(response.data));
     });
 };
 export const getStatus = (userId) => (dispatch) => {
