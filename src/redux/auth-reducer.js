@@ -1,6 +1,6 @@
 import {authAPI, profileAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
-import {showingFriends} from "./navbar-reducer";
+import {getShowingFriends} from "./users-reducer";
 
 let initialState = {
     userId: null,
@@ -10,10 +10,13 @@ let initialState = {
     currentUser: null,
 }
 
-const SET_USER_DATA = "SET_USER_DATA";
-const SET_CURRENT_USER = "SET_CURRENT_USER";
+const SET_USER_DATA = "social-network/auth/SET_USER_DATA";
+const SET_CURRENT_USER = "social-network/auth/SET_CURRENT_USER";
 
-export const setUserData = (userId, login, email, isAuth) => ({type: SET_USER_DATA, payload: {userId, login, email,isAuth}});
+export const setUserData = (userId, login, email, isAuth) => ({
+    type: SET_USER_DATA,
+    payload: {userId, login, email, isAuth}
+});
 export const setCurrentUser = (profile) => ({type: SET_CURRENT_USER, profile});
 
 const authReducer = (state = initialState, action) => {
@@ -36,35 +39,29 @@ const authReducer = (state = initialState, action) => {
 
 export default authReducer;
 
-export const getAuthUserData = () => (dispatch) => {
-   return  authAPI.authMe().then(data => {
-        if (data.resultCode === 0) {
-            let {id, login, email} = data.data;
-            dispatch(setUserData(id, login, email, true));
-            profileAPI.getProfile(id).then(response => {
-                dispatch(setCurrentUser(response.data));
-            });
-            dispatch(showingFriends());
-        }
-
-    });
+export const getAuthUserData = () => async (dispatch) => {
+    let response = await authAPI.authMe();
+    if (response.data.resultCode === 0) {
+        let {id, login, email} = response.data.data;
+        dispatch(setUserData(id, login, email, true));
+        let response2 = profileAPI.getProfile(id);
+        dispatch(setCurrentUser(response2.data));
+        dispatch(getShowingFriends());
+    }
 };
 
-export const login = (email, password, rememberMe) => (dispatch) => {
-    authAPI.login(email, password, rememberMe).then(data => {
-        if (data.resultCode === 0) {
-            dispatch(getAuthUserData());
-        }
-        else {
-            dispatch(stopSubmit("login", {_error: data.messages}));
-        }
-    });
+export const login = (email, password, rememberMe) => async (dispatch) => {
+    let data = await authAPI.login(email, password, rememberMe);
+    if (data.resultCode === 0) {
+        dispatch(getAuthUserData());
+    } else {
+        dispatch(stopSubmit("login", {_error: data.messages}));
+    }
 };
-export const logout = () => (dispatch) => {
-    authAPI.logout().then(data => {
-        if (data.resultCode === 0) {
-            dispatch(setUserData(null, null, null, false));
-        }
-    });
+export const logout = () => async (dispatch) => {
+    let data = await authAPI.logout();
+    if (data.resultCode === 0) {
+        dispatch(setUserData(null, null, null, false));
+    }
 };
 

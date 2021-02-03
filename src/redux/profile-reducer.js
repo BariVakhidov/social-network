@@ -7,51 +7,21 @@ let initialState = {
             name: "Roman",
             userImage: "https://media4.s-nbcnews.com/j/MSNBC/Components/Video/201609/a_ov_Pepe_160928.focal-760x428.jpg",
             postText: "Ok, see you",
-            likesCount: 5,
-            comments: [
-                {
-                    id: 1,
-                    name: "Bary",
-                    userImage: "https://pyxis.nymag.com/v1/imgs/618/0a9/d04d34a833c6656c02dc608d1adc0d563a-iCim4eXE-400x400.rsquare.w330.jpg",
-                    postText: "How are u",
-                    likesCount: 5
-                }
-            ],
-            newCommentText: ""
+            likesCount: 5
         },
         {
             id: 2,
             name: "Andrew",
             userImage: "https://media4.s-nbcnews.com/j/MSNBC/Components/Video/201609/a_ov_Pepe_160928.focal-760x428.jpg",
             postText: "Hey",
-            likesCount: 6,
-            comments: [
-                {
-                    id: 2,
-                    name: "Demin",
-                    userImage: "https://pyxis.nymag.com/v1/imgs/618/0a9/d04d34a833c6656c02dc608d1adc0d563a-iCim4eXE-400x400.rsquare.w330.jpg",
-                    postText: "ahhhhahaakjn,m",
-                    likesCount: 4
-                }
-            ],
-            newCommentText: ""
+            likesCount: 6
         },
         {
             id: 3,
             name: "Demin",
             userImage: "https://media4.s-nbcnews.com/j/MSNBC/Components/Video/201609/a_ov_Pepe_160928.focal-760x428.jpg",
             postText: "Nigga",
-            likesCount: 1,
-            comments: [
-                {
-                    id: 3,
-                    name: "Bary",
-                    userImage: "https://pyxis.nymag.com/v1/imgs/618/0a9/d04d34a833c6656c02dc608d1adc0d563a-iCim4eXE-400x400.rsquare.w330.jpg",
-                    postText: "Sup",
-                    likesCount: 0
-                }
-            ],
-            newCommentText: ""
+            likesCount: 1
         },
     ],
     profile: null,
@@ -68,7 +38,7 @@ const SET_SHOWING_USER_ID = "SET_SHOWING_USER_ID";
 
 
 export const addPostAC = (newText) => ({type: ADD_POST, newText});
-export const deletePostAC = (postId) => ({type: DELETE_POST, postId});
+export const deletePost = (postId) => ({type: DELETE_POST, postId});
 export const addLikeAC = (postId) => ({type: ADD_LIKE, postId});
 export const likeCommentAC = (commentId) => ({type: LIKE_COMMENT, commentId});
 export const setUserProfile = (profile) => ({type: SET_PROFILE, profile});
@@ -93,6 +63,10 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: "",
                 posts: [...state.posts, newPost]
             };
+        case DELETE_POST:
+            return {
+                ...state, posts: state.posts.filter(p => p.id !== action.postId)
+            }
         case ADD_LIKE:
             return {
                 ...state,
@@ -104,7 +78,7 @@ const profileReducer = (state = initialState, action) => {
                 })
             }
         case SET_PROFILE:
-            return {...state,  profile: action.profile};
+            return {...state, profile: action.profile};
         case SET_STATUS:
             return {...state, status: action.status}
         case SET_SHOWING_USER_ID:
@@ -120,24 +94,20 @@ const profileReducer = (state = initialState, action) => {
 
 export default profileReducer;
 
-export const getProfilePage = (userId) => (dispatch) => {
+export const getProfilePage = (userId) => async (dispatch) => {
     dispatch(setShowingUserId(userId));
-    profileAPI.getProfile(userId).then(response => {
-        dispatch(setUserProfile(response.data));
-    });
-    profileAPI.getStatus(userId).then(response => {
-        dispatch(setStatus(response.data));
-    });
+    let response = await profileAPI.getProfile(userId);
+    dispatch(setUserProfile(response.data));
+    let response2 = await profileAPI.getStatus(userId);
+    dispatch(setStatus(response2.data));
 };
-export const getStatus = (userId) => (dispatch) => {
-    profileAPI.getStatus(userId).then(response => {
-        dispatch(setStatus(response.data));
-    });
+export const getStatus = (userId) => async (dispatch) => {
+    let response = await profileAPI.getStatus(userId);
+    dispatch(setStatus(response.data));
 };
-export const updateStatus = (status) => (dispatch) => {
-    profileAPI.updateStatus(status).then(response => {
-        if(response.data.resultCode === 0) {
-            dispatch(setStatus(status));
-        }
-    });
+export const updateStatus = (status) => async (dispatch) => {
+    let response = await profileAPI.updateStatus(status);
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status));
+    }
 }

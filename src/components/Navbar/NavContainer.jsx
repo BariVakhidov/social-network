@@ -1,8 +1,6 @@
 import React from "react"
 import {connect} from "react-redux";
 import Nav from "./Nav";
-import {showingFriends} from "../../redux/navbar-reducer";
-
 class NavContainer extends React.Component {
     componentDidMount() {
     };
@@ -15,9 +13,9 @@ class NavContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
-        friends: state.navbar.friends,
-        friendsCount: state.navbar.friendsCount,
+        friends: state.usersPage.showingFriends,
+        friendsCount: state.usersPage.totalFriends,
     };
 };
 
-export default connect(mapStateToProps, {showingFriends})(NavContainer);
+export default connect(mapStateToProps, {})(NavContainer);

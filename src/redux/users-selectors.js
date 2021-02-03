@@ -18,5 +18,5 @@ export const getFollowingProgress = (state) => {
     return state.usersPage.followingProgress;
 };
 export const getFriendsCount = (state) => {
-    return state.navbar.friendsCount;
+    return state.usersPage.totalFriends;
 };

@@ -2,11 +2,8 @@ import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-    followSuccess,
     setCurrentPage,
-    setTotalUsers,
-    setUsers,
-    unfollowSuccess, requestUsers, unfollowUser, followUser, setPage
+    setTotalUsers, requestUsers, unfollowUser, followUser, setPage
 } from "../../redux/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
@@ -28,7 +25,6 @@ class UsersContainer extends React.Component {
     };
 
     onPageChange = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
         this.props.getUsers(pageNumber, this.props.pageSize);
     }
 
@@ -94,9 +90,6 @@ let mapStateToProps = (state) => {
 };*/
 
 export default compose(connect(mapStateToProps, {
-    follow: followSuccess,
-    unFollow: unfollowSuccess,
-    setUsers,
     setCurrentPage,
     setTotalUsers,
     getUsers: requestUsers,

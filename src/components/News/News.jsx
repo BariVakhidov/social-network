@@ -1,3 +1,10 @@
+import React from "react";
+const News = () => {
+    return (
+        <div>News</div>
+    );
+};
+export default News;
 /*
 import React, {useEffect, useRef, useMemo} from 'react'
 import * as THREE from 'three'

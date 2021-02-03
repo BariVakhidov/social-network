@@ -1,14 +1,14 @@
 import React from 'react';
-import Preloader from "../components/common/Preloader/Preloader";
-import Users from "../components/Users/Users";
+import Preloader from "../common/Preloader/Preloader";
+import Users from "../Users/Users";
 import {connect} from "react-redux";
 import {
-    followSuccess, followUser, getFriends,
-    setCurrentPage, setPage,
-    setTotalUsers,
-    setUsers,
-    unfollowSuccess, unfollowUser
-} from "../redux/users-reducer";
+    followUser, getFriends,
+    setFriendsCurrentPage, setPage,
+    setTotalUsers, unfollowSuccess,
+    unfollowUser
+} from "../../redux/users-reducer";
+import {getFollowingProgress, getFriendsCount, getIsFetching} from "../../redux/users-selectors";
 
 class FriendsContainer extends React.Component {
 
@@ -18,7 +18,6 @@ class FriendsContainer extends React.Component {
     };
 
     onPageChange = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
         this.props.getFriends(pageNumber, this.props.pageSize);
     }
 
@@ -35,23 +34,20 @@ class FriendsContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        totalUsers: state.usersPage.totalUsers,
+        users: state.usersPage.friends,
+        totalUsers: state.usersPage.totalFriends,
         pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingProgress:state.usersPage.followingProgress,
-        friendsCount: state.navbar.friendsCount,
-        initialized: state.app.initialized
+        currentPage: state.usersPage.friendsCurrentPage,
+        isFetching: getIsFetching(state),
+        followingProgress: getFollowingProgress(state),
+        friendsCount: getFriendsCount(state)
     };
 
 };
 
 export default connect(mapStateToProps, {
-    follow: followSuccess,
-    unFollow: unfollowSuccess,
-    setUsers,
-    setCurrentPage,
+    unfollowSuccess,
+    setFriendsCurrentPage,
     setTotalUsers,
     getFriends,
     unfollowUser,

@@ -10,12 +10,13 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import FriendsContainer from "./Friends/Friends";
+import FriendsContainer from "./components/Friends/Friends";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {withRouter} from "react-router";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+
 
 
 class App extends React.Component{
@@ -28,20 +29,20 @@ class App extends React.Component{
             return <Preloader/>
         }
         return (
-            <div className="app-wrapper">
-                <HeaderContainer/>
-                <NavContainer/>
-                <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                    <Route path="/login" render={() => <Login/>}/>
-                    <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
-                    <Route path="/news" component={News}/>
-                    <Route path="/users/:friends?" render={() => <UsersContainer/>}/>
-                    <Route path="/music" component={Music}/>
-                    <Route path="/friends" component={FriendsContainer}/>
-                    <Route path="/settings" component={Settings}/>
+                <div className="app-wrapper">
+                    <HeaderContainer/>
+                    <NavContainer/>
+                    <div className="app-wrapper-content">
+                        <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                        <Route path="/login" render={() => <Login/>}/>
+                        <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                        <Route path="/news" component={News}/>
+                        <Route path="/users/:friends?" render={() => <UsersContainer/>}/>
+                        <Route path="/music" component={Music}/>
+                        <Route path="/friends" component={FriendsContainer}/>
+                        <Route path="/settings" component={Settings}/>
+                    </div>
                 </div>
-            </div>
         );
     }
 }
