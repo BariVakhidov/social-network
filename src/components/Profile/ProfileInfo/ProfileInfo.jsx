@@ -25,6 +25,8 @@ const ProfileInfo = (props) => {
                     <h3>{props.profile.fullName}</h3>
                     <p>{props.profile.lookingForAJob ? "lookingForAJob" : "-"}</p>
                     <p>{props.profile.lookingForAJobDescription}</p>
+                    <div>{props.profile.contacts.facebook}
+                    </div>
                 </div>
                 <div className={s.contacts}>
                 </div>

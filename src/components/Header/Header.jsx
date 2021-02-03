@@ -12,8 +12,8 @@ const Header = (props) => {
                 <div>Rebellion</div>
             </div>
             <div className={s.auth}>
-                {props.isAuth && props.profile? <div>{props.profile.userId} {props.login}
-                    <button  onClick={props.logout}>Logout</button>
+                {props.isAuth && props.profile? <div className={s.authInfo}>{props.profile.photos.small} {props.login}
+                    <button className={s.logoutButton} onClick={props.logout}>Logout</button>
                 </div> : <NavLink to="/login">Login</NavLink> }
             </div>
         </header>

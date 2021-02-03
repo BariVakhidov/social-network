@@ -44,7 +44,7 @@ export const getAuthUserData = () => async (dispatch) => {
     if (response.data.resultCode === 0) {
         let {id, login, email} = response.data.data;
         dispatch(setUserData(id, login, email, true));
-        let response2 = profileAPI.getProfile(id);
+        let response2 = await profileAPI.getProfile(id);
         dispatch(setCurrentUser(response2.data));
         dispatch(getShowingFriends());
     }

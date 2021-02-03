@@ -1,4 +1,4 @@
-.formControl {
+.formControl input, textarea {
 
 }
 
@@ -20,4 +20,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.form button {
+    margin-left: 15px;
+    padding: 5px 20px;
+    background-color: #889fdb;
+    border: solid 1px grey;
+    border-radius: 5px;
+}
+.form button:hover{
+    cursor: pointer;
+    background-color: #3e6bff;
 }

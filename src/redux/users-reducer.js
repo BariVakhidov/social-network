@@ -1,4 +1,5 @@
 import {friendsAPI, usersAPI} from "../api/api";
+import {updateObjectInArray} from "../utils/objects-helpers/users-helper";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -49,25 +50,17 @@ const usersReducer = (state = initialState, action) => {
             return (
                 {
                     ...state,
-                    users: state.users.map(u => {
-                        if (u.id === action.userId) {
-                            return {...u, followed: true};
-                        }
-                        return u;
-                    })
+                    users: updateObjectInArray(state.users,action.userId, "id", {followed: true}),
+                    friends: updateObjectInArray(state.friends,action.userId, "id", {followed: true}),
                 }
             );
+
         case UNFOLLOW:
             return (
                 {
                     ...state,
-                    users: state.users.map(u => {
-                            if (u.id === action.userId) {
-                                return {...u, followed: false};
-                            }
-                            return u;
-                        }
-                    )
+                    users: updateObjectInArray(state.users,action.userId, "id", {followed: false}),
+                    friends: updateObjectInArray(state.friends,action.userId, "id", {followed: false})
                 }
             );
         case SET_PAGE:
@@ -121,21 +114,24 @@ export const getFriends = (currentPage, pageSize) => async (dispatch) => {
     dispatch(setTotalFriends(data.totalCount));
 
 };
-const followUnfollowFolow = async (dispatch, userId, apiMethod, actionCreator) =>  {
+const followUnfollowFollow = async (dispatch, userId, apiMethod, actionCreator) =>  {
     dispatch(toggleFollowingProgress(true, userId));
     let data = await apiMethod(userId);
     if (data.resultCode === 0) {
         dispatch(actionCreator(userId));
+        let data = await friendsAPI.displayFriends();
+        dispatch(setShowingFriends(data.items));
+        dispatch(setTotalFriends(data.totalCount));
     }
     dispatch(toggleFollowingProgress(false, userId));
 }
 
-export const unfollowUser = (userId, friendsCount) => async (dispatch) => {
-   await followUnfollowFolow(dispatch, userId, usersAPI.unFollowUser.bind(usersAPI), unfollowSuccess)
+export const unfollowUser = (userId) => async (dispatch) => {
+   await followUnfollowFollow(dispatch, userId, usersAPI.unFollowUser.bind(usersAPI), unfollowSuccess);
 
 };
-export const followUser = (userId, friendsCount) => async (dispatch) => {
-   await followUnfollowFolow(dispatch,userId,usersAPI.followUser.bind(usersAPI),followSuccess)
+export const followUser = (userId) => async (dispatch) => {
+   await followUnfollowFollow(dispatch,userId,usersAPI.followUser.bind(usersAPI),followSuccess);
 };
 export const getShowingFriends = () => async (dispatch) => {
     dispatch(toggleIsFetching(true));
