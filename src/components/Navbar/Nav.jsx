@@ -8,7 +8,7 @@ const Nav = (props) => {
     /* let friends = (props.state.friends).map(f => <Friend.jsx image={f.imageURL} />);*/
 
     return (
-        <nav className={s.navbar}>
+        <nav className={s.navbar + " " + (props.blackTheme && s.navbarBlack)}>
             <div className={s.nav}>
                 <div className={s.item}>
                     <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>

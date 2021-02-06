@@ -25,3 +25,7 @@ body {
     background-color: #add8e6;
     border-radius: 10px;
 }
+.app-wrapper-content-black {
+    background-color: #211f1f;
+    color: wheat;
+}

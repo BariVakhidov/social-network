@@ -15,6 +15,7 @@ let mapStateToProps = (state) => {
         isAuth: state.auth.isAuth,
         friends: state.usersPage.showingFriends,
         friendsCount: state.usersPage.totalFriends,
+        blackTheme: state.app.blackTheme
     };
 };
 

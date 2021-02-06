@@ -1,21 +1,19 @@
 
 .post {
     color: #a52a2a;
-    background-color: #a1d287;
+    background-color: #8291db;
     margin: 10px 0 10px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    border: 2px solid #5a5a5a;
     padding: 5px;
 }
 
 .cont {
-    margin: 10px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 10px    ;
+    margin: 10px;
 }
 
 .postMessage {

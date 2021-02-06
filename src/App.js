@@ -1,10 +1,7 @@
-import React from "react";
+import React, {Suspense} from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
 import "./App.css";
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavContainer from "./components/Navbar/NavContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -17,6 +14,10 @@ import {withRouter} from "react-router";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const News = React.lazy(() => import('./components/News/News'));
+const Music = React.lazy(() => import('./components/Music/Music'));
 
 
 class App extends React.Component {
@@ -32,15 +33,18 @@ class App extends React.Component {
             <div className="app-wrapper">
                 <HeaderContainer/>
                 <NavContainer/>
-                <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                    <Route path="/login" render={() => <Login/>}/>
-                    <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
-                    <Route path="/news" component={News}/>
-                    <Route path="/users/:friends?" render={() => <UsersContainer/>}/>
-                    <Route path="/music" component={Music}/>
-                    <Route path="/friends" component={FriendsContainer}/>
-                    <Route path="/settings" component={Settings}/>
+                <div
+                    className={"app-wrapper-content".concat(" ", this.props.blackTheme && "app-wrapper-content-black")}>
+                    <Suspense fallback={<Preloader/>}>
+                        <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                        <Route path="/login" render={() => <Login/>}/>
+                        <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                        <Route path="/news" component={News}/>
+                        <Route path="/users/:friends?" render={() => <UsersContainer/>}/>
+                        <Route path="/music" component={Music}/>
+                        <Route path="/friends" component={FriendsContainer}/>
+                        <Route path="/settings" component={Settings}/>
+                    </Suspense>
                 </div>
             </div>
         );
@@ -49,12 +53,13 @@ class App extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        initialized: state.app.initialized
+        initialized: state.app.initialized,
+        blackTheme: state.app.blackTheme
     }
 }
 const AppContainer = compose(withRouter, connect(mapStateToProps, {initializeApp}))(App);
 
-const SocialNetworkApp = (props) => {
+const SocialNetworkApp = () => {
     return (
         <React.StrictMode>
             <BrowserRouter>

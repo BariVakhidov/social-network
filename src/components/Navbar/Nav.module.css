@@ -7,6 +7,10 @@
     border-radius: 10px;
 
 }
+.navbarBlack {
+    background-color: #211f1f;
+    color: wheat;
+}
 .nav {
     display: flex;
     flex-direction: column;

@@ -30,39 +30,62 @@ class UsersContainer extends React.Component {
 
     render() {
         return (
-            <>  {this.props.isFetching ? <Preloader/> : null}
+            <>
+                {this.props.isFetching ? <Preloader/> : null}
                 <Users {...this.props}
                        onPageChange={this.onPageChange}
                 />
             </>
         );
     }
+
 }
 
-/*
-let mapStateToProps = (state) => {
-    return {
-        users: state.usersPage.users,
-        totalUsers: state.usersPage.totalUsers,
-        pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingProgress:state.usersPage.followingProgress,
-        friendsCount: state.navbar.friendsCount
-    };
+    /*
+    let mapStateToProps = (state) => {
+        return {
+            users: state.usersPage.users,
+            totalUsers: state.usersPage.totalUsers,
+            pageSize: state.usersPage.pageSize,
+            currentPage: state.usersPage.currentPage,
+            isFetching: state.usersPage.isFetching,
+            followingProgress:state.usersPage.followingProgress,
+            friendsCount: state.navbar.friendsCount
+        };
 
-};
-*/
-let mapStateToProps = (state) => {
-    return {
-        users: getUsers(state),
-        totalUsers: getTotalUsers(state),
-        pageSize: getPageSize(state),
-        currentPage: getCurrentPage(state),
-        isFetching: getIsFetching(state),
-        followingProgress: getFollowingProgress(state),
-        friendsCount: getFriendsCount(state)
     };
+    */
+let mapStateToProps = (state) => {
+return {
+    users: getUsers
+(
+    state
+),
+    totalUsers: getTotalUsers
+(
+    state
+),
+    pageSize: getPageSize
+(
+    state
+),
+    currentPage: getCurrentPage
+(
+    state
+),
+    isFetching: getIsFetching
+(
+    state
+),
+    followingProgress: getFollowingProgress
+(
+    state
+),
+    friendsCount: getFriendsCount
+(
+    state
+)
+};
 
 };
 
@@ -90,10 +113,10 @@ let mapStateToProps = (state) => {
 };*/
 
 export default compose(connect(mapStateToProps, {
-    setCurrentPage,
-    setTotalUsers,
-    getUsers: requestUsers,
-    unfollowUser,
-    followUser,
-    setPage
+setCurrentPage,
+setTotalUsers,
+getUsers: requestUsers,
+unfollowUser,
+followUser,
+setPage
 }), withRouter)(UsersContainer);
