@@ -107,6 +107,7 @@ export const requestUsers = (currentPage, pageSize) => {
 };
 
 export const getFriends = (currentPage, pageSize) => async (dispatch) => {
+    dispatch(setFriendsCurrentPage(currentPage));
     dispatch(toggleIsFetching(true));
     let data = await friendsAPI.getFriends(currentPage, pageSize);
     dispatch(toggleIsFetching(false));
