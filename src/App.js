@@ -1,5 +1,5 @@
 import React, {Suspense} from 'react';
-import {BrowserRouter, Route} from "react-router-dom";
+import {HashRouter, Route} from "react-router-dom";
 import "./App.css";
 import Settings from "./components/Settings/Settings";
 import NavContainer from "./components/Navbar/NavContainer";
@@ -62,11 +62,11 @@ const AppContainer = compose(withRouter, connect(mapStateToProps, {initializeApp
 const SocialNetworkApp = () => {
     return (
         <React.StrictMode>
-            <BrowserRouter>
+            <HashRouter>
                 <Provider store={store}>
                     <AppContainer/>
                 </Provider>
-            </BrowserRouter>
+            </HashRouter>
         </React.StrictMode>
     )
 };

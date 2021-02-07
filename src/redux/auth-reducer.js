@@ -12,12 +12,14 @@ let initialState = {
 
 const SET_USER_DATA = "social-network/auth/SET_USER_DATA";
 const SET_CURRENT_USER = "social-network/auth/SET_CURRENT_USER";
+const SET_CURRENT_USER_PHOTO = "social-network/auth/SET_CURRENT_USER_PHOTO";
 
 export const setUserData = (userId, login, email, isAuth) => ({
     type: SET_USER_DATA,
     payload: {userId, login, email, isAuth}
 });
 export const setCurrentUser = (profile) => ({type: SET_CURRENT_USER, profile});
+export const setCurrentUserPhotos = (photos) => ({type: SET_CURRENT_USER_PHOTO, photos});
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -30,6 +32,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUser: action.profile
+            }
+        case SET_CURRENT_USER_PHOTO:
+            return {
+                ...state,
+                currentUser: {...state.currentUser, photos: action.photos}
             }
         default:
             return state;

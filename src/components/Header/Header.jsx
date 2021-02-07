@@ -16,7 +16,7 @@ const Header = (props) => {
                     <span className={s.slider + " " + s.round}></span>
             </label>
             <div className={s.auth}>
-                {props.isAuth && props.profile? <div className={s.authInfo}>{props.profile.photos.small} {props.login}
+                {props.isAuth && props.profile? <div className={s.authInfo}><img src={props.profile.photos.small} alt=""/> {props.login}
                     <button className={s.logoutButton} onClick={props.logout}>Logout</button>
                 </div> : <NavLink to="/login">Login</NavLink> }
             </div>

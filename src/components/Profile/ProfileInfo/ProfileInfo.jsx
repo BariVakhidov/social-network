@@ -7,17 +7,25 @@ const ProfileInfo = (props) => {
     if (!props.profile) {
         return <Preloader/>
     }
-
+    const onMainPhotoSelected = (e) => {
+        if (e.target.files.length) {
+            props.savePhoto(e.target.files[0]);
+        }
+    }
     return (
         <div>
             <div className={s.back}></div>
             <div className={s.name}>
-                <div>
+                <div className={s.container}>
                     <img
                         className={s.avatar}
                         alt="ava"
-                            src={props.profile.photos.large ? props.profile.photos.large: "https://upload.wikimedia.org/wikipedia/ru/0/00/The_Child_aka_Baby_Yoda_%28Star_Wars%29.jpg"}
+                        src={props.profile.photos.large ? props.profile.photos.large : "https://upload.wikimedia.org/wikipedia/ru/0/00/The_Child_aka_Baby_Yoda_%28Star_Wars%29.jpg"}
                     />
+                    <div className={s.cont}>{props.isOwner &&
+                    <input type="file" className={s.inputFile} onChange={onMainPhotoSelected}/>}
+                    </div>
+
                 </div>
                 <div className={s.aboutYourself}>
                     <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
