@@ -115,6 +115,15 @@ export const updateStatus = (status) => async (dispatch) => {
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
     }
+};
+
+export const updateProfile = (profileData,userId) => async (dispatch) => {
+    let response = await profileAPI.updateProfile(profileData);
+    if (response.data.resultCode === 0) {
+        let response = await profileAPI.getProfile(userId);
+        dispatch(setUserProfile(response.data));
+        alert("Success update!");
+    }
 }
 export const savePhoto = (file) => async (dispatch) => {
     let response = await profileAPI.savePhoto(file);

@@ -11,10 +11,9 @@
 .avatar {
     position: relative;
     display: block;
-    height: 150px;
-    width: 150px;
     border-radius: 10px;
     z-index: 30;
+    height: 100%;
 }
 
 .cont {
@@ -27,33 +26,43 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(73, 73, 73, 0.7);
+    background-color: rgba(73, 73, 73, 0.8);
 }
 
-.container:nth-child(1):hover img {
+.photoContainer:nth-child(1):hover img {
     z-index: 0;
     transition: 0.3s all;
 }
 
-/*
-.container:nth-child(2):hover {
-    z-index: 5;
-}
-*/
-
-.name {
+.profileData {
     display: flex;
     justify-content: flex-start;
+    align-items: flex-start;
+    flex-flow: row wrap;
     padding: 10px;
 }
+.status {
 
+}
+.withoutStatus{
+    color: #909090;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: transparent;
+}
 .aboutYourself {
+    text-align: center;
     margin-left: 20px;
 }
-.container {
+.fullName {
+    font-weight: bold;
+    margin: 10px;
+}
+.photoContainer {
     position: relative;
     display: block;
-
+    height: 150px;
+    width: 150px;
 }
 .inputFile {
     background-image: url("http://cdn.onlinewebfonts.com/svg/img_234775.png");
@@ -91,3 +100,37 @@
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
+.contacts {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    margin-left: 20px;
+}
+.contact {
+    display: flex;
+    justify-content: flex-start;
+    margin: 5px;
+}
+.contact span {
+    margin-right: 10px;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+}
+.formEl {
+    margin: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+.inputs {
+    display: flex;
+}
+.formButtons {
+    display: flex;
+    justify-content: center;
+}
+.formButton{
+    margin: 10px;
+}

@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import s from "../ProfileInfo.module.css";
+
 
 const ProfileStatusWithHooks = props => {
 
@@ -19,15 +21,16 @@ const ProfileStatusWithHooks = props => {
     };
     const onStatusChange = (e) => {
         setStatus(e.currentTarget.value);
-
     };
 
 
     return (
         <div>
             {!editMode &&
-            <div>
-                <span onDoubleClick={activateEditMode}>{props.status || "------"}</span>
+            <div className={props.status ? s.status : s.withoutStatus}>
+                {props.isOwner &&
+                <span onDoubleClick={activateEditMode}>{props.status || "status"}</span>}
+                {!props.isOwner && <span> {props.status || "status"}</span>}
             </div>
             }
             {editMode &&
@@ -38,6 +41,6 @@ const ProfileStatusWithHooks = props => {
             }
         </div>
     );
-};
+}
 
 export default ProfileStatusWithHooks;

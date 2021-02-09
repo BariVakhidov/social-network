@@ -23,7 +23,6 @@ const NewPostForm = (props) => {
 const NewPostReduxForm = reduxForm({form: 'newPost'})(NewPostForm);
 
 const MyPosts = React.memo(props => {
-    console.log("Render")
     let posts = props.posts.map(p => <Post id={p.id}
                                            name={p.name}
                                            userImg={p.userImage}
@@ -34,7 +33,6 @@ const MyPosts = React.memo(props => {
                                            key={p.id}/>);
 
     const onSubmit = (formData) => {
-        console.log(formData);
         props.addPostAC(formData.newPost);
     }
 
