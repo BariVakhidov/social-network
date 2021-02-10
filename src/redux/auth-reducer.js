@@ -1,4 +1,4 @@
-import {authAPI, profileAPI} from "../api/api";
+import {authAPI, profileAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {getShowingFriends} from "./users-reducer";
 
@@ -8,11 +8,13 @@ let initialState = {
     email: null,
     isAuth: false,
     currentUser: null,
+    captchaURL: null
 }
 
 const SET_USER_DATA = "social-network/auth/SET_USER_DATA";
 const SET_CURRENT_USER = "social-network/auth/SET_CURRENT_USER";
 const SET_CURRENT_USER_PHOTO = "social-network/auth/SET_CURRENT_USER_PHOTO";
+const SET_CAPTCHA_URL = "social-network/auth/SET_CAPTCHA_URL";
 
 export const setUserData = (userId, login, email, isAuth) => ({
     type: SET_USER_DATA,
@@ -20,6 +22,7 @@ export const setUserData = (userId, login, email, isAuth) => ({
 });
 export const setCurrentUser = (profile) => ({type: SET_CURRENT_USER, profile});
 export const setCurrentUserPhotos = (photos) => ({type: SET_CURRENT_USER_PHOTO, photos});
+export const setCaptchaURL = (url) => ({type: SET_CAPTCHA_URL, url});
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -37,6 +40,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUser: {...state.currentUser, photos: action.photos}
+            }
+        case SET_CAPTCHA_URL:
+            return {
+                ...state,
+                captchaURL: action.url
             }
         default:
             return state;
@@ -57,18 +65,30 @@ export const getAuthUserData = () => async (dispatch) => {
     }
 };
 
-export const login = (email, password, rememberMe) => async (dispatch) => {
-    let data = await authAPI.login(email, password, rememberMe);
+export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
+    debugger
+    let data = await authAPI.login(email, password, rememberMe, captcha);
     if (data.resultCode === 0) {
         dispatch(getAuthUserData());
-    } else {
+    }
+    else {
+        if (data.resultCode === 10) {
+            dispatch(getCaptchaURL());
+        }
         dispatch(stopSubmit("login", {_error: data.messages}));
     }
 };
+
+export const getCaptchaURL = () => async (dispatch) => {
+    let captchaURL = await securityAPI.getCaptchaURL();
+    dispatch(setCaptchaURL(captchaURL.url));
+};
+
 export const logout = () => async (dispatch) => {
     let data = await authAPI.logout();
     if (data.resultCode === 0) {
         dispatch(setUserData(null, null, null, false));
     }
 };
+
 

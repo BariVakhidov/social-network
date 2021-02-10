@@ -53,7 +53,7 @@ const Photo = ({profile, isOwner, onMainPhotoSelected}) => {
 };
 const ProfileData = ({profile, isOwner, status, updateStatus, updateProfile}) => {
     let [editMode, setEditMode] = useState(false);
-
+    let [contactsVisible, setContactsVisible] = useState(false)
     const activateEditMode = () => {
         setEditMode(true);
     }
@@ -62,27 +62,33 @@ const ProfileData = ({profile, isOwner, status, updateStatus, updateProfile}) =>
     }
     return (
         <>
-            {!editMode &&
-            <div className={s.profileData}>
-                <div className={s.aboutYourself}>
-                    <ProfileStatusWithHooks isOwner={isOwner} status={status}
-                                            updateStatus={updateStatus}/>
-                    <div className={s.fullName}>{profile.fullName}</div>
-                    <div>{profile.aboutMe}</div>
-                    <div>{profile.lookingForAJob ? "lookingForAJob" : "-"}</div>
-                    <div>{profile.lookingForAJobDescription}</div>
-                </div>
-                <div className={s.contacts}>
-                    <div>{Object.keys(profile.contacts).map((key => {
-                        return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-                    }))}
+            {!editMode ?
+                <div className={s.profileDataComp}>
+                    <div className={s.aboutYourself}>
+                        <ProfileStatusWithHooks isOwner={isOwner} status={status}
+                                                updateStatus={updateStatus}/>
+                        <div className={s.fullName}>{profile.fullName}</div>
+                        <div>{profile.aboutMe}</div>
+                        <div>{profile.lookingForAJob ? "lookingForAJob" : "-"}</div>
+                        <div>{profile.lookingForAJobDescription}</div>
+                        <div style={{display: "inline-block"}}>
+                            {contactsVisible ? <button onClick={() => {
+                                    setContactsVisible(false)
+                                }}>Close contacts</button> :
+                                <button onClick={() => {
+                                    setContactsVisible(true)
+                                }}>Show contacts</button>}
+                            {isOwner && <button onClick={activateEditMode}>Edit</button>}
+                        </div>
                     </div>
+                    {contactsVisible ? <div className={s.contacts}>
+                        <div>{Object.keys(profile.contacts).map((key => {
+                            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+                        }))}
+                        </div>
+                    </div> : null}
                 </div>
-                <div>{isOwner && <button onClick={activateEditMode}>Edit</button>}</div>
-            </div>
-            }
-            {
-                editMode &&
+                :
                 <ProfileInfoForm updateProfile={updateProfile} deactivateEditMode={deactivateEditMode}
                                  contacts={profile.contacts} profile={profile}/>
             }

@@ -29,15 +29,14 @@ let initialState = {
     status: "",
     showingUserId: null
 }
-const ADD_POST = "ADD_POST";
-const DELETE_POST = "DELETE_POST";
-const ADD_LIKE = "ADD_LIKE";
-const LIKE_COMMENT = "LIKE_COMMENT";
-const SET_PROFILE = "SET_PROFILE";
-const SET_STATUS = "SET_STATUS";
-const SET_SHOWING_USER_ID = "SET_SHOWING_USER_ID";
-const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
-
+const ADD_POST = "social-network/profile/ADD_POST";
+const DELETE_POST = "social-network/profile/DELETE_POST";
+const ADD_LIKE = "social-network/profile/ADD_LIKE";
+const LIKE_COMMENT = "social-network/profile/LIKE_COMMENT";
+const SET_PROFILE = "social-network/profile/SET_PROFILE";
+const SET_STATUS = "social-network/profile/SET_STATUS";
+const SET_SHOWING_USER_ID = "social-network/profile/SET_SHOWING_USER_ID";
+const SAVE_PHOTO_SUCCESS = "social-network/profile/SAVE_PHOTO_SUCCESS"
 
 export const addPostAC = (newText) => ({type: ADD_POST, newText});
 export const deletePost = (postId) => ({type: DELETE_POST, postId});
@@ -122,8 +121,8 @@ export const updateProfile = (profileData,userId) => async (dispatch) => {
     if (response.data.resultCode === 0) {
         let response = await profileAPI.getProfile(userId);
         dispatch(setUserProfile(response.data));
-        alert("Success update!");
     }
+    else return response.data.messages;
 }
 export const savePhoto = (file) => async (dispatch) => {
     let response = await profileAPI.savePhoto(file);

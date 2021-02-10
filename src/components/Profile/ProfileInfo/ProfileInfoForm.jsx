@@ -1,8 +1,16 @@
 import s from "./ProfileInfo.module.css";
 import {Formik, Form, Field, ErrorMessage} from 'formik';
+import Preloader from "../../common/Preloader/Preloader";
+import {useState} from "react";
 
 
 const ProfileInfoForm = ({contacts, deactivateEditMode, profile, updateProfile}) => {
+
+    const [isFetching, setFetching] = useState(false);
+    const capitalizeFirstLetter = (string) => {
+        return string[0].charAt(0).toLowerCase() + string[0].slice(1) + "." + string[1].charAt(0).toLowerCase() + string[1].slice(1);
+    };
+
     return (
         <Formik
             initialValues={{
@@ -12,76 +20,66 @@ const ProfileInfoForm = ({contacts, deactivateEditMode, profile, updateProfile})
                 userId: profile.userId,
                 aboutMe: profile.aboutMe || "",
                 contacts: {...contacts}
-                /*facebook: contacts.facebook || "",
-                github: contacts.github || "",
-                instagram: contacts.instagram || "",
-                mainLink: contacts.mainLink || "",
-                twitter: contacts.twitter || "",
-                vk: contacts.vk || "",
-                website: contacts.website || "",
-                youtube: contacts.youtube || ""*/
             }}
-            /*  validate={values => {
-                  const errors = {};
-                  if (!values.email) {
-                      errors.email = 'Required';
-                  } else if (
-                      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                  ) {
-                      errors.email = 'Invalid email address';
-                  }
-                  return errors;
-              }}*/
-            onSubmit={(values, {setSubmitting}) => {
-                setTimeout(() => {
-                    console.log(values);
-                    updateProfile(values, profile.userId)
-                    /*let {lookingForAJob, lookingForAJobDescription, fullName, userId, aboutMe, ...contacts} = values;
-                    updateProfile({lookingForAJob, lookingForAJobDescription, fullName, userId, aboutMe, contacts}, profile.userId);*/
-                    deactivateEditMode();
-                    setSubmitting(false);
-                }, 400);
+            onSubmit={(values, {setSubmitting, setFieldError}) => {
+                setFetching(true);
+                updateProfile(values, profile.userId)
+                    .then(
+                        (errors) => {
+                            if (errors) {
+                                errors.map(error => {
+                                    let errorSplit = error.split(/[()]/g);
+                                    let errorMessage = errorSplit[0];
+                                    let errorField = capitalizeFirstLetter(errorSplit[1].split(/\W+/));
+                                    debugger
+                                    setFieldError(errorField, errorMessage);
+                                    return error;
+                                });
+                            } else
+                                deactivateEditMode();
+                        })
+                    .finally(() => {
+                        setSubmitting(false);
+                        setFetching(false);
+                    });
             }}
         >
-            {({isSubmitting}) => (
+            {({isSubmitting, errors}) => (
                 <Form className={s.form}>
                     <div className={s.inputs}>
-                        <div>
-                            <div className={s.formEl}>
-                                <div>fullName:</div>
-                                <Field type="fullName" name="fullName"/>
-                                <ErrorMessage name="fullName" component="div"/>
-                            </div>
-                            <div className={s.formEl}>
-                                <div>aboutMe:</div>
-                                <Field type="aboutMe" name="aboutMe"/>
-
-                            </div>
-                            <div className={s.formEl}>
-                                <div>lookingForAJob:</div>
-                                <Field type="checkbox" name="lookingForAJob"/></div>
-                            <div className={s.formEl}>
-                                <div>lookingForAJobDescription:</div>
-                                <Field type="lookingForAJobDescription" name="lookingForAJobDescription"/></div>
+                        <div className={s.fields}>
+                            <FormikField type={"text"} name={"fullName"} title={"Full name"}/>
+                            <FormikField type={"text"} name={"aboutMe"}  title={"About me"} />
+                            <FormikField type={"checkbox"}  name={"lookingForAJob"} title={"Looking for a job"} />
+                            <FormikField type={"text"} name={"lookingForAJobDescription"} title={"Job Description"}/>
                         </div>
-                        <div>{Object.keys(contacts).map(key => {
-                            return <div className={s.formEl} key={key}>
-                                <div>{key}:</div>
-                                <Field type="text" name= {"contacts."+key}/></div>
+                        <div className={s.fields}>{Object.keys(contacts).map(key => {
+                            return <FormikField key={key} type={"text"} name={"contacts." + key} title={key}/>
                         })}</div>
                     </div>
                     <div className={s.formButtons}>
-                            <button className={s.formButton} type="submit" disabled={isSubmitting}>
-                                Save
-                            </button>
-                            <button className={s.formButton} onClick={deactivateEditMode}>
-                                Cancel
-                            </button>
+                        <button className={s.formButton} type="submit" disabled={isSubmitting}>
+                            Save
+                        </button>
+                        <button className={s.formButton} onClick={deactivateEditMode}>
+                            Cancel
+                        </button>
                     </div>
+                    <div>{isFetching && <Preloader/>}</div>
                 </Form>
             )}
         </Formik>
     )
 };
-
+const FormikField = ({name, type, title}) => {
+    return (
+        <div className={s.formEl}>
+            <div className={s.fieldTitle}>{title.concat(":")}</div>
+            <div className={s.field}>
+                <Field type={type} name={name} className={s.fieldEl}/>
+                <ErrorMessage name={name} component="div" className={s.error}/>
+            </div>
+        </div>
+    )
+}
 export default ProfileInfoForm;
