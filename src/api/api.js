@@ -57,7 +57,7 @@ export const profileAPI = {
 
 export const friendsAPI = {
     displayFriends() {
-        return (instance.get(`users?page=1&count=+3&friend=true`).then(response => response.data));
+        return (instance.get(`users?page=1&count=+2&friend=true`).then(response => response.data));
     },
     getFriends(currentPage, pageSize) {
         return (instance.get(`users?page=${currentPage}&count=${pageSize}&friend=true`).then(response => response.data));

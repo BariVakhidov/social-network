@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./Users.module.css"
 import userPhoto from '../../assets/images/pepe.png'
 import {NavLink} from "react-router-dom";
+import StyledButton from "../common/StyledButton";
 
 const User = ({user, followingProgress, unfollowUser, friendsCount, followUser}) => {
     return (
@@ -14,16 +15,16 @@ const User = ({user, followingProgress, unfollowUser, friendsCount, followUser})
                     </NavLink>
                 </div>
                 <div className={s.followButton}>
-                    {user.followed ? <button disabled={followingProgress.some(id => id === user.id)}
+                    {user.followed ? <StyledButton disabled={followingProgress.some(id => id === user.id)}
                                           onClick={() => {
                                               unfollowUser(user.id, friendsCount);
                                           }}>
-                            Unfollow</button>
-                        : <button disabled={followingProgress.some(id => id === user.id)}
+                            Unfollow</StyledButton>
+                        : <StyledButton disabled={followingProgress.some(id => id === user.id)}
                                   onClick={() => {
                                       followUser(user.id, friendsCount);
                                   }}>
-                            Follow</button>}
+                            Follow</StyledButton>}
                 </div>
             </div>
             <div className={s.userInfo}>

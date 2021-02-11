@@ -1,6 +1,7 @@
 import React from "react";
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
+import StyledButton from "../common/StyledButton";
 
 const Header = (props) => {
     return (
@@ -17,7 +18,7 @@ const Header = (props) => {
             </label>
             <div className={s.auth}>
                 {props.isAuth && props.profile? <div className={s.authInfo}><img src={props.profile.photos.small} alt=""/> {props.login}
-                    <button className={s.logoutButton} onClick={props.logout}>Logout</button>
+                    <StyledButton onClick={props.logout}>Logout</StyledButton>
                 </div> : <NavLink to="/login">Login</NavLink> }
             </div>
         </header>

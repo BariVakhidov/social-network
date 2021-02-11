@@ -10,7 +10,7 @@ import Login from "./components/Login/Login";
 import FriendsContainer from "./components/Friends/Friends";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
-import {Switch, withRouter} from "react-router";
+import {Redirect, Switch, withRouter} from "react-router";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
@@ -37,6 +37,7 @@ class App extends React.Component {
                     className={"app-wrapper-content".concat(" ", this.props.blackTheme && "app-wrapper-content-black")}>
                     <Suspense fallback={<Preloader/>}>
                        <Switch>
+                           <Route exact path="/" render={() => <Redirect to={"/profile"}/>}/>
                            <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                            <Route path="/login" render={() => <Login/>}/>
                            <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>

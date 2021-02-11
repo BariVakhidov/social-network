@@ -5,7 +5,7 @@ let initialState = {
     blackTheme: false
 }
 
-const INITIALIZED_SUCCESS = "social-network/app/INITIALIZED_SUCCESS";
+const INITIALIZED_SUCCESS = "social-network/appINITIALIZED_SUCCESS";
 const BLACK_THEME = "social-network/app/BLACK_THEME";
 
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS});

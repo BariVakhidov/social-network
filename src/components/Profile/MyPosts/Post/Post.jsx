@@ -1,6 +1,7 @@
 import React from "react";
 import s from './Posts.module.css';
 import Like from "../../../common/Like/Like";
+import StyledButton from "../../../common/StyledButton";
 
 const Post = (props) => {
     return (
@@ -17,10 +18,10 @@ const Post = (props) => {
                         {props.postText}
                     </div>
                 </div>
-                <button className={s.delete} onClick={() => {
+                <StyledButton className={s.delete} onClick={() => {
                     props.deletePost(props.id)
                 }}>Delete
-                </button>
+                </StyledButton>
             </div>
             <Like addLike={() => {
                 props.addLike(props.id)

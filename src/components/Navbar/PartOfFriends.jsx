@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./Nav.module.css";
 import Friends from "./Friend/Friends";
+import StyledButton from "../common/StyledButton";
 
 const PartOfFriends = props => {
     if (props.isAuth) {
@@ -11,7 +12,7 @@ const PartOfFriends = props => {
                     {props.friends.map(f => <Friends name={f.name} id={f.id} image={f.photos.small} key={f.id}/>)}
                 </div>
                 <div>
-                    <button>Show more</button>
+                    <StyledButton>Show more</StyledButton>
                 </div>
             </div>
         );

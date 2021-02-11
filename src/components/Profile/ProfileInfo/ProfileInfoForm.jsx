@@ -2,6 +2,7 @@ import s from "./ProfileInfo.module.css";
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import Preloader from "../../common/Preloader/Preloader";
 import {useState} from "react";
+import StyledButton from "../../common/StyledButton";
 
 
 const ProfileInfoForm = ({contacts, deactivateEditMode, profile, updateProfile}) => {
@@ -44,7 +45,7 @@ const ProfileInfoForm = ({contacts, deactivateEditMode, profile, updateProfile})
                     });
             }}
         >
-            {({isSubmitting, errors}) => (
+            {({isSubmitting}) => (
                 <Form className={s.form}>
                     <div className={s.inputs}>
                         <div className={s.fields}>
@@ -58,12 +59,12 @@ const ProfileInfoForm = ({contacts, deactivateEditMode, profile, updateProfile})
                         })}</div>
                     </div>
                     <div className={s.formButtons}>
-                        <button className={s.formButton} type="submit" disabled={isSubmitting}>
+                        <StyledButton className={s.formButton} type="submit" disabled={isSubmitting}>
                             Save
-                        </button>
-                        <button className={s.formButton} onClick={deactivateEditMode}>
+                        </StyledButton>
+                        <StyledButton className={s.formButton} onClick={deactivateEditMode}>
                             Cancel
-                        </button>
+                        </StyledButton>
                     </div>
                     <div>{isFetching && <Preloader/>}</div>
                 </Form>

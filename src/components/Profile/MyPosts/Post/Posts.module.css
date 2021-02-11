@@ -37,9 +37,4 @@
 }
 .delete {
     align-self: flex-start;
-    margin-left: 15px;
-    padding: 5px;
-    background-color: #b3b3b3;
-    border: solid 1px grey;
-    border-radius: 5px;
 }

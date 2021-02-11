@@ -3,6 +3,7 @@ import s from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
 import ProfileInfoForm from "./ProfileInfoForm";
+import StyledButton from "../../common/StyledButton";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -72,13 +73,13 @@ const ProfileData = ({profile, isOwner, status, updateStatus, updateProfile}) =>
                         <div>{profile.lookingForAJob ? "lookingForAJob" : "-"}</div>
                         <div>{profile.lookingForAJobDescription}</div>
                         <div style={{display: "inline-block"}}>
-                            {contactsVisible ? <button onClick={() => {
+                            {contactsVisible ? <StyledButton onClick={() => {
                                     setContactsVisible(false)
-                                }}>Close contacts</button> :
-                                <button onClick={() => {
+                                }}>Close contacts</StyledButton> :
+                                <StyledButton onClick={() => {
                                     setContactsVisible(true)
-                                }}>Show contacts</button>}
-                            {isOwner && <button onClick={activateEditMode}>Edit</button>}
+                                }}>Show contacts</StyledButton>}
+                            {isOwner && <StyledButton onClick={activateEditMode}>Edit</StyledButton>}
                         </div>
                     </div>
                     {contactsVisible ? <div className={s.contacts}>
