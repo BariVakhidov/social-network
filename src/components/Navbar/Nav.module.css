@@ -19,14 +19,15 @@
 }
 .friends {
     margin-top: 40px;
-
 }
 .friendsItems {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
     justify-content: center;
-
+}
+ button {
+    margin: 10px 0;
 }
 .item a{
     color: white;
@@ -41,5 +42,6 @@
     padding: 5px 10px;
 }
 .item:hover {
+
     background-color: rgba(133, 133, 133, 0.3);
 }

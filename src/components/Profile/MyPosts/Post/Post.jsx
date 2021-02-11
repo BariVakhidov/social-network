@@ -1,12 +1,8 @@
 import React from "react";
 import s from './Posts.module.css';
+import Like from "../../../common/Like/Like";
 
 const Post = (props) => {
-
-    let addLike = () => {
-        props.addLike(props.id);
-    };
-
     return (
         <div className={s.post}>
             <div className={s.cont}>
@@ -21,15 +17,14 @@ const Post = (props) => {
                         {props.postText}
                     </div>
                 </div>
-                <button className={s.delete} onClick={() => {props.deletePost(props.id)}}>Delete</button>
-            </div>
-            <div className={s.like}>
-                <button onClick={addLike}>
-                    <img className={s.likeLogo} alt="like button" src='https://cdn.worldvectorlogo.com/logos/like-2.svg'
-                         title='Like'/>
+                <button className={s.delete} onClick={() => {
+                    props.deletePost(props.id)
+                }}>Delete
                 </button>
-                <span className="like"> likes: </span>{props.likesCount}
             </div>
+            <Like addLike={() => {
+                props.addLike(props.id)
+            }} likesCount={props.likesCount}/>
         </div>
     );
 };

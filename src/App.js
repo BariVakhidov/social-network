@@ -1,5 +1,5 @@
 import React, {Suspense} from 'react';
-import {HashRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import "./App.css";
 import Settings from "./components/Settings/Settings";
 import NavContainer from "./components/Navbar/NavContainer";
@@ -10,7 +10,7 @@ import Login from "./components/Login/Login";
 import FriendsContainer from "./components/Friends/Friends";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
-import {withRouter} from "react-router";
+import {Switch, withRouter} from "react-router";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
@@ -36,14 +36,17 @@ class App extends React.Component {
                 <div
                     className={"app-wrapper-content".concat(" ", this.props.blackTheme && "app-wrapper-content-black")}>
                     <Suspense fallback={<Preloader/>}>
-                        <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                        <Route path="/login" render={() => <Login/>}/>
-                        <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
-                        <Route path="/news" component={News}/>
-                        <Route path="/users/:friends?" render={() => <UsersContainer/>}/>
-                        <Route path="/music" component={Music}/>
-                        <Route path="/friends" component={FriendsContainer}/>
-                        <Route path="/settings" component={Settings}/>
+                       <Switch>
+                           <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                           <Route path="/login" render={() => <Login/>}/>
+                           <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                           <Route path="/news" component={News}/>
+                           <Route path="/users/:friends?" render={() => <UsersContainer/>}/>
+                           <Route path="/music" component={Music}/>
+                           <Route path="/friends" component={FriendsContainer}/>
+                           <Route path="/settings" component={Settings}/>
+                           <Route path="*" render={()=><div>404 NOT FOUND</div>}/>
+                       </Switch>
                     </Suspense>
                 </div>
             </div>
@@ -62,11 +65,11 @@ const AppContainer = compose(withRouter, connect(mapStateToProps, {initializeApp
 const SocialNetworkApp = () => {
     return (
         <React.StrictMode>
-            <HashRouter>
+            <BrowserRouter>
                 <Provider store={store}>
                     <AppContainer/>
                 </Provider>
-            </HashRouter>
+            </BrowserRouter>
         </React.StrictMode>
     )
 };

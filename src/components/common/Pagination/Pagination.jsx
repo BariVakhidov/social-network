@@ -23,7 +23,7 @@ const Pagination = ({portionSize = 10, ...props}) => {
             {pages.filter(p => p >= leftPageNumber && p <= rightPageNumber)
                 .map(p => {
                         return (
-                            <div key={p} className={props.currentPage === p && s.selectedPage || s.page} onClick={() => {
+                            <div key={p} className={(props.currentPage === p && s.selectedPage) || s.page} onClick={() => {
                                 props.onPageChange(p)
                             }}>{p}</div>)
                     }

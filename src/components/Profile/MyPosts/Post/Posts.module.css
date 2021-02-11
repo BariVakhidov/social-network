@@ -1,14 +1,19 @@
 
 .post {
-    color: #a52a2a;
-    background-color: #8291db;
+    color: wheat;
+    background-color: #242424;
     margin: 10px 0 10px;
     display: flex;
     flex-direction: column;
+    border: transparent 1px solid;
     border-radius: 10px;
     padding: 5px;
+    transition:  0.3s ease-in 0.1s;
 }
-
+.post:hover {
+    background-color: #424242;
+    border: wheat 1px solid;
+}
 .cont {
     display: flex;
     align-items: center;
@@ -29,14 +34,6 @@
     height: 50px;
     border-radius: 30px;
     margin-right: 10px;
-}
-
-.like {
-    margin: 0 10px 10px 10px;
-}
-
-.likeLogo {
-    width: 15px;
 }
 .delete {
     align-self: flex-start;
