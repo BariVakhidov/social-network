@@ -1,18 +1,18 @@
 import {friendsAPI, usersAPI} from "../api/api";
 import {updateObjectInArray} from "../utils/objects-helpers/users-helper";
 
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET_USERS";
-const SET_FRIENDS = "SET_FRIENDS";
-const SET_SHOWING_FRIENDS = "SET_SHOWING_FRIENDS";
-const SET_PAGE = "SET_PAGE";
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-const SET_FRIENDS_CURRENT_PAGE = "SET_FRIENDS_CURRENT_PAGE";
-const SET_TOTAL_USERS = "SET_TOTAL_USERS";
-const SET_TOTAL_FRIENDS = "SET_TOTAL_FRIENDS";
-const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
-const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
+const FOLLOW = "social-network/users/FOLLOW";
+const UNFOLLOW = "social-network/users/UNFOLLOW";
+const SET_USERS = "social-network/users/SET_USERS";
+const SET_FRIENDS = "social-network/users/SET_FRIENDS";
+const SET_SHOWING_FRIENDS = "social-network/users/SET_SHOWING_FRIENDS";
+const SET_PAGE = "social-network/users/SET_PAGE";
+const SET_CURRENT_PAGE = "social-network/users/SET_CURRENT_PAGE";
+const SET_FRIENDS_CURRENT_PAGE = "social-network/users/SET_FRIENDS_CURRENT_PAGE";
+const SET_TOTAL_USERS = "social-network/users/SET_TOTAL_USERS";
+const SET_TOTAL_FRIENDS = "social-network/users/SET_TOTAL_FRIENDS";
+const TOGGLE_IS_FETCHING = "social-network/users/TOGGLE_IS_FETCHING";
+const TOGGLE_IS_FOLLOWING_PROGRESS = "social-network/users/TOGGLE_IS_FOLLOWING_PROGRESS";
 
 export const followSuccess = (userId) => ({type: FOLLOW, userId});
 export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId});

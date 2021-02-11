@@ -5,8 +5,8 @@ let initialState = {
     blackTheme: false
 }
 
-const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
-const BLACK_THEME = "BLACK_THEME";
+const INITIALIZED_SUCCESS = "social-network/app/INITIALIZED_SUCCESS";
+const BLACK_THEME = "social-network/app/BLACK_THEME";
 
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 export const isBlackTheme = (blackTheme) => ({type: BLACK_THEME, blackTheme});
