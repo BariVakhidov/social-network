@@ -4,6 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
 import ProfileInfoForm from "./ProfileInfoForm";
 import StyledButton from "../../common/StyledButton";
+import cn from 'classnames'
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -15,9 +16,9 @@ const ProfileInfo = (props) => {
         }
     }
     return (
-        <div>
+        <>
             <div className={s.back}></div>
-            <div className={s.profileData}>
+            <div className={cn(s.profileData,{[s.profileDataM]:props.isMobile})}>
                 <Photo profile={props.profile} isOwner={props.isOwner} onMainPhotoSelected={onMainPhotoSelected}/>
                 <ProfileData
                     isOwner={props.isOwner}
@@ -26,7 +27,7 @@ const ProfileInfo = (props) => {
                     updateStatus={props.updateStatus}
                     updateProfile={props.updateProfile}/>
             </div>
-        </div>
+        </>
     );
 };
 const Contact = ({contactTitle, contactValue}) => {
@@ -69,8 +70,8 @@ const ProfileData = ({profile, isOwner, status, updateStatus, updateProfile}) =>
                         <ProfileStatusWithHooks isOwner={isOwner} status={status}
                                                 updateStatus={updateStatus}/>
                         <div className={s.fullName}>{profile.fullName}</div>
-                        <div>{profile.aboutMe}</div>
-                        <div>{profile.lookingForAJob ? "lookingForAJob" : "-"}</div>
+                        <div style={{marginBottom:"10px"}}>{profile.aboutMe}</div>
+                        <div style={{marginBottom:"10px"}}>{profile.lookingForAJob ? "lookingForAJob" : "-"}</div>
                         <div>{profile.lookingForAJobDescription}</div>
                         <div style={{display: "inline-block"}}>
                             {contactsVisible ? <StyledButton onClick={() => {

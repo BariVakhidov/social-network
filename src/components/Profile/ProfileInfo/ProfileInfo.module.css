@@ -33,6 +33,9 @@
     z-index: 0;
     transition: 0.3s all;
 }
+.photoContainer {
+    margin-bottom: 20px;
+}
 
 .profileData {
     display: flex;
@@ -40,6 +43,9 @@
     align-items: flex-start;
     flex-flow: row wrap;
     padding: 10px;
+}
+.profileDataM {
+    justify-content: center;
 }
 .profileDataComp {
     display: flex;
@@ -156,6 +162,8 @@
     text-align: center;
 }
 .fieldEl {
+    display: flex;
+    flex-flow: row wrap;
     border-radius: 5px;
     padding: 5px;
     border: white 1px solid;
@@ -170,4 +178,12 @@
     text-align: center;
     padding: 3px;
     font-size: 15px;
+}
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: 550;
+}
+a:hover {
+    color: #86C232;
 }

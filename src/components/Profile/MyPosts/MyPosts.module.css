@@ -11,3 +11,9 @@
     margin-top: 10px;
     color: crimson;
 }
+textarea {
+    background-color: #6B6E70;
+}
+textarea::placeholder {
+    color: #474B4F;
+}

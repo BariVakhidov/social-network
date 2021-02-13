@@ -23,12 +23,23 @@
 }
 
 .userInfo {
-    margin: 0 10px;
+    margin: 20px 20px;
     display: flex;
     flex-direction: column;
-
+    align-items: flex-start;
+    justify-content: flex-start;
 }
-
+.userInfo div {
+    margin-bottom: 10px;
+}
+.userName {
+    font-size: 18px;
+    font-weight: 550;
+}
+.status {
+    font-size: 14px;
+    font-style: italic;
+}
 .page {
     margin: 10px;
     cursor: default;
@@ -60,6 +71,7 @@
 
 }
 .turnPageLeft {
+    margin: 5px;
     padding: 3px;
     height: 24px;
     border: none;
@@ -70,6 +82,7 @@
 
 }
 .turnPageRight {
+    margin: 5px;
     padding: 3px;
     height: 24px;
     border: none;

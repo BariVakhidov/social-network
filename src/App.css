@@ -4,28 +4,24 @@ h1, h2, h3, h4, p, a {
     font-weight: normal;
 }
 body {
-    background-color: #02020a;
+    background-color: #222629;
+    box-sizing: border-box;
 }
 
 .app-wrapper {
-    display: grid;
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 3fr 13fr;
-    grid-template-areas:
-     "h h"
-     "n c";
+    display: flex;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .app-wrapper-content {
+    width: 100%;
     margin: 10px;
-    grid-area: c;
     background-color: #add8e6;
     border-radius: 10px;
 }
 .app-wrapper-content-black {
-    background-color: #211f1f;
+    background-color: #474B4F;
     color: wheat;
 }

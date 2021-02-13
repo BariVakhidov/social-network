@@ -1,0 +1,14 @@
+.wrapperContent {
+    width: 100%;
+    background-color: #222629;
+    border-radius: 10px;
+}
+.content {
+    width: 100%;
+    background-color: #add8e6;
+    border-radius: 0;
+}
+.contentBlack {
+    background-color: #474B4F;
+    color: wheat;
+}

@@ -2,23 +2,21 @@ import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
 import {logout} from "../../redux/auth-reducer";
-import {isBlackTheme} from "../../redux/app-reducer";
+import {setNavVisible} from "../../redux/app-reducer";
 
 class HeaderContainer extends React.Component {
-    componentDidMount() {
-    }
-
     render() {
         return <Header {...this.props} />
     }
 }
+
 let mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
-        login: state.auth.login,
         profile: state.auth.currentUser,
-        blackTheme: state.app.blackTheme
+        blackTheme: state.app.blackTheme,
+        isVisible: state.app.isVisible
     }
 }
 
-export default connect(mapStateToProps, {logout,isBlackTheme})(HeaderContainer);
+export default connect(mapStateToProps, {logout, setNavVisible})(HeaderContainer);

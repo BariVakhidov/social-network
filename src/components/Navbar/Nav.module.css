@@ -5,43 +5,220 @@
     background-color: #162147;
     text-align: center;
     border-radius: 10px;
-
+}
+.navbarM {
+    margin: 0;
+    padding: 10px;
+    border-radius: 0;
 }
 .navbarBlack {
-    background-color: #211f1f;
-    color: wheat;
+    background-color: #2d2a2a;
+    color: #86C232;
 }
+
 .nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
+.navM {
+
+}
+
 .friends {
     margin-top: 40px;
 }
+.mobileFriends {
+    margin-top: 0;
+}
 .friendsItems {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row;
     align-items: center;
     justify-content: center;
 }
- button {
+
+button {
     margin: 10px 0;
 }
-.item a{
-    color: white;
+
+.item a {
+    color: wheat;
     text-decoration: none;
 }
 
 .item a.active {
-    color: gold;
+    color: #86C232;
 }
+
 .item {
     border-radius: 10px;
     padding: 5px 10px;
+    width: 100%;
 }
-.item:hover {
 
+.item:hover {
     background-color: rgba(133, 133, 133, 0.3);
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+    margin:0;
+    padding:0;
+}
+.mid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top:1em;
+}
+
+
+/* Switch starts here */
+.rocker {
+    display: inline-block;
+    position: relative;
+    /*
+    SIZE OF SWITCH
+    ==============
+    All sizes are in em - therefore
+    changing the font-size here
+    will change the size of the switch.
+    See .rocker-small below as example.
+    */
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #888;
+    width: 7em;
+    height: 4em;
+    overflow: hidden;
+    border-bottom: 0.5em solid #171717;
+}
+
+
+.rocker::before {
+    content: "";
+    position: absolute;
+    top: 1em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #999;
+    border: 0.5em solid #171717;
+    border-bottom: 0;
+}
+.mid img {
+    height: 10px;
+}
+.rocker input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.rockerSmall {
+    font-size: 10px; /* Sizes the switch */
+    margin: 0;
+}
+.rockerSmall img {
+    height: 8px;
+}
+.mobileRocker {
+    font-size: 8px; /* Sizes the switch */
+    margin: 1em;
+}
+.switchLeft,
+.switchRight {
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5em;
+    width: 3em;
+    transition: 0.2s;
+}
+
+.switchLeft {
+    height: 2.4em;
+    width: 2.75em;
+    left: 0.85em;
+    bottom: 0.4em;
+    background-color: #ddd;
+    transform: rotate(15deg) skewX(15deg);
+}
+
+.switchRight {
+    right: 0.5em;
+    bottom: 0;
+    background-color: #494949;
+    color: #fff;
+}
+
+.switchLeft::before,
+.switchRight::before {
+    content: "";
+    position: absolute;
+    width: 0.4em;
+    height: 2.45em;
+    bottom: -0.45em;
+    background-color: #ccc;
+    transform: skewY(-65deg);
+}
+
+.switchLeft::before {
+    left: -0.4em;
+}
+
+.switchRight::before {
+    right: -0.375em;
+    background-color: transparent;
+    transform: skewY(65deg);
+}
+
+input:checked + .switchLeft {
+    background-color: #494949;
+    color: #fff;
+    bottom: 0;
+    left: 0.5em;
+    height: 2.5em;
+    width: 3em;
+    transform: rotate(0deg) skewX(0deg);
+}
+
+input:checked + .switchLeft::before {
+    background-color: transparent;
+    width: 3.0833em;
+}
+
+input:checked + .switchLeft + .switchRight {
+    background-color: #ddd;
+    color: #888;
+    bottom: 0.4em;
+    right: 0.8em;
+    height: 2.4em;
+    width: 2.75em;
+    transform: rotate(-15deg) skewX(-15deg);
+}
+
+input:checked + .switchLeft + .switchRight::before {
+    background-color: #ccc;
+}
+
+/* Keyboard Users */
+input:focus + .switchLeft {
+    color: #333;
+}
+
+input:checked:focus + .switchLeft {
+    color: #fff;
+}
+
+input:focus + .switchLeft + .switchRight {
+    color: #fff;
+}
+
+input:checked:focus + .switchLeft + .switchRight {
+    color: #333;
 }

@@ -1,12 +1,21 @@
 import React, {useState} from 'react';
-import s from "../../Users/Users.module.css"
+import s from "../../Users/Users.module.css";
+import cn from "classnames";
+import dArrowR from "../../../assets/images/double-arrow.png";
+import dArrowL from "../../../assets/images/double-arrow2.png";
+import arrowR from "../../../assets/images/arrowR.png";
+import arrowL from "../../../assets/images/arrowL.png";
 
 const Pagination = ({portionSize = 10, ...props}) => {
+    if (props.isMobile) {
+        portionSize=3;
+    }
     let pagesCount = Math.ceil(props.totalUsers / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
-    }
+    } //all pages
+
     let portionCount = Math.ceil(pagesCount / portionSize);
     let [portionNumber, setPortionNumber] = useState(1);
     let rightPageNumber = portionNumber * portionSize;
@@ -16,23 +25,40 @@ const Pagination = ({portionSize = 10, ...props}) => {
             {portionNumber > 1 &&
             <div>
                 <button className={s.turnPageLeft} onClick={() => {
+                    setPortionNumber(1)
+                }}><img
+                    src={dArrowL}
+                    alt=""/>
+                </button>
+                <button className={s.turnPageLeft} onClick={() => {
                     setPortionNumber(portionNumber - 1)
-                }}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Arrow_Blue_Left_001.svg/1200px-Arrow_Blue_Left_001.svg.png" alt=""/>
+                }}><img
+                    src={arrowL}
+                    alt=""/>
                 </button>
             </div>}
             {pages.filter(p => p >= leftPageNumber && p <= rightPageNumber)
                 .map(p => {
                         return (
-                            <div key={p} className={(props.currentPage === p && s.selectedPage) || s.page} onClick={() => {
-                                props.onPageChange(p)
-                            }}>{p}</div>)
+                            <div key={p} className={cn({[s.selectedPage]: props.currentPage === p}, s.page)}
+                                 onClick={() => {
+                                     props.onPageChange(p)
+                                 }}>{p}</div>)
                     }
                 )}
             {portionCount > portionNumber &&
             <div>
                 <button className={s.turnPageRight} onClick={() => {
                     setPortionNumber(portionNumber + 1)
-                }}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Arrow_Blue_Right_001.svg/768px-Arrow_Blue_Right_001.svg.png" alt=""/>
+                }}><img
+                    src={arrowR}
+                    alt=""/>
+                </button>
+                <button className={s.turnPageRight} onClick={() => {
+                    setPortionNumber(portionCount)
+                }}><img
+                    src={dArrowR}
+                    alt=""/>
                 </button>
             </div>}
         </div>

@@ -8,10 +8,10 @@ const Profile = (props) => {
         return <Preloader/>
     }
     return (
-        <div>
-            <ProfileInfo isFetching={props.isFetching} isOwner={props.isOwner} profile={props.profile} status={props.status} savePhoto={props.savePhoto} updateStatus={props.updateStatus} updateProfile={props.updateProfile}/>
+        <>
+            <ProfileInfo isMobile={props.isMobile} isFetching={props.isFetching} isOwner={props.isOwner} profile={props.profile} status={props.status} savePhoto={props.savePhoto} updateStatus={props.updateStatus} updateProfile={props.updateProfile}/>
             <MyPostsContainer />
-        </div>
+        </>
     );
 };
 

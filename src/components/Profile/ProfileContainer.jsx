@@ -19,17 +19,20 @@ class ProfileContainer extends React.Component {
         if (!userId) userId = this.props.mainUserId;
         this.props.getProfilePage(userId);
     }
+
     componentDidMount() {
         this.refreshProfile();
     };
+
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.match.params.userId !== prevProps.match.params.userId) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile();
         }
     }
+
     render() {
         return (
-            <Profile isOwner={!this.props.match.params.userId} {...this.props} updateStatus={this.props.updateStatus} />
+            <Profile isOwner={!this.props.match.params.userId} {...this.props} updateStatus={this.props.updateStatus}/>
         );
     };
 }
@@ -43,5 +46,13 @@ let mapStateToProps = (state) => {
     }
 };
 
-export default compose(connect(mapStateToProps, {savePhoto,updateProfile,setUserProfile,setShowingUserId, getProfilePage, getStatus,updateStatus}),withRouter, withAuthRedirect)(ProfileContainer);
+export default compose(connect(mapStateToProps, {
+    savePhoto,
+    updateProfile,
+    setUserProfile,
+    setShowingUserId,
+    getProfilePage,
+    getStatus,
+    updateStatus
+}), withRouter, withAuthRedirect)(ProfileContainer);
 
