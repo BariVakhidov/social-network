@@ -4,14 +4,20 @@
     background-color: #162147;
     text-align: center;
     border-radius: 10px;
+    border-right: #86C232 5px solid;
 }
 .navbarM {
     margin: 0;
     padding: 10px;
     border-radius: 0;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    border-right:none;
+    border-bottom: #86C232 5px solid;
 }
 .navbarBlack {
-    background-color: #474B4F;
+    background-color: #2d2e31;
     color: #86C232;
 }
 

@@ -1,11 +1,25 @@
 
 .myPosts {
-    padding: 0 10px 10px;
+    padding: 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+}
+.myPostsTitle {
+    align-self: center;
+    margin: 10px 0;
+    padding: 10px;
+    border: #86C232 3px solid;
+    border-radius: 10px;
+    transition: background-color 0.2s ease-in;
+}
+.myPostsTitle:hover{
+    cursor: pointer;
+    background-color: #86C232;
+    color: #2d2e31;
 }
 .posts {
     display: flex;
     flex-direction: column-reverse;
-
 }
 .newPost {
     margin-top: 10px;

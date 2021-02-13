@@ -43,7 +43,7 @@ const Nav = (props) => {
                     <div className={s.mid}>
                         <label
                             className={cn(s.rocker, {[s.mobileRocker]: props.isMobile}, {[s.rockerSmall]: !props.isMobile})}>
-                            <input type="checkbox" onChange={event => {
+                            <input type="checkbox" checked={props.blackTheme} onChange={event => {
                                 props.isBlackTheme(event.currentTarget.checked)
                             }}></input>
                             <span className={s.switchLeft}><img src={moon} alt=""/></span>

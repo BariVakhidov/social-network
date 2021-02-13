@@ -1,10 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import s from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
-import ProfileInfoForm from "./ProfileInfoForm";
-import StyledButton from "../../common/StyledButton";
 import cn from 'classnames'
+import ProfileImage from "./ProfileImage";
+import ProfileData from "./ProfileData";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -17,84 +16,20 @@ const ProfileInfo = (props) => {
     }
     return (
         <>
-            <div className={s.back}></div>
-            <div className={cn(s.profileData,{[s.profileDataM]:props.isMobile})}>
-                <Photo profile={props.profile} isOwner={props.isOwner} onMainPhotoSelected={onMainPhotoSelected}/>
+            <div className={cn(s.back, {[s.backM]: props.isMobile})}></div>
+            <div className={cn(s.profileData, {[s.profileDataM]: props.isMobile})}>
+                <ProfileImage profile={props.profile} isOwner={props.isOwner}
+                              onMainPhotoSelected={onMainPhotoSelected}/>
                 <ProfileData
                     isOwner={props.isOwner}
                     profile={props.profile}
                     status={props.status}
                     updateStatus={props.updateStatus}
-                    updateProfile={props.updateProfile}/>
+                    updateProfile={props.updateProfile}
+                    isMobile={props.isMobile}/>
             </div>
         </>
     );
 };
-const Contact = ({contactTitle, contactValue}) => {
-    return (
-        <div className={s.contact}>
-            <span>{contactTitle}</span>
-            <a href={contactValue}>{contactValue}</a>
-        </div>
-    )
-};
-const Photo = ({profile, isOwner, onMainPhotoSelected}) => {
-    return (
-        <div className={s.photoContainer}>
-            <img
-                className={s.avatar}
-                alt="ava"
-                src={profile.photos.large ? profile.photos.large : "https://upload.wikimedia.org/wikipedia/ru/0/00/The_Child_aka_Baby_Yoda_%28Star_Wars%29.jpg"}
-            />
-            <div className={s.cont}>{isOwner &&
-            <input type="file" className={s.inputFile} onChange={onMainPhotoSelected}/>}
-            </div>
 
-        </div>
-    )
-};
-const ProfileData = ({profile, isOwner, status, updateStatus, updateProfile}) => {
-    let [editMode, setEditMode] = useState(false);
-    let [contactsVisible, setContactsVisible] = useState(false)
-    const activateEditMode = () => {
-        setEditMode(true);
-    }
-    const deactivateEditMode = () => {
-        setEditMode(false);
-    }
-    return (
-        <>
-            {!editMode ?
-                <div className={s.profileDataComp}>
-                    <div className={s.aboutYourself}>
-                        <ProfileStatusWithHooks isOwner={isOwner} status={status}
-                                                updateStatus={updateStatus}/>
-                        <div className={s.fullName}>{profile.fullName}</div>
-                        <div style={{marginBottom:"10px"}}>{profile.aboutMe}</div>
-                        <div style={{marginBottom:"10px"}}>{profile.lookingForAJob ? "lookingForAJob" : "-"}</div>
-                        <div>{profile.lookingForAJobDescription}</div>
-                        <div style={{display: "inline-block"}}>
-                            {contactsVisible ? <StyledButton onClick={() => {
-                                    setContactsVisible(false)
-                                }}>Close contacts</StyledButton> :
-                                <StyledButton onClick={() => {
-                                    setContactsVisible(true)
-                                }}>Show contacts</StyledButton>}
-                            {isOwner && <StyledButton onClick={activateEditMode}>Edit</StyledButton>}
-                        </div>
-                    </div>
-                    {contactsVisible ? <div className={s.contacts}>
-                        <div>{Object.keys(profile.contacts).map((key => {
-                            return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-                        }))}
-                        </div>
-                    </div> : null}
-                </div>
-                :
-                <ProfileInfoForm updateProfile={updateProfile} deactivateEditMode={deactivateEditMode}
-                                 contacts={profile.contacts} profile={profile}/>
-            }
-        </>
-    )
-}
 export default ProfileInfo;

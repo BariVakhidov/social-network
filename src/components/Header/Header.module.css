@@ -1,6 +1,10 @@
 header {
+    top: 0;
     height: 60px;
     background-color: gray;
+    position: sticky;
+    z-index: 999;
+    border-bottom: #86C232 5px solid;
 }
 
 .header {
@@ -17,6 +21,7 @@ header {
     background-color: #474B4F;
     color: wheat;
 }
+
 .menuButton {
     background-color: transparent;
     border: none;

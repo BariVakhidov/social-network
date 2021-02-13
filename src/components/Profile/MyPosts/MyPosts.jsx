@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {Field, reduxForm} from "redux-form";
@@ -34,17 +34,18 @@ const MyPosts = React.memo(props => {
                                            key={p.id}/>);
 
     const onSubmit = (formData) => {
-        props.addPostAC(formData.newPost);
+        props.addPostAC(formData.newPost, props.photo);
     }
-
-    console.log(props.newPostText);
+    let [postsVisible, setPostsVisible] = useState(false);
     return (
         <div className={s.myPosts}>
-            <h3>My posts</h3>
-            <NewPostReduxForm onSubmit={onSubmit}/>
-            <div className={s.posts}>
-                {posts}
-            </div>
+            <div className={s.myPostsTitle} onClick={() => setPostsVisible(!postsVisible)}>My posts</div>
+            {postsVisible && <>
+                <NewPostReduxForm onSubmit={onSubmit}/>
+                <div className={s.posts}>
+                    {posts}
+                </div>
+            </>}
         </div>
     );
 });

@@ -1,26 +1,27 @@
 import {profileAPI} from "../api/api";
 import {setCurrentUserPhotos} from "./auth-reducer";
+import profileImg from '../assets/images/profile.jpg'
 
 let initialState = {
     posts: [
         {
             id: 1,
             name: "Roman",
-            userImage: "https://media4.s-nbcnews.com/j/MSNBC/Components/Video/201609/a_ov_Pepe_160928.focal-760x428.jpg",
+            userImage: profileImg,
             postText: "Ok, see you",
             likesCount: 5
         },
         {
             id: 2,
             name: "Andrew",
-            userImage: "https://media4.s-nbcnews.com/j/MSNBC/Components/Video/201609/a_ov_Pepe_160928.focal-760x428.jpg",
+            userImage: profileImg,
             postText: "Hey",
             likesCount: 6
         },
         {
             id: 3,
             name: "Demin",
-            userImage: "https://media4.s-nbcnews.com/j/MSNBC/Components/Video/201609/a_ov_Pepe_160928.focal-760x428.jpg",
+            userImage: profileImg,
             postText: "Nigga",
             likesCount: 1
         },
@@ -38,7 +39,7 @@ const SET_STATUS = "social-network/profile/SET_STATUS";
 const SET_SHOWING_USER_ID = "social-network/profile/SET_SHOWING_USER_ID";
 const SAVE_PHOTO_SUCCESS = "social-network/profile/SAVE_PHOTO_SUCCESS"
 
-export const addPostAC = (newText) => ({type: ADD_POST, newText});
+export const addPostAC = (newText, photo) => ({type: ADD_POST, newText, photo});
 export const deletePost = (postId) => ({type: DELETE_POST, postId});
 export const addLikeAC = (postId) => ({type: ADD_LIKE, postId});
 export const likeCommentAC = (commentId) => ({type: LIKE_COMMENT, commentId});
@@ -54,7 +55,7 @@ const profileReducer = (state = initialState, action) => {
             let newPost = {
                 id: state.posts.length + 1,
                 name: "Bary",
-                userImage: "https://media.pri.org/s3fs-public/styles/open_graph/public/story/images/Crying-Frog-Meme-06.jpg?itok=79C7E-DY",
+                userImage: action.photo,
                 postText: action.newText,
                 likesCount: 0,
                 comments: [],
