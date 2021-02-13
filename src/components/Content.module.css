@@ -1,13 +1,28 @@
 .wrapperContent {
+    display: flex;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content {
+    width: 100%;
+    margin: 10px;
+    background-color: #add8e6;
+    border-radius: 10px;
+}
+
+.wrapperContentM {
     width: 100%;
     background-color: #222629;
     border-radius: 10px;
 }
-.content {
+.contentM {
     width: 100%;
     background-color: #add8e6;
     border-radius: 0;
 }
+
 .contentBlack {
     background-color: #474B4F;
     color: wheat;

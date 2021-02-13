@@ -7,7 +7,7 @@ import {withRouter} from "react-router";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
-import Content from "./components/Content";
+import ContentWithResponsive from "./components/ContentWithResponsive";
 
 
 
@@ -21,7 +21,7 @@ class App extends React.Component {
         }
         return (
             <>
-                <Content blackTheme={this.props.blackTheme} />
+                <ContentWithResponsive blackTheme={this.props.blackTheme} />
             </>
         )
     }
