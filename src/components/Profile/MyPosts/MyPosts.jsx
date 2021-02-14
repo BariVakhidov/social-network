@@ -32,7 +32,7 @@ const NewPostForm = (props) => {
                     <Field placeholder="New post" type="post" name="post" component={"textarea"}/>
                     <ErrorMessage className={s.error} name="post" component="div"/>
                     <StyledButton type="submit" disabled={isSubmitting}>
-                        Submit
+                        Add post
                     </StyledButton>
                 </Form>
             )}

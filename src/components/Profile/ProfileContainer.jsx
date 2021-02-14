@@ -43,7 +43,8 @@ let mapStateToProps = (state) => {
         status: state.profilePage.status,
         mainUserId: state.auth.userId,
         showingUserId: state.profilePage.showingUserId,
-        blackTheme:state.app.blackTheme
+        blackTheme:state.app.blackTheme,
+        editMode:state.profilePage.editMode
     }
 };
 

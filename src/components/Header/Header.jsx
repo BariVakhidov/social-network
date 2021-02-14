@@ -5,6 +5,7 @@ import StyledButton from "../common/StyledButton";
 import cn from 'classnames';
 import logout from '../../assets/images/logout.png'
 import menu from '../../assets/images/menu.png';
+import carrot from '../../assets/images/carrot.jpg'
 
 const Header = (props) => {
     useEffect(()=> {
@@ -18,9 +19,9 @@ const Header = (props) => {
                 <div className={s.logo}>
                     <img
                         alt="img"
-                        src="https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/062019/rage_against_the_machine-01.png?LE3JPx_L4z5gcXoUVhjrQiWd8KOOq3iJ&itok=gBeWUx92"/>
+                        src={carrot}/>
                     <div>{props.isMobile ? <button className={s.menuButton} onClick={()=> props.setNavVisible(!props.isVisible)}><img src={menu} alt=""/></button> :
-                        "Rebellion"}</div>
+                        "Carrot"}</div>
                 </div>
                 <div className={s.auth}>
                     {props.isAuth && props.profile ?

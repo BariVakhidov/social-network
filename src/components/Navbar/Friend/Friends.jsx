@@ -1,7 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import s from './Friends.module.css';
-import userPhoto from '../../../assets/pepe.gif';
+import userPhoto from '../../../assets/images/profile.jpg';
 
 const Friends = (props) => {
     let path = "/profile/" + props.id;
