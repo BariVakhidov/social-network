@@ -6,6 +6,7 @@ import StyledButton from "../../common/StyledButton";
 import Contact from "./Contact";
 import ProfileInfoForm from "./ProfileInfoForm";
 import job from "../../../assets/images/job.png"
+import name from "../../../assets/images/name.png"
 
 const ProfileData = ({profile, isOwner, status, updateStatus, updateProfile, isMobile}) => {
     let [editMode, setEditMode] = useState(false);
@@ -23,7 +24,7 @@ const ProfileData = ({profile, isOwner, status, updateStatus, updateProfile, isM
                     <div className={cn(s.aboutYourself, {[s.aboutYourselfM]: isMobile})}>
                         <ProfileStatusWithHooks isOwner={isOwner} status={status}
                                                 updateStatus={updateStatus}/>
-                        <div className={s.fullName}>{profile.fullName}</div>
+                        <div className={s.fullName}><img src={name} alt="name" height={25}/><span>{profile.fullName}</span></div>
                         <div style={{marginBottom: "10px"}}>{profile.aboutMe}</div>
                         <div style={{marginBottom: "10px"}}>{profile.lookingForAJob ?
                             <img src={job} alt="job" width="30"/> : "-"}</div>

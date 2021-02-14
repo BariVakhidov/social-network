@@ -8,7 +8,7 @@ let initialState = {
             id: 1,
             name: "Roman",
             userImage: profileImg,
-            postText: "Ok, see you",
+            postText: "How are you?",
             likesCount: 5
         },
         {
@@ -22,7 +22,7 @@ let initialState = {
             id: 3,
             name: "Demin",
             userImage: profileImg,
-            postText: "Nigga",
+            postText: "Go party",
             likesCount: 1
         },
     ],

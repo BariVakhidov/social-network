@@ -6,7 +6,7 @@ let mapStateToProps = (state) => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
-        photo: state.auth.currentUser.photos.small
+        currentUser: state.auth.currentUser
     }
 };
 

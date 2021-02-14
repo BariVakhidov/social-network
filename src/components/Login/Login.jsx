@@ -1,8 +1,7 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
-import {Input} from "../common/FormsControls/FormsControl";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {required} from "../../utils/validators/validators";
 import {Redirect} from "react-router";
 import s from "../common/FormsControls/FormControl.module.css"
@@ -10,8 +9,8 @@ import cn from "classnames"
 
 const LoginForm = (props) => {
     return (
-        <div className={cn(s.form, {[s.formM]: props.isMobile})}>
-            <form onSubmit={props.handleSubmit}>
+        <div >
+           {/* <form onSubmit={props.handleSubmit}>
                 <div>
                     <Field placeholder={"Login"} name={"email"} component={Input} validate={[required]}/>
                 </div>
@@ -33,20 +32,65 @@ const LoginForm = (props) => {
                 <div>
                     <button>Login</button>
                 </div>
-            </form>
+            </form>*/}
+            <Formik
+                initialValues={{ email: '', password: '', captcha: '' }}
+                validate={values => {
+                    const errors = {};
+                    if (!values.email) {
+                        errors.email = 'Required';
+                    } else if (
+                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                    ) {
+                        errors.email = 'Invalid email address';
+                    }
+                    return errors;
+                }}
+                onSubmit={(values, { setSubmitting,setFieldError }) => {
+                        props.login(values)
+                            .then((error) => {
+                                    if (error) {
+                                        setFieldError("password", error)
+                                    }
+                                })
+                            .finally(() => {
+                                setSubmitting(false);
+                            });
+                }}
+            >
+                {({ isSubmitting }) => (
+                    <Form className={cn(s.form, {[s.formM]: props.isMobile})}>
+                        <Field type="email" name="email" placeholder={"E-mail"} />
+                        <ErrorMessage name="email" component="div" className={s.error}/>
+                        <Field type="password" name="password" placeholder={"password"} />
+                        <ErrorMessage name="password" component="div" className={s.formSummaryError}/>
+                        <div><Field type="checkbox" name="rememberMe" />remember me</div>
+                        {props.captchaURL? <>
+                            <img src={props.captchaURL} alt="captcha" />
+                            <Field placeholder={"Captcha"} name={"captcha"} type={"input"} component="input"
+                                   validate={[required]}/>
+                        </>:null}
+                        <button type="submit" disabled={isSubmitting}>
+                            Login
+                        </button>
+                    </Form>
+                )}
+            </Formik>
         </div>
 
     );
 };
+/*
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
+*/
 
 const Login = (props) => {
-    const onSubmit = (formData) => {
+    /*const onSubmit = (formData) => {
         props.login(formData.email, formData.password, formData.rememberMe,formData.captcha)
-    }
+    }*/
     if (props.isAuth) return <Redirect to='/profile'/>
     return (<div>
-            <LoginReduxForm captchaURL={props.captchaURL} isMobile={props.isMobile} onSubmit={onSubmit}/>
+            <LoginForm captchaURL={props.captchaURL} login={props.login} isMobile={props.isMobile}/>
         </div>
     );
 };

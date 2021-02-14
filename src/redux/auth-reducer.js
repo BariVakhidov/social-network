@@ -1,5 +1,4 @@
 import {authAPI, profileAPI, securityAPI} from "../api/api";
-import {stopSubmit} from "redux-form";
 import {getShowingFriends} from "./users-reducer";
 
 let initialState = {
@@ -65,8 +64,8 @@ export const getAuthUserData = () => async (dispatch) => {
     }
 };
 
-export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
-    let data = await authAPI.login(email, password, rememberMe, captcha);
+export const login = (loginData) => async (dispatch) => {
+    let data = await authAPI.login(loginData);
     if (data.resultCode === 0) {
         dispatch(getAuthUserData());
     }
@@ -74,7 +73,7 @@ export const login = (email, password, rememberMe, captcha) => async (dispatch) 
         if (data.resultCode === 10) {
             dispatch(getCaptchaURL());
         }
-        dispatch(stopSubmit("login", {_error: data.messages}));
+        return data.messages
     }
 };
 
@@ -87,6 +86,7 @@ export const logout = () => async (dispatch) => {
     let data = await authAPI.logout();
     if (data.resultCode === 0) {
         dispatch(setUserData(null, null, null, false));
+        dispatch(setCaptchaURL(null))
     }
 };
 

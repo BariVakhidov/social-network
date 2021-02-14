@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import "./App.css";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
@@ -39,11 +39,11 @@ const SocialNetworkApp = () => {
 
     return (
         <React.StrictMode>
-            <BrowserRouter>
+            <HashRouter>
                 <Provider store={store}>
                     <AppContainer/>
                 </Provider>
-            </BrowserRouter>
+            </HashRouter>
         </React.StrictMode>
     )
 };

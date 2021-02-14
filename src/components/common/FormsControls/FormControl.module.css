@@ -1,12 +1,12 @@
-.formControl input, textarea {
+.form input, textarea {
     margin: 5px;
     padding: 5px;
     border-radius: 5px;
     border: none;
 }
 
-.formControl.error input,
-.formControl.error textarea {
+.error {
+    padding: 5px;
     border: solid red 2px;
 }
 
@@ -21,6 +21,7 @@
 .form {
     margin-top: 40px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }

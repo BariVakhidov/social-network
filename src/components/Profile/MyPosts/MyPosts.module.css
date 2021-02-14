@@ -25,6 +25,20 @@
     margin-top: 10px;
     color: crimson;
 }
+.error {
+    margin-left: 5px;
+    padding: 3px 20px;
+    border: solid red 2px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+.form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
 textarea {
     background-color: #c4c3c3;
     border-radius: 10px;
