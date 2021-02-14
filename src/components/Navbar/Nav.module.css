@@ -1,10 +1,10 @@
 .navbar {
     margin: 10px 0 10px 10px;
     padding: 20px;
-    background-color: #162147;
+    background-color: #BC986A;
+    color: wheat;
     text-align: center;
     border-radius: 10px;
-    border-right: #86C232 5px solid;
 }
 .navbarM {
     margin: 0;

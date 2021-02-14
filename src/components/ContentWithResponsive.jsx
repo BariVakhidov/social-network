@@ -44,15 +44,18 @@ const Content = ({isMobile, blackTheme}) => {
                     <Suspense fallback={<Preloader/>}>
                         <Switch>
                             <Route exact path="/" render={() => <Redirect to={"/profile"}/>}/>
-                            <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                            <Route path="/login" render={() => <Login/>}/>
+                            <Route path="/dialogs" render={() => <DialogsContainer isMobile={isMobile}/>}/>
+                            <Route path="/login" render={() => <Login isMobile={isMobile}/>}/>
                             <Route path="/profile/:userId?" render={() => <ProfileContainer isMobile={isMobile}/>}/>
                             <Route path="/news" component={News}/>
                             <Route path="/users/:friends?" render={() => <UsersContainer isMobile={isMobile}/>}/>
                             <Route path="/music" component={Music}/>
                             <Route path="/friends" render={() => <FriendsContainer isMobile={isMobile}/>}/>
                             <Route path="/settings" component={Settings}/>
-                            <Route path="*" render={() => <div>404 NOT FOUND</div>}/>
+                            <Route path="*" render={() => <div className={s.start}>
+                                <h1>Test auth data:</h1>
+                                <p>Email: free@samuraijs.com</p>
+                                <p>Password: free</p></div>}/>
                         </Switch>
                     </Suspense>
                 </div>

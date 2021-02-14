@@ -5,8 +5,8 @@ import cn from "classnames"
 const Contact = ({contactValue, icon, isMobile}) => {
     return (
         <div className={cn(s.contact, {[s.contactM]: isMobile})}>
-            <img src={`my-app/images/${icon}.png`} alt="icon" width="25"/>
-            <a className={s.contactRef} href={contactValue}>{contactValue}</a>
+            {icon ? <img src={`/my-app/images/${icon}.png`} alt="icon" width="25"/> : icon}
+            <a className={s.contactRef} href={contactValue}>{contactValue? contactValue : "-"}</a>
         </div>
     )
 };

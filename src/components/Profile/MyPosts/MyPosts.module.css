@@ -26,7 +26,9 @@
     color: crimson;
 }
 textarea {
-    background-color: #6B6E70;
+    background-color: #c4c3c3;
+    border-radius: 10px;
+    padding: 10px;
 }
 textarea::placeholder {
     color: #474B4F;

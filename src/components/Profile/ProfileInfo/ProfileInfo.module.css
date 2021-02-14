@@ -1,8 +1,9 @@
 .back {
     height: 100px;
     width: 100%;
-    background-image: url(https://media.npr.org/assets/img/2020/08/27/nasa-goods-real_wide-9168d715c2d4c488d7a0e594b397d7abdd969d9d.png);
+    background-image: url(https://images.unsplash.com/photo-1565661303127-f48d88591ca1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8amFwYW5lc2UlMjBsYW5kc2NhcGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80);
     background-size: cover;
+    background-position: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
@@ -10,13 +11,22 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-
+.backBlack {
+    height: 100px;
+    width: 100%;
+    background-image: url(https://media.npr.org/assets/img/2020/08/27/nasa-goods-real_wide-9168d715c2d4c488d7a0e594b397d7abdd969d9d.png);
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
 .avatar {
     position: relative;
     display: block;
     border-radius: 10px;
     z-index: 30;
     height: 100%;
+    border: #8D8741 2px solid;
 }
 
 .cont {
@@ -183,6 +193,7 @@ hr {
     text-align: center;
 }
 .fieldEl {
+    background-color: #c4c3c3;
     display: flex;
     flex-flow: row wrap;
     border-radius: 5px;

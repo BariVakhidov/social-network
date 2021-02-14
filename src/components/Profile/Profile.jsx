@@ -9,9 +9,9 @@ const Profile = (props) => {
     }
     return (
         <>
-            <ProfileInfo isMobile={props.isMobile} isFetching={props.isFetching} isOwner={props.isOwner} profile={props.profile} status={props.status} savePhoto={props.savePhoto} updateStatus={props.updateStatus} updateProfile={props.updateProfile}/>
-            <hr/>
-            <MyPostsContainer />
+            <ProfileInfo blackTheme={props.blackTheme} isMobile={props.isMobile} isFetching={props.isFetching} isOwner={props.isOwner} profile={props.profile} status={props.status} savePhoto={props.savePhoto} updateStatus={props.updateStatus} updateProfile={props.updateProfile}/>
+            {props.blackTheme && <hr/>}
+            <MyPostsContainer blackTheme={props.blackTheme}/>
         </>
     );
 };

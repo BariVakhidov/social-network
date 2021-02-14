@@ -1,7 +1,23 @@
 .like {
-    margin: 0 10px 10px 10px;
+    margin: 0 10px 0 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
-
+.like span {
+    margin-left: 5px;
+}
 .likeLogo {
     width: 15px;
+    height: 15px;
+}
+
+.like button {
+    padding: 3px 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: #e5c5c5;
+}
+.like button:hover {
+    background-color: #ffa8a8;
 }

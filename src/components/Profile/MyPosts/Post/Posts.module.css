@@ -1,7 +1,19 @@
 
 .post {
+    color: #EAE7DC;
+    background-color: #DAAD86;
+    margin: 10px 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: transparent 1px solid;
+    border-radius: 10px;
+    padding: 5px;
+    transition:  0.3s ease-in 0.1s;
+}
+.postBlack {
     color: wheat;
-    background-color: #242424;
+    background-color: #2d2d2d;
     margin: 10px 0 10px;
     display: flex;
     flex-direction: column;
@@ -11,6 +23,10 @@
     transition:  0.3s ease-in 0.1s;
 }
 .post:hover {
+    background-color: #BC986A;
+    border: wheat 1px solid;
+}
+.postBlack:hover {
     background-color: #424242;
     border: wheat 1px solid;
 }
@@ -18,11 +34,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 10px;
+    margin: 10px 10px 0;
 }
 
 .postMessage {
-
+    margin-left: 40px;
 }
 .postInfo {
     display: flex;
@@ -34,7 +50,11 @@
     height: 50px;
     border-radius: 30px;
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 .delete {
     align-self: flex-start;
+}
+.post hr {
+    border:  1px solid;
 }

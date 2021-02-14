@@ -1,5 +1,8 @@
 .formControl input, textarea {
-
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
 }
 
 .formControl.error input,
@@ -20,6 +23,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.formM {
+    margin-top: 0;
+    padding: 60px;
 }
 .form button {
     margin-left: 15px;

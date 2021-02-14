@@ -5,8 +5,10 @@
     align-items: center;
     margin: 10px;
     border-radius: 10px;
+    padding: 10px;
 }
 .myMessage {
+    padding: 10px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-start;
@@ -21,13 +23,17 @@
     background-color: rgba(133, 133, 133, 0.3);
 }
 .userImg {
-    background-image: url('https://36.media.tumblr.com/5f95de2096cf952d46b92187140b32d3/tumblr_ngkinytY101s6enrfo1_500.jpg');
-    background-size: cover;
     height: 50px;
     width: 50px;
-    border-radius: 30px;
+    border-radius: 50%;
     margin-right: 5px;
     margin-left: 5px;
+}
+.userImg img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 .message.text {
 

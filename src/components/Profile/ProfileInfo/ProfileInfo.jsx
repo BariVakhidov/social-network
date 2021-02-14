@@ -16,7 +16,7 @@ const ProfileInfo = (props) => {
     }
     return (
         <>
-            <div className={cn(s.back, {[s.backM]: props.isMobile})}></div>
+            <div className={cn((props.blackTheme ? s.backBlack : s.back), {[s.backM]: props.isMobile})}></div>
             <div className={cn(s.profileData, {[s.profileDataM]: props.isMobile})}>
                 <ProfileImage profile={props.profile} isOwner={props.isOwner}
                               onMainPhotoSelected={onMainPhotoSelected}/>

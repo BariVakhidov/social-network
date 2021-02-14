@@ -1,10 +1,10 @@
 header {
     top: 0;
     height: 60px;
-    background-color: gray;
+    background-color: #659DBD;
+    color: #FBEEC1;
     position: sticky;
     z-index: 999;
-    border-bottom: #86C232 5px solid;
 }
 
 .header {
@@ -20,6 +20,7 @@ header {
 .headerBlack {
     background-color: #474B4F;
     color: wheat;
+    border-bottom: #86C232 5px solid;
 }
 
 .menuButton {

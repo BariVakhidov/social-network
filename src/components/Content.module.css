@@ -4,11 +4,18 @@
     margin-left: auto;
     margin-right: auto;
 }
-
+.start {
+    text-align: center;
+    margin: 60px;
+}
+.start p {
+    margin: 20px;
+    font-weight: bold;
+}
 .content {
     width: 100%;
     margin: 10px;
-    background-color: #add8e6;
+    background-color: #FBEEC1;
     border-radius: 10px;
 }
 
@@ -19,7 +26,7 @@
 }
 .contentM {
     width: 100%;
-    background-color: #add8e6;
+    background-color: #FBEEC1;
     border-radius: 0;
 }
 

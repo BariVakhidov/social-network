@@ -1,5 +1,6 @@
 import {
-    sendMessage
+    getChatFriends,
+    sendMessage, setCurrentChatFriendsPage
 } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
@@ -9,17 +10,11 @@ import {compose} from "redux";
 let mapStateToProps = (state) => {
     return {
         dialogsPage: state.dialogsPage,
+        blackTheme: state.app.blackTheme,
+        chatFriends: state.dialogsPage.chatFriends,
+        currentChatFriendsPage:state.dialogsPage.currentChatFriendsPage,
+        currentUser: state.auth.currentUser
     };
 };
 
-/*let mapDispatchToProps = (dispatch) => {
-    return {
-        sendMessage: () => {
-            dispatch(sendMessageActionCreator());
-        },
-        updateNewMessageText: (text) => {
-            dispatch(updateNewMessageTextActionCreator(text));
-        }
-    }
-}*/
-export default compose(connect(mapStateToProps, {sendMessage}),withAuthRedirect)(Dialogs);
+export default compose(connect(mapStateToProps, {sendMessage,getChatFriends,setCurrentChatFriendsPage}),withAuthRedirect)(Dialogs);

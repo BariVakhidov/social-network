@@ -1,18 +1,36 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 30% 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.dialogsM {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.dialogsBlack {
 
 }
-
 .dialogsItems {
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
-    border: 2px solid #5a5a5a;
-    background-color: white;
+    background-color: #DAAD86;
 }
+.dialogsItemsM{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row wrap;
+}
+.dialogsItemsBlack {
+    background-color: #2d2e31;
+}
+
 .addDialog {
-    margin: 10px;
+    box-sizing: content-box;
+    margin: 10px auto;
     text-align: center;
 }
 .addDialog img {
@@ -20,41 +38,46 @@
     padding: 10px;
     border-radius: 20px;
 }
+
 .addDialog img:hover {
     background-color: rgba(133, 133, 133, 0.3);
 }
+
 .dialog {
     border-radius: 10px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 10px;
+    margin: 10px 20px;
 }
+
 .dialog:hover {
     background-color: rgba(133, 133, 133, 0.3);
 
 }
-.dialog a{
+
+.dialog a {
     text-decoration: none;
     color: black;
 }
-.dialog a.active {
-    background-color: rgb(155, 155, 155);
-}
+
 
 .userImg {
     width: 50px;
     height: 50px;
-    border-radius: 30px;
+    border-radius: 50%;
     margin-right: 10px;
 }
+
 .messages {
+    background-color: #ffd6b4;
+    width: 100%;
     margin: 10px;
     border-radius: 10px;
-    border: 2px solid #5a5a5a;
     padding: 1px;
-    background-color: azure;
-
+}
+.messagesBlack {
+    background-color: #636363;
 }
 .sentMessage {
     box-sizing: border-box;
@@ -63,13 +86,16 @@
     margin: 10px;
     padding: 5px;
 }
+
 .button {
     margin: 10px 0;
     align-self: flex-end;
 }
+
 .button button {
     padding: 5px 30px;
 }
+
 .sentMessage textarea {
     width: 100%;
     box-sizing: border-box;

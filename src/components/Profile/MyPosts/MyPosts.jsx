@@ -31,7 +31,8 @@ const MyPosts = React.memo(props => {
                                            likesCount={p.likesCount}
                                            addLike={props.addLikeAC}
                                            deletePost={props.deletePost}
-                                           key={p.id}/>);
+                                           key={p.id}
+                                           blackTheme={props.blackTheme}/>);
 
     const onSubmit = (formData) => {
         props.addPostAC(formData.newPost, props.photo);

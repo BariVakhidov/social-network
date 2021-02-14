@@ -8,7 +8,7 @@ const Like = ({addLike,likesCount}) => {
                 <img className={s.likeLogo} alt="like button" src='https://cdn.worldvectorlogo.com/logos/like-2.svg'
                      title='Like'/>
             </button>
-            <span className="like"> likes: </span>{likesCount}
+            <span>{likesCount}</span>
         </div>
     );
 }
