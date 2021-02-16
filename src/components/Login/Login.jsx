@@ -73,6 +73,9 @@ const LoginForm = (props) => {
                         <button type="submit" disabled={isSubmitting}>
                             Login
                         </button>
+                        <h1>Test auth data:</h1>
+                        <p>Email: free@samuraijs.com</p>
+                        <p>Password: free</p>
                     </Form>
                 )}
             </Formik>
@@ -89,9 +92,9 @@ const Login = (props) => {
         props.login(formData.email, formData.password, formData.rememberMe,formData.captcha)
     }*/
     if (props.isAuth) return <Redirect to='/profile'/>
-    return (<div>
+    return (<>
             <LoginForm captchaURL={props.captchaURL} login={props.login} isMobile={props.isMobile}/>
-        </div>
+        </>
     );
 };
 let mapStateToProps = (state) => {

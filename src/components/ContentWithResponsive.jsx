@@ -52,10 +52,7 @@ const Content = ({isMobile, blackTheme}) => {
                             <Route path="/music" component={Music}/>
                             <Route path="/friends" render={() => <FriendsContainer isMobile={isMobile}/>}/>
                             <Route path="/settings" component={Settings}/>
-                            <Route path="*" render={() => <div className={s.start}>
-                                <h1>Test auth data:</h1>
-                                <p>Email: free@samuraijs.com</p>
-                                <p>Password: free</p></div>}/>
+                            <Route path="*" render={() => <div className={s.start} >404 NOT FOUND</div>}/>
                         </Switch>
                     </Suspense>
                 </div>
