@@ -1,13 +1,42 @@
 import {friendsAPI} from "../api/api";
+import {User} from "./users-reducer";
+import {ThunkAction} from "redux-thunk";
 
 const SEND_MESSAGE = "social-network/dialogs/SEND_MESSAGE";
 const SET_CHAT_FRIENDS = "social-network/dialogs/SET_CHAT_FRIENDS";
 const SET_CURRENT_CHAT_FRIENDS_PAGE = "social-network/dialogs/SET_CURRENT_CHAT_FRIENDS_PAGE";
-export const sendMessage = (newMessageText, id) => ({type: SEND_MESSAGE, newMessageText,id});
-export const setChatFriends = (chatFriends) => ({type: SET_CHAT_FRIENDS, chatFriends});
-export const setCurrentChatFriendsPage = (currentPage) => ({type: SET_CURRENT_CHAT_FRIENDS_PAGE, currentPage});
 
-let initialState = {
+interface SendMessage {
+    type:typeof SEND_MESSAGE;
+    newMessageText: string;
+    id: number;
+}
+interface SetChatFriends {
+    type:typeof SET_CHAT_FRIENDS;
+    chatFriends: Array<User>;
+}
+
+interface SetCurrentChatFriendsPage {
+    type:typeof SET_CURRENT_CHAT_FRIENDS_PAGE;
+    currentPage: number;
+}
+type DialogsReducerActionTypes = SendMessage | SetChatFriends | SetCurrentChatFriendsPage;
+export const sendMessage = (newMessageText:string, id:number):DialogsReducerActionTypes => ({type: SEND_MESSAGE, newMessageText,id});
+export const setChatFriends = (chatFriends:Array<User>):DialogsReducerActionTypes => ({type: SET_CHAT_FRIENDS, chatFriends});
+export const setCurrentChatFriendsPage = (currentPage:number):DialogsReducerActionTypes => ({type: SET_CURRENT_CHAT_FRIENDS_PAGE, currentPage});
+
+export interface Message {
+    id: number;
+    message: string;
+}
+
+interface DialogsReducer {
+    messagesData: Array<Message>
+    chatFriends: Array<User>,
+    currentChatFriendsPage: number
+}
+
+let initialState:DialogsReducer = {
     messagesData: [
         {id: 1, message: "Hi!"},
         {id: 2, message: "How are you?"},
@@ -21,7 +50,7 @@ let initialState = {
     currentChatFriendsPage: 1
 };
 
-const dialogReducer = (state = initialState, action) => {
+const dialogReducer = (state = initialState, action:DialogsReducerActionTypes):DialogsReducer => {
     switch (action.type) {
         case SEND_MESSAGE:
             let newMessage = {
@@ -48,7 +77,7 @@ const dialogReducer = (state = initialState, action) => {
 };
 export default dialogReducer;
 
-export const getChatFriends = (currentPage, pageSize=3) => async (dispatch) => {
+export const getChatFriends = (currentPage:number, pageSize=3): ThunkAction<void, unknown, unknown, DialogsReducerActionTypes> => async (dispatch) => {
     dispatch(setCurrentChatFriendsPage(currentPage));
     let data = await friendsAPI.getFriends(currentPage, pageSize);
     dispatch(setChatFriends(data.items));

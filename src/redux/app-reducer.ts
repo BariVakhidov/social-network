@@ -16,26 +16,28 @@ let initialState: AppReducer = {
 interface InitializedSuccess {
     type: typeof INITIALIZED_SUCCESS
 }
+
 interface IsBlackTheme {
     type: typeof BLACK_THEME;
     blackTheme: boolean
 }
+
 interface SetNavVisible {
     type: typeof SET_NAV_VISIBLE;
     visible: boolean
 }
 
-type AppActions = InitializedSuccess | IsBlackTheme | SetNavVisible;
+type AppActionTypes = InitializedSuccess | IsBlackTheme | SetNavVisible;
 
 const INITIALIZED_SUCCESS = "social-network/appINITIALIZED_SUCCESS";
 const BLACK_THEME = "social-network/app/BLACK_THEME";
 const SET_NAV_VISIBLE = "social-network/app/SET_NAV_VISIBLE";
 
-export const initializedSuccess = ():AppActions => ({type: INITIALIZED_SUCCESS});
-export const isBlackTheme = (blackTheme: boolean):AppActions => ({type: BLACK_THEME, blackTheme});
-export const setNavVisible = (visible: boolean):AppActions => ({type: SET_NAV_VISIBLE, visible});
+export const initializedSuccess = (): AppActionTypes => ({type: INITIALIZED_SUCCESS});
+export const isBlackTheme = (blackTheme: boolean): AppActionTypes => ({type: BLACK_THEME, blackTheme});
+export const setNavVisible = (visible: boolean): AppActionTypes => ({type: SET_NAV_VISIBLE, visible});
 
-const appReducer = (state:AppReducer = initialState, action: AppActions) => {
+const appReducer = (state = initialState, action: AppActionTypes): AppReducer => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {
@@ -60,11 +62,9 @@ const appReducer = (state:AppReducer = initialState, action: AppActions) => {
 
 export default appReducer;
 
-export const initializeApp = ():ThunkAction<void, unknown, unknown, AppActions> => (dispatch) => {
-    let promise = dispatch(getAuthUserData());
-    promise.then(() => {
-        dispatch(initializedSuccess());
-    });
+export const initializeApp = (): ThunkAction<void, unknown, unknown, AppActionTypes> => async (dispatch) => {
+    await dispatch(getAuthUserData());
+    dispatch(initializedSuccess());
 };
 
 
