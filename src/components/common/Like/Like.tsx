@@ -1,7 +1,12 @@
 import React from "react";
 import s from "./Like.module.css";
 
-const Like = ({addLike,likesCount}) => {
+interface Props {
+    addLike: () => void;
+    likesCount: number;
+}
+
+const Like: React.FC<Props> = ({addLike, likesCount}) => {
     return (
         <div className={s.like}>
             <button onClick={addLike}>

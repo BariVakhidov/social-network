@@ -57,34 +57,13 @@ let mapStateToProps = (state) => {
 */
 let mapStateToProps = (state) => {
     return {
-        users: getUsers
-        (
-            state
-        ),
-        totalUsers: getTotalUsers
-        (
-            state
-        ),
-        pageSize: getPageSize
-        (
-            state
-        ),
-        currentPage: getCurrentPage
-        (
-            state
-        ),
-        isFetching: getIsFetching
-        (
-            state
-        ),
-        followingProgress: getFollowingProgress
-        (
-            state
-        ),
-        friendsCount: getFriendsCount
-        (
-            state
-        )
+        users: getUsers(state),
+        totalUsers: getTotalUsers(state),
+        pageSize: getPageSize(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingProgress: getFollowingProgress(state),
+        friendsCount: getFriendsCount(state)
     };
 
 };

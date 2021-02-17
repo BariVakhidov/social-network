@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Users.module.css"
 import Pagination from "../common/Pagination/Pagination";
-import User from "./User";
+import UserComp from "./UserComp";
 
 const Users = ({currentPage, totalUsers, onPageChange, pageSize, users, ...props}) => {
     return (
@@ -10,10 +10,10 @@ const Users = ({currentPage, totalUsers, onPageChange, pageSize, users, ...props
                         pageSize={pageSize}/>
             <div>
                 {users.map(u =>
-                    <User key={u.id} className={s.user} user={u}
-                          followingProgress={props.followingProgress}
-                          unfollowUser={props.unfollowUser}
-                          followUser={props.followUser}/>)}
+                    <UserComp key={u.id} className={s.user} user={u}
+                              followingProgress={props.followingProgress}
+                              unfollowUser={props.unfollowUser}
+                              followUser={props.followUser}/>)}
             </div>
         </div>
     )

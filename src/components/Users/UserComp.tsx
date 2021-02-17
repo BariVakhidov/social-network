@@ -4,7 +4,24 @@ import userPhoto from '../../assets/images/profile.jpg'
 import {NavLink} from "react-router-dom";
 import StyledButton from "../common/StyledButton";
 
-const User = ({user, followingProgress, unfollowUser, friendsCount, followUser}) => {
+interface User {
+    id: number;
+    name: string;
+    photos: {
+        small: string | null;
+    };
+    followed: boolean;
+    status: null | string;
+}
+
+interface Props {
+    user : User;
+    followingProgress: Array<number>;
+    unfollowUser: (userId : number) => void;
+    followUser: (userId: number) => void;
+}
+
+const UserComp: React.FC<Props> = ({user, followingProgress, unfollowUser, followUser}) => {
     return (
         <div className={s.user}>
             <div className={s.firstUserInfo}>
@@ -17,12 +34,12 @@ const User = ({user, followingProgress, unfollowUser, friendsCount, followUser})
                 <div className={s.followButton}>
                     {user.followed ? <StyledButton disabled={followingProgress.some(id => id === user.id)}
                                                    onClick={() => {
-                                                       unfollowUser(user.id, friendsCount);
+                                                       unfollowUser(user.id);
                                                    }}>
                             Unfollow</StyledButton>
                         : <StyledButton disabled={followingProgress.some(id => id === user.id)}
                                         onClick={() => {
-                                            followUser(user.id, friendsCount);
+                                            followUser(user.id);
                                         }}>
                             Follow</StyledButton>}
                 </div>
@@ -34,4 +51,4 @@ const User = ({user, followingProgress, unfollowUser, friendsCount, followUser})
         </div>)
 }
 
-export default User;
+export default UserComp;

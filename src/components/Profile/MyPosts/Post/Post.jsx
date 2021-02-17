@@ -1,8 +1,8 @@
 import React from "react";
 import s from './Posts.module.css';
-import Like from "../../../common/Like/Like";
 import StyledButton from "../../../common/StyledButton";
 import cn from 'classnames'
+import Like from "../../../common/Like/Like.tsx";
 
 const Post = (props) => {
     return (
