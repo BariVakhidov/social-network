@@ -1,6 +1,6 @@
 import {authAPI, profileAPI, securityAPI} from "../api/api";
 import {getShowingFriends, Photos} from "./users-reducer";
-import {ThunkAction} from "redux-thunk";
+import {AppThunk} from "./redux-store";
 
 export interface Contacts {
     github: (string);
@@ -118,7 +118,7 @@ const authReducer = (state:AuthReducer = initialState, action: AuthReducerAction
 
 export default authReducer;
 
-export const getAuthUserData = (): ThunkAction<void, unknown, unknown, AuthReducerActionTypes> => async (dispatch) => {
+export const getAuthUserData = (): AppThunk => async (dispatch) => {
     let response = await authAPI.authMe();
     if (response.data.resultCode === 0) {
         let {id, login, email} = response.data.data;
@@ -129,7 +129,7 @@ export const getAuthUserData = (): ThunkAction<void, unknown, unknown, AuthReduc
     }
 };
 
-export const login = (loginData: object): ThunkAction<void, unknown, unknown, AuthReducerActionTypes> => async (dispatch) => {
+export const login = (loginData: object): AppThunk => async (dispatch) => {
     let data = await authAPI.login(loginData);
     if (data.resultCode === 0) {
         dispatch(getAuthUserData());
@@ -141,12 +141,12 @@ export const login = (loginData: object): ThunkAction<void, unknown, unknown, Au
     }
 };
 
-export const getCaptchaURL = (): ThunkAction<void, unknown, unknown, AuthReducerActionTypes> => async (dispatch) => {
+export const getCaptchaURL = (): AppThunk => async (dispatch) => {
     let captchaURL = await securityAPI.getCaptchaURL();
     dispatch(setCaptchaURL(captchaURL.url));
 };
 
-export const logout = (): ThunkAction<void, unknown, unknown, AuthReducerActionTypes> => async (dispatch) => {
+export const logout = (): AppThunk => async (dispatch) => {
     let data = await authAPI.logout();
     if (data.resultCode === 0) {
         dispatch(setUserData(null, null, null, false));

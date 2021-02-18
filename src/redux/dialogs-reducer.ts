@@ -1,6 +1,6 @@
 import {friendsAPI} from "../api/api";
 import {User} from "./users-reducer";
-import {ThunkAction} from "redux-thunk";
+import {AppThunk} from "./redux-store";
 
 const SEND_MESSAGE = "social-network/dialogs/SEND_MESSAGE";
 const SET_CHAT_FRIENDS = "social-network/dialogs/SET_CHAT_FRIENDS";
@@ -77,7 +77,7 @@ const dialogReducer = (state = initialState, action:DialogsReducerActionTypes):D
 };
 export default dialogReducer;
 
-export const getChatFriends = (currentPage:number, pageSize=3): ThunkAction<void, unknown, unknown, DialogsReducerActionTypes> => async (dispatch) => {
+export const getChatFriends = (currentPage:number, pageSize=3): AppThunk => async (dispatch) => {
     dispatch(setCurrentChatFriendsPage(currentPage));
     let data = await friendsAPI.getFriends(currentPage, pageSize);
     dispatch(setChatFriends(data.items));

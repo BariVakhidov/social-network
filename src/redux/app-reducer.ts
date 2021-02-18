@@ -1,5 +1,5 @@
 import {getAuthUserData} from "./auth-reducer";
-import {ThunkAction} from "redux-thunk";
+import {AppThunk} from "./redux-store";
 
 interface AppReducer {
     initialized: boolean;
@@ -62,7 +62,7 @@ const appReducer = (state = initialState, action: AppActionTypes): AppReducer =>
 
 export default appReducer;
 
-export const initializeApp = (): ThunkAction<void, unknown, unknown, AppActionTypes> => async (dispatch) => {
+export const initializeApp = ():AppThunk => async (dispatch) => {
     await dispatch(getAuthUserData());
     dispatch(initializedSuccess());
 };

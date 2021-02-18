@@ -1,6 +1,6 @@
 import {friendsAPI, usersAPI} from "../api/api";
 import {updateObjectInArray} from "../utils/objects-helpers/users-helper";
-import {ThunkAction} from "redux-thunk";
+import {AppThunk} from "./redux-store";
 
 enum Actions {
     FOLLOW = "social-network/users/FOLLOW",
@@ -225,8 +225,8 @@ const usersReducer = (state: UsersState = initialState, action: UsersReducerActi
 };
 export default usersReducer;
 
-export const requestUsers = (currentPage: number, pageSize: number) => {
-    return async (dispatch: (action: UsersReducerActions) => void) => {
+export const requestUsers = (currentPage: number, pageSize: number):AppThunk => {
+    return async (dispatch) => {
         dispatch(setCurrentPage(currentPage));
         dispatch(toggleIsFetching(true));
         let data = await usersAPI.getUsers(currentPage, pageSize);
@@ -236,7 +236,7 @@ export const requestUsers = (currentPage: number, pageSize: number) => {
     }
 };
 
-export const getFriends = (currentPage: number, pageSize: number): ThunkAction<void, unknown, unknown, UsersReducerActions> => async dispatch => {
+export const getFriends = (currentPage: number, pageSize: number): AppThunk=> async dispatch => {
     dispatch(setFriendsCurrentPage(currentPage));
     dispatch(toggleIsFetching(true));
     let data = await friendsAPI.getFriends(currentPage, pageSize);
@@ -257,14 +257,14 @@ const followUnfollowFollow = async (dispatch: (action: UsersReducerActions) => v
     dispatch(toggleFollowingProgress(false, userId));
 }
 
-export const unfollowUser = (userId: number): ThunkAction<void, unknown, unknown, UsersReducerActions> => async dispatch => {
+export const unfollowUser = (userId: number): AppThunk => async dispatch => {
     await followUnfollowFollow(dispatch, userId, usersAPI.unFollowUser.bind(usersAPI), unfollowSuccess);
 
 };
-export const followUser = (userId: number): ThunkAction<void, unknown, unknown, UsersReducerActions> => async dispatch => {
+export const followUser = (userId: number): AppThunk => async dispatch => {
     await followUnfollowFollow(dispatch, userId, usersAPI.followUser.bind(usersAPI), followSuccess);
 };
-export const getShowingFriends = (): ThunkAction<void, unknown, unknown, UsersReducerActions> => async dispatch => {
+export const getShowingFriends = (): AppThunk => async dispatch => {
     dispatch(toggleIsFetching(true));
     let data = await friendsAPI.displayFriends();
     dispatch(toggleIsFetching(false));
