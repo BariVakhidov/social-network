@@ -2,9 +2,8 @@ import React from "react";
 import s from './Nav.module.css';
 import {NavLink} from "react-router-dom";
 import PartOfFriends, {PartOfFriendsProps} from "./PartOfFriends";
-import sun from "../../assets/images/sun.png";
-import moon from "../../assets/images/moon.png";
 import cn from "classnames";
+import Switcher from "./Switcher";
 
 interface Props extends PartOfFriendsProps{
     blackTheme:boolean;
@@ -45,16 +44,7 @@ const Nav: React.FC<Props> = ({blackTheme, isMobile, isBlackTheme, isVisible, fr
                             <PartOfFriends friends={friends} friendsCount={friendsCount} isAuth={isAuth}/>
                         </div>}
                     </div>
-                    <div className={s.mid}>
-                        <label
-                            className={cn(s.rocker, {[s.mobileRocker]: isMobile}, {[s.rockerSmall]: !isMobile})}>
-                            <input type="checkbox" checked={blackTheme} onChange={event => {
-                                isBlackTheme(event.currentTarget.checked)
-                            }}></input>
-                            <span className={s.switchLeft}><img src={moon} alt=""/></span>
-                            <span className={s.switchRight}><img style={{height: "20px"}} src={sun} alt=""/></span>
-                        </label>
-                    </div>
+                    <Switcher isMobile={isMobile} blackTheme={blackTheme} isBlackTheme={isBlackTheme}/>
                 </nav>
             </div>}
         </>

@@ -2,31 +2,42 @@ import React from "react";
 import s from './Posts.module.css';
 import StyledButton from "../../../common/StyledButton";
 import cn from 'classnames'
-import Like from "../../../common/Like/Like.tsx";
+import Like from "../../../common/Like/Like";
 
-const Post = (props) => {
+interface Props {
+    blackTheme:boolean;
+    userImg: string;
+    name:string;
+    postText:string;
+    id:number;
+    deletePost: (id:number)=>void;
+    likesCount:number;
+    addLike: (postId:number)=>void;
+}
+
+const Post:React.FC<Props> = ({blackTheme, name, id, deletePost, likesCount,addLike, postText, userImg}) => {
     return (
-        <div className={cn(!props.blackTheme ? s.post : s.postBlack)}>
+        <div className={cn(!blackTheme ? s.post : s.postBlack)}>
             <div className={s.cont}>
                 <div className={s.postInfo}>
                     <div>
                         <img className={s.userAvatar}
                              alt="user avatar"
-                             src={props.userImg}/>
-                        <div style={{fontWeight:"bold"}}>{props.name}</div>
+                             src={userImg}/>
+                        <div style={{fontWeight:"bold"}}>{name}</div>
                     </div>
                     <div className={s.postMessage}>
-                        {props.postText}
+                        {postText}
                     </div>
                 </div>
                 <StyledButton className={s.delete} onClick={() => {
-                    props.deletePost(props.id)
+                    deletePost(id)
                 }}>Delete
                 </StyledButton>
             </div>
             <Like addLike={() => {
-                props.addLike(props.id)
-            }} likesCount={props.likesCount}/>
+                addLike(id)
+            }} likesCount={likesCount}/>
         </div>
     );
 };

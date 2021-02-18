@@ -10,13 +10,13 @@ export interface PartOfFriendsProps {
     friends: Array<User>
 }
 
-const PartOfFriends: React.FC<PartOfFriendsProps> = props => {
-    if (props.isAuth) {
+const PartOfFriends: React.FC<PartOfFriendsProps> = ({isAuth,friendsCount,friends}) => {
+    if (isAuth) {
         return (
             <div>
-                <div>{props.friendsCount}</div>
+                <div>{friendsCount}</div>
                 <div className={s.friendsItems}>
-                    {props.friends.map(f => <Friends name={f.name} id={f.id} image={f.photos.small} key={f.id}/>)}
+                    {friends.map(f => <Friends name={f.name} id={f.id} image={f.photos.small} key={f.id}/>)}
                 </div>
                 <div>
                     <StyledButton>Show more</StyledButton>

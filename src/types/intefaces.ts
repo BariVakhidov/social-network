@@ -49,8 +49,8 @@ export interface AppReducer {
 }
 
 export interface Photos {
-    small: string | null;
-    large: string | null;
+    small: string;
+    large: string;
 }
 
 export interface User {

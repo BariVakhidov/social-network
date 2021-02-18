@@ -6,30 +6,32 @@ import {User} from "../../types/intefaces";
 
 interface UsersProps {
     currentPage: number;
-    totalUsers:number;
-    onPageChange: (page: number)=>void;
-    pageSize:number;
+    totalUsers: number;
+    onPageChange: (page: number) => void;
+    pageSize: number;
     users: Array<User>;
-    isMobile:boolean;
+    isMobile: boolean;
     followingProgress: Array<number>;
-    unfollowUser: (userId : number) => void;
+    unfollowUser: (userId: number) => void;
     followUser: (userId: number) => void;
 }
 
-const Users:React.FC<UsersProps> = ({currentPage, totalUsers, onPageChange, pageSize, users, ...props}) => {
+const Users: React.FC<UsersProps> = ({currentPage, totalUsers, onPageChange,
+                                         pageSize, users, isMobile,
+                                         unfollowUser, followingProgress, followUser}) => {
     return (
         <div>
-            <Pagination isMobile={props.isMobile}
+            <Pagination isMobile={isMobile}
                         currentPage={currentPage}
                         totalUsers={totalUsers}
                         onPageChange={onPageChange}
                         pageSize={pageSize}/>
             <div>
-                {users.map(u =><div key={u.id} className={s.user}>
+                {users.map(u => <div key={u.id} className={s.user}>
                     <UserComp user={u}
-                              followingProgress={props.followingProgress}
-                              unfollowUser={props.unfollowUser}
-                              followUser={props.followUser}/>
+                              followingProgress={followingProgress}
+                              unfollowUser={unfollowUser}
+                              followUser={followUser}/>
                 </div>)}
             </div>
         </div>
