@@ -2,8 +2,15 @@ import React from "react";
 import s from "./Nav.module.css";
 import Friends from "./Friend/Friends";
 import StyledButton from "../common/StyledButton";
+import {User} from "../../redux/users-reducer";
 
-const PartOfFriends = props => {
+interface PartOfFriendsProps {
+    isAuth: boolean;
+    friendsCount: number;
+    friends: Array<User>
+}
+
+const PartOfFriends: React.FC<PartOfFriendsProps> = props => {
     if (props.isAuth) {
         return (
             <div>
@@ -16,7 +23,6 @@ const PartOfFriends = props => {
                 </div>
             </div>
         );
-    }
-    else return <div>0</div>
+    } else return <div>0</div>
 }
 export default PartOfFriends;

@@ -3,7 +3,13 @@ import {NavLink} from "react-router-dom";
 import s from './Friends.module.css';
 import userPhoto from '../../../assets/images/profile.jpg';
 
-const Friends = (props) => {
+interface FriendsProps {
+    id:number;
+    image:string | null;
+    name: string;
+}
+
+const Friends:React.FC<FriendsProps> = (props) => {
     let path = "/profile/" + props.id;
     return (
         <div className={s.friend}>

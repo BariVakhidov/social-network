@@ -6,9 +6,18 @@ import dArrowL from "../../../assets/images/double-arrow2.png";
 import arrowR from "../../../assets/images/arrowR.png";
 import arrowL from "../../../assets/images/arrowL.png";
 
-const Pagination = ({portionSize = 10, ...props}) => {
+interface PaginationProps {
+    portionSize: number;
+    isMobile: boolean;
+    totalUsers: number;
+    pageSize: number;
+    currentPage: number;
+    onPageChange: (page: number) => void;
+}
+
+const Pagination: React.FC<PaginationProps> = ({portionSize, ...props}) => {
     if (props.isMobile) {
-        portionSize=3;
+        portionSize = 3;
     }
     let pagesCount = Math.ceil(props.totalUsers / props.pageSize);
     let pages = [];
