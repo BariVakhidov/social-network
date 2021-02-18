@@ -1,6 +1,7 @@
 import {friendsAPI, usersAPI} from "../api/api";
 import {updateObjectInArray} from "../utils/objects-helpers/users-helper";
 import {AppThunk} from "./redux-store";
+import {User, UsersState} from "../types/intefaces";
 
 enum Actions {
     FOLLOW = "social-network/users/FOLLOW",
@@ -30,17 +31,6 @@ const SET_TOTAL_USERS = "social-network/users/SET_TOTAL_USERS";
 const SET_TOTAL_FRIENDS = "social-network/users/SET_TOTAL_FRIENDS";
 const TOGGLE_IS_FETCHING = "social-network/users/TOGGLE_IS_FETCHING";
 const TOGGLE_IS_FOLLOWING_PROGRESS = "social-network/users/TOGGLE_IS_FOLLOWING_PROGRESS";*/
-export interface Photos {
-    small: string | null;
-    large: string | null;
-}
-export interface User {
-    id: number;
-    name: string;
-    status: null | string;
-    photos: Photos;
-    followed: boolean;
-}
 
 interface FollowSuccessAction {
     type: typeof Actions.FOLLOW
@@ -147,19 +137,6 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number): Us
     isFetching,
     userId
 })
-
-interface UsersState {
-    users: Array<User>;
-    friends: Array<User>;
-    totalUsers: number;
-    totalFriends: number;
-    pageSize: number;
-    currentPage: number;
-    friendsCurrentPage: number;
-    isFetching: boolean;
-    followingProgress: Array<number>;
-    showingFriends: Array<User>;
-}
 
 let initialState: UsersState = {
     users: [],

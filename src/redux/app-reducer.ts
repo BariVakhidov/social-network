@@ -1,11 +1,6 @@
 import {getAuthUserData} from "./auth-reducer";
 import {AppThunk} from "./redux-store";
-
-interface AppReducer {
-    initialized: boolean;
-    blackTheme: boolean;
-    isVisible: boolean;
-}
+import {AppReducer} from "../types/intefaces";
 
 let initialState: AppReducer = {
     initialized: false,

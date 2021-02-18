@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import StyledButton from "../common/StyledButton";
@@ -6,15 +6,17 @@ import cn from 'classnames';
 import logout from '../../assets/images/logout.png'
 import menu from '../../assets/images/menu.png';
 import carrot from '../../assets/images/carrot.jpg'
+import {BlackThemeContext} from "../../contexts/theme-context";
 
 const Header = (props) => {
     useEffect(()=> {
         if (!props.isMobile && !props.isVisible) {
             props.setNavVisible(true);
         }
-    }, [props])
+    }, [props]);
+    const blackTheme = useContext(BlackThemeContext);
     return (
-        <header className={cn({[s.headerBlack]: props.blackTheme})}>
+        <header className={cn({[s.headerBlack]: blackTheme})}>
             <div className={s.header}>
                 <div className={s.logo}>
                     <img

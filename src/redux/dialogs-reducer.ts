@@ -1,6 +1,6 @@
 import {friendsAPI} from "../api/api";
-import {User} from "./users-reducer";
 import {AppThunk} from "./redux-store";
+import {User} from "../types/intefaces";
 
 const SEND_MESSAGE = "social-network/dialogs/SEND_MESSAGE";
 const SET_CHAT_FRIENDS = "social-network/dialogs/SET_CHAT_FRIENDS";

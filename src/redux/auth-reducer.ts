@@ -1,35 +1,7 @@
 import {authAPI, profileAPI, securityAPI} from "../api/api";
-import {getShowingFriends, Photos} from "./users-reducer";
+import {getShowingFriends} from "./users-reducer";
 import {AppThunk} from "./redux-store";
-
-export interface Contacts {
-    github: (string);
-    vk: (string);
-    facebook: (string);
-    instagram: (string);
-    twitter: (string);
-    website: (string);
-    youtube: (string);
-    mainLink: (string);
-}
-
-export interface Profile {
-    userId: number;
-    lookingForAJob: boolean;
-    lookingForAJobDescription: string | null;
-    fullName: string;
-    contacts: Contacts;
-    photos: Photos;
-}
-
-interface AuthReducer {
-    userId: number | null;
-    login: null | string;
-    email: null | string;
-    isAuth: boolean;
-    currentUser: Profile | null,
-    captchaURL: null | string
-}
+import {AuthReducer, Photos, Profile} from "../types/intefaces";
 
 let initialState: AuthReducer = {
     userId: null,

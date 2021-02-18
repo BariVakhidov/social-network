@@ -1,11 +1,11 @@
 import {connect} from "react-redux";
 import {addLikeAC, addPostAC, deletePost} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
+import {RootState} from "../../../redux/redux-store";
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state:RootState) => {
     return {
         posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText,
         currentUser: state.auth.currentUser
     }
 };

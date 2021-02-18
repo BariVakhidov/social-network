@@ -6,7 +6,7 @@ interface Props {
     likesCount: number;
 }
 
-const Like: React.FC<Props> = ({addLike, likesCount}) => {
+const Like: React.FC<Props> = ({addLike, likesCount}:Props) => {
     return (
         <div className={s.like}>
             <button onClick={addLike}>

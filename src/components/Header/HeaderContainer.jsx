@@ -14,7 +14,6 @@ let mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
         profile: state.auth.currentUser,
-        blackTheme: state.app.blackTheme,
         isVisible: state.app.isVisible
     }
 }

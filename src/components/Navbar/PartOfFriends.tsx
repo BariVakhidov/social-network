@@ -2,9 +2,9 @@ import React from "react";
 import s from "./Nav.module.css";
 import Friends from "./Friend/Friends";
 import StyledButton from "../common/StyledButton";
-import {User} from "../../redux/users-reducer";
+import {User} from "../../types/intefaces";
 
-interface PartOfFriendsProps {
+export interface PartOfFriendsProps {
     isAuth: boolean;
     friendsCount: number;
     friends: Array<User>

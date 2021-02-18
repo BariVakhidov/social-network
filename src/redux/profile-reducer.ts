@@ -1,23 +1,9 @@
 import {profileAPI} from "../api/api";
-import {Profile, setCurrentUserPhotos} from "./auth-reducer";
+import {setCurrentUserPhotos} from "./auth-reducer";
 import profileImg from '../assets/images/profile.jpg'
-import {Photos} from "./users-reducer";
 import {AppThunk} from "./redux-store";
+import {Photos, Profile, ProfileReducer} from "../types/intefaces";
 
-interface Post {
-    id: number;
-    name: string;
-    userImage: string;
-    postText: string;
-    likesCount: number;
-}
-
-interface ProfileReducer {
-    posts: Array<Post>;
-    profile: Profile | null;
-    status: string;
-    showingUserId: null | number;
-}
 
 let initialState:ProfileReducer = {
     posts: [

@@ -2,7 +2,7 @@ import React from 'react';
 import s from "./Users.module.css"
 import Pagination from "../common/Pagination/Pagination";
 import UserComp from "./UserComp";
-import {User} from "../../redux/users-reducer";
+import {User} from "../../types/intefaces";
 
 interface UsersProps {
     currentPage: number;
@@ -19,7 +19,10 @@ interface UsersProps {
 const Users:React.FC<UsersProps> = ({currentPage, totalUsers, onPageChange, pageSize, users, ...props}) => {
     return (
         <div>
-            <Pagination portionSize={10} isMobile={props.isMobile} currentPage={currentPage} totalUsers={totalUsers} onPageChange={onPageChange}
+            <Pagination isMobile={props.isMobile}
+                        currentPage={currentPage}
+                        totalUsers={totalUsers}
+                        onPageChange={onPageChange}
                         pageSize={pageSize}/>
             <div>
                 {users.map(u =><div key={u.id} className={s.user}>

@@ -7,7 +7,7 @@ import arrowR from "../../../assets/images/arrowR.png";
 import arrowL from "../../../assets/images/arrowL.png";
 
 interface PaginationProps {
-    portionSize: number;
+    portionSize?: number;
     isMobile: boolean;
     totalUsers: number;
     pageSize: number;
@@ -15,7 +15,7 @@ interface PaginationProps {
     onPageChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({portionSize, ...props}) => {
+const Pagination: React.FC<PaginationProps> = ({portionSize=10, ...props}) => {
     if (props.isMobile) {
         portionSize = 3;
     }
