@@ -18,9 +18,13 @@ const DialogsContainer = React.lazy(() => import('./Dialogs/DialogsContainer'));
 const News = React.lazy(() => import('./News/News'));
 const Music = React.lazy(() => import('./Music/Music'));
 
-const ContentWithResponsive = ({blackTheme}) => {
-    const isDesktop = useMediaQuery({query: '(min-width: 768px)'});
-    const isMobile = useMediaQuery({query: '(max-width: 767px)'});
+interface Props {
+    blackTheme:boolean;
+}
+
+const ContentWithResponsive:React.FC<Props> = ({blackTheme}) => {
+    const isDesktop:boolean = useMediaQuery({query: '(min-width: 768px)'});
+    const isMobile:boolean = useMediaQuery({query: '(max-width: 767px)'});
     return (
         <>
             <BlackThemeContext.Provider value={blackTheme}>
@@ -37,7 +41,12 @@ const ContentWithResponsive = ({blackTheme}) => {
 }
 export default ContentWithResponsive;
 
-const Content = ({isMobile}) => {
+
+interface ContentProps {
+    isMobile:boolean;
+}
+
+const Content:React.FC<ContentProps> = ({isMobile}) => {
     return (
         <>
             <BlackThemeContext.Consumer>
