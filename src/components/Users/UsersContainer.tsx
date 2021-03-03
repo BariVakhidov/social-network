@@ -1,13 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
-import {
-    setCurrentPage,
-    setTotalUsers, requestUsers, unfollowUser, followUser, setPage
-} from "../../redux/users-reducer";
+import {requestUsers, unfollowUser, followUser, setPage} from "../../redux/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
-import {compose} from "redux";
-import {withRouter} from "react-router";
+
 import {
     getCurrentPage,
     getFollowingProgress, getFriendsCount,
@@ -16,15 +12,36 @@ import {
     getTotalUsers,
     getUsers
 } from "../../redux/users-selectors";
+import {RootState} from "../../redux/redux-store";
+import {User} from "../../types/intefaces";
 
-class UsersContainer extends React.Component {
+interface MapDispatchToProps {
+    getUsers: (pageNumber:number, pageSize:number)=>void;
+    unfollowUser: (userId: number) => void;
+    followUser: (userId: number) => void;
+    setPage: ()=> void;
+}
+interface MapStateToProps {
+    currentPage: number;
+    pageSize:number;
+    isFetching:boolean;
+    friendsCount: number;
+    totalUsers: number;
+    users: Array<User>;
+    followingProgress: Array<number>;
+}
+interface OwnProps {
+    isMobile:boolean;
+}
+type Props = MapDispatchToProps & MapStateToProps & OwnProps;
 
+class UsersContainer extends React.Component<Props> {
     componentDidMount() {
         this.props.setPage();
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
     };
 
-    onPageChange = (pageNumber) => {
+    onPageChange = (pageNumber:number) => {
         this.props.getUsers(pageNumber, this.props.pageSize);
     }
 
@@ -41,21 +58,7 @@ class UsersContainer extends React.Component {
 
 }
 
-/*
-let mapStateToProps = (state) => {
-    return {
-        users: state.usersPage.users,
-        totalUsers: state.usersPage.totalUsers,
-        pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingProgress:state.usersPage.followingProgress,
-        friendsCount: state.navbar.friendsCount
-    };
-
-};
-*/
-let mapStateToProps = (state) => {
+let mapStateToProps = (state:RootState):MapStateToProps => {
     return {
         users: getUsers(state),
         totalUsers: getTotalUsers(state),
@@ -91,11 +94,9 @@ let mapStateToProps = (state) => {
     }
 };*/
 
-export default compose(connect(mapStateToProps, {
-    setCurrentPage,
-    setTotalUsers,
+export default connect<MapStateToProps, MapDispatchToProps, OwnProps, RootState>(mapStateToProps, {
+    setPage,
     getUsers: requestUsers,
     unfollowUser,
-    followUser,
-    setPage
-}), withRouter)(UsersContainer);
+    followUser
+})(UsersContainer);

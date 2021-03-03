@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import s from "../../Users/Users.module.css";
 import cn from "classnames";
 import dArrowR from "../../../assets/images/double-arrow.png";
@@ -15,12 +15,12 @@ interface PaginationProps {
     onPageChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({portionSize=10, ...props}) => {
+const Pagination:FC<PaginationProps> = ({portionSize=10, ...props}) => {
     if (props.isMobile) {
         portionSize = 3;
     }
     let pagesCount = Math.ceil(props.totalUsers / props.pageSize);
-    let pages = [];
+    let pages: Array<number> = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     } //all pages

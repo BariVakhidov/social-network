@@ -4,11 +4,11 @@ import {connect} from "react-redux";
 import {logout} from "../../redux/auth-reducer";
 import {setNavVisible} from "../../redux/app-reducer";
 
-class HeaderContainer extends React.Component {
-    render() {
-        return <Header {...this.props} />
+    class HeaderContainer extends React.Component {
+        render() {
+            return <Header {...this.props} />
+        }
     }
-}
 
 let mapStateToProps = (state) => {
     return {

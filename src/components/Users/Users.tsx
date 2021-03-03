@@ -4,7 +4,7 @@ import Pagination from "../common/Pagination/Pagination";
 import UserComp from "./UserComp";
 import {User} from "../../types/intefaces";
 
-interface UsersProps {
+export interface UsersProps {
     currentPage: number;
     totalUsers: number;
     onPageChange: (page: number) => void;

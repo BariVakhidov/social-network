@@ -32,7 +32,6 @@ const ProfileInfoForm = ({contacts, deactivateEditMode, profile, updateProfile})
                                     let errorSplit = error.split(/[()]/g);
                                     let errorMessage = errorSplit[0];
                                     let errorField = capitalizeFirstLetter(errorSplit[1].split(/\W+/));
-                                    debugger
                                     setFieldError(errorField, errorMessage);
                                     return error;
                                 });

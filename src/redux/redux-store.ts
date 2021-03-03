@@ -12,7 +12,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     unknown,
     Action<string>>
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
         profilePage: profileReducer,
         dialogsPage: dialogReducer,
         usersPage: usersReducer,
@@ -21,14 +21,15 @@ const reducers = combineReducers({
         app: appReducer
     }
 );
-export type RootState = ReturnType<typeof reducers>;
+export type RootState = ReturnType<typeof rootReducer>;
+
 declare global {
     interface Window {
         __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
     }
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)
 ));
 
 export default store;

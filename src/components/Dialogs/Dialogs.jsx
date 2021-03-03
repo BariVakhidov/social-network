@@ -20,7 +20,7 @@ const Dialogs = ({chatFriends, getChatFriends, currentChatFriendsPage, setCurren
     const onSubmit = (formData) => {
         props.sendMessage(formData.newMessage);
     }
-    if (!props.isAuth) return <Redirect to='/login'/>
+        if (!props.isAuth) return <Redirect to='/login'/>
     return (
         <div className={cn((!props.isMobile ? s.dialogs : s.dialogsM), {[s.dialogsBlack]: props.blackTheme})}>
             <div>
