@@ -1,0 +1,42 @@
+.audio {
+    margin: 30px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /*
+    background-color: #ffdcb3;
+    */
+    border-bottom: #2d2e31 1px solid;
+}
+.audio:hover {
+    background-color: rgba(133, 133, 133, 0.3);}
+.cover img {
+    display: block;
+    border-radius: 50%;
+}
+.titleCont {
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+.playCont {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.play {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.play div:hover {
+    cursor: pointer;
+}
