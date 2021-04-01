@@ -1,7 +1,7 @@
 import {
-    getChatFriends,
     sendMessage, setCurrentChatFriendsPage
-} from "../../redux/dialogs-reducer";
+} from "../../redux/dialogs/action-creators";
+import {getChatFriends} from '../../redux/dialogs/thunk'
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";

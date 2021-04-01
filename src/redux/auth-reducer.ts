@@ -1,5 +1,5 @@
 import {authAPI, profileAPI, securityAPI} from "../api/api";
-import {getShowingFriends} from "./users-reducer";
+import {getShowingFriends} from "./users/thunk";
 import {AppThunk} from "./redux-store";
 import {AuthReducer, Photos, Profile} from "../types/intefaces";
 

@@ -1,4 +1,4 @@
-import profileReducer, {addPostAC, deletePost} from "./profile-reducer";
+import profileReducer, {addPostAC, deletePost} from "../action-creators";
 
 let initialState = {
     posts: [

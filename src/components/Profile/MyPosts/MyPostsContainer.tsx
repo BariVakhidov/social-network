@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {addLikeAC, addPostAC, deletePost} from "../../../redux/profile-reducer";
+import {addLikeAC, addPostAC, deletePost} from "../../../redux/profile/action-creators";
 import MyPosts from "./MyPosts";
 import {RootState} from "../../../redux/redux-store";
 

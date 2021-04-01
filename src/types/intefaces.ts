@@ -18,6 +18,16 @@ export interface Profile {
     photos: Photos;
 }
 
+export interface Message {
+    id: number;
+    message: string;
+}
+
+export interface DialogsReducer {
+    messagesData: Array<Message>
+    chatFriends: Array<User>,
+    currentChatFriendsPage: number
+}
 export interface AuthReducer {
     userId: number | null;
     login: null | string;
