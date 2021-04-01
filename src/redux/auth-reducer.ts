@@ -1,7 +1,7 @@
 import {authAPI, profileAPI, securityAPI} from "../api/api";
 import {getShowingFriends} from "./users/thunk";
 import {AppThunk} from "./redux-store";
-import {AuthReducer, Photos, Profile} from "../types/intefaces";
+import {AuthReducer, LoginData, Photos, Profile} from "../types/intefaces";
 
 let initialState: AuthReducer = {
     userId: null,
@@ -101,7 +101,7 @@ export const getAuthUserData = (): AppThunk => async (dispatch) => {
     }
 };
 
-export const login = (loginData: object): AppThunk => async (dispatch) => {
+export const login = (loginData: LoginData): AppThunk => async (dispatch) => {
     let data = await authAPI.login(loginData);
     if (data.resultCode === 0) {
         dispatch(getAuthUserData());

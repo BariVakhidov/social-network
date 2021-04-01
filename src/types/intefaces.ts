@@ -17,7 +17,13 @@ export interface Profile {
     contacts: Contacts;
     photos: Photos;
 }
-
+export interface ProfileData {
+    userId: number;
+    lookingForAJob: boolean;
+    lookingForAJobDescription: string | null;
+    fullName: string;
+    contacts: Contacts;
+}
 export interface Message {
     id: number;
     message: string;
@@ -82,4 +88,10 @@ export interface UsersState {
     isFetching: boolean;
     followingProgress: Array<number>;
     showingFriends: Array<User>;
+}
+export interface LoginData {
+    email:string;
+    password:string;
+    rememberMe:boolean;
+    captcha:boolean;
 }

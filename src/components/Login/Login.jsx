@@ -11,29 +11,6 @@ import cn from "classnames"
 const LoginForm = (props) => {
     return (
         <div >
-           {/* <form onSubmit={props.handleSubmit}>
-                <div>
-                    <Field placeholder={"Login"} name={"email"} component={Input} validate={[required]}/>
-                </div>
-                <div>
-                    <Field placeholder={"Password"} name={"password"} type={"password"} component={Input}
-                           validate={[required]}/>
-                </div>
-                <div style={{display:"flex", alignItems:"center"}}>
-                    <Field component={Input} name={"rememberMe"} type={'checkbox'}/><div>remember me</div>
-                </div>
-                {props.error && <div className={s.formSummaryError}>
-                    {props.error}
-                </div>}
-                {props.captchaURL? <div>
-                    <img src={props.captchaURL} alt="captcha" />
-                    <Field placeholder={"Captcha"} name={"captcha"} type={"captcha"} component={Input}
-                           validate={[required]}/>
-                </div>:null}
-                <div>
-                    <button>Login</button>
-                </div>
-            </form>*/}
             <Formik
                 initialValues={{ email: '', password: '', captcha: '' }}
                 validate={values => {
