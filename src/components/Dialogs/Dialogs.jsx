@@ -35,7 +35,7 @@ const Dialogs = ({chatFriends, getChatFriends, currentChatFriendsPage, setCurren
                 </div>
             </div>
             <div className={cn(s.messages, {[s.messagesBlack]: props.blackTheme})}>
-                <div>
+                <div className={s.messagesCont}>
                     {props.dialogsPage.messagesData.map(m => <Message currentUser={props.currentUser}
                                                                       message={m.message} id={m.id} key={m.id}/>)}
                 </div>

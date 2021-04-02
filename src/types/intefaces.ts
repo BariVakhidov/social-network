@@ -92,6 +92,6 @@ export interface UsersState {
 export interface LoginData {
     email:string;
     password:string;
-    rememberMe:boolean;
-    captcha:boolean;
+    rememberMe?:boolean;
+    captcha?:string;
 }

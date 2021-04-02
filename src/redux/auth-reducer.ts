@@ -1,7 +1,10 @@
 import {authAPI, profileAPI, securityAPI} from "../api/api";
 import {getShowingFriends} from "./users/thunk";
-import {AppThunk} from "./redux-store";
+import {AppThunk, RootState} from "./redux-store";
 import {AuthReducer, LoginData, Photos, Profile} from "../types/intefaces";
+import { ThunkAction } from "redux-thunk";
+import { Action } from "redux";
+import { LoginResponse } from "../api/response-types";
 
 let initialState: AuthReducer = {
     userId: null,
@@ -101,7 +104,10 @@ export const getAuthUserData = (): AppThunk => async (dispatch) => {
     }
 };
 
-export const login = (loginData: LoginData): AppThunk => async (dispatch) => {
+export const login = (loginData: LoginData): ThunkAction<Promise<string[] | undefined>,
+RootState,
+unknown,
+Action<string>> => async (dispatch) => {
     let data = await authAPI.login(loginData);
     if (data.resultCode === 0) {
         dispatch(getAuthUserData());
