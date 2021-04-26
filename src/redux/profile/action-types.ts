@@ -22,6 +22,9 @@ interface SetStatus {
   type: typeof Actions.SET_STATUS;
   status: string;
 }
+interface SetFetching {
+  type: typeof Actions.SET_FETCHING;
+}
 interface SavePhotoSuccess {
   type: typeof Actions.SAVE_PHOTO_SUCCESS;
   photos: Photos;
@@ -31,10 +34,11 @@ interface SetShowingUserId {
   showingUserId: number;
 }
 export type ProfileReducerActionType =
-  | AddPost
-  | AddLike
-  | DeletePost
-  | SavePhotoSuccess
-  | SetUserProfile
-  | SetStatus
-  | SetShowingUserId;
+    | AddPost
+    | AddLike
+    | DeletePost
+    | SavePhotoSuccess
+    | SetUserProfile
+    | SetStatus
+    | SetShowingUserId
+    | SetFetching;

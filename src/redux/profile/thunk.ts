@@ -1,15 +1,17 @@
 import { profileAPI } from "../../api/api";
 import { setCurrentUserPhotos } from "../auth-reducer";
-import { setShowingUserId, setUserProfile, setStatus, savePhotoSuccess } from "./action-creators";
+import {setShowingUserId, setUserProfile, setStatus, savePhotoSuccess, setFetching} from "./action-creators";
 import { AppThunk } from "../redux-store";
 import { ProfileData } from "../../types/intefaces";
 
 export const getProfilePage = (userId:number): AppThunk => async (dispatch) => {
   dispatch(setShowingUserId(userId));
+  dispatch(setFetching());
   let response = await profileAPI.getProfile(userId);
   dispatch(setUserProfile(response.data));
   let response2 = await profileAPI.getStatus(userId);
   dispatch(setStatus(response2.data));
+  dispatch(setFetching());
 };
 export const getStatus = (userId:number): AppThunk => async (dispatch) => {
   let response = await profileAPI.getStatus(userId);

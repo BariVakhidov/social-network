@@ -21,7 +21,7 @@ const dialogReducer:Reducer<DialogsReducer, DialogsReducerActionTypes> = (state 
     switch (action.type) {
         case Actions.SEND_MESSAGE:
             let newMessage = {
-                id: 2,
+                id: action.id,
                 message: action.newMessageText
             };
             return {

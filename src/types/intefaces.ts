@@ -56,6 +56,7 @@ export interface ProfileReducer {
     profile: Profile | null;
     status: string;
     showingUserId: null | number;
+    isFetching: boolean;
 }
 
 export interface AppReducer {
@@ -94,4 +95,15 @@ export interface LoginData {
     password:string;
     rememberMe?:boolean;
     captcha?:string;
+}
+export interface DialogsProps {
+    chatFriends: Array<User>;
+    getChatFriends: (currentPage:number) => void;
+    currentChatFriendsPage: number;
+    setCurrentChatFriendsPage: (page:number)=> void;
+    messagesData:Array<Message>
+    blackTheme:boolean;
+    isAuth:boolean;
+    isMobile:boolean;
+    currentUser:Profile | null;
 }

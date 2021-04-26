@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import { Formik, Form, Field, ErrorMessage, FormikErrors, FormikValues } from 'formik';
 import { required } from '../../utils/validators/validators';
@@ -7,8 +7,8 @@ import { Redirect } from 'react-router';
 import s from '../common/FormsControls/FormControl.module.css';
 import cn from 'classnames';
 import { LoginData } from '../../types/intefaces';
-import { AppThunk, RootState } from '../../redux/redux-store';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { RootState } from '../../redux/redux-store';
+import { ThunkAction } from 'redux-thunk';
 import { Action } from 'redux';
 
 export interface LoginFormProps {

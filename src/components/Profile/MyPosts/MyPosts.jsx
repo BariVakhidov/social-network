@@ -61,7 +61,7 @@ const MyPosts = React.memo((props) => {
     />
   ));
 
-  let [postsVisible, setPostsVisible] = useState(false);
+  const [postsVisible, setPostsVisible] = useState(false);
   return (
     <div className={s.myPosts}>
       <div

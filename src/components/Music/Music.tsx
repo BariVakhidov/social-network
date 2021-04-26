@@ -1,12 +1,23 @@
-import React, {useReducer, useState} from "react";
-import cat from "../../assets/images/cat.png";
+import React, {Reducer, useReducer} from "react";
 import music1 from "../../assets/images/music1.jpg";
 import music2 from "../../assets/images/music2.jpg";
 import music3 from "../../assets/images/music3.jpg";
 import music4 from "../../assets/images/music4.jpeg";
 import Audio from "./Audio";
 
-const initialState = {
+export interface Track {
+    id: number,
+    duration: string,
+    singer: string,
+    title: string,
+    coverImg: string
+}
+interface MusicState {
+    count: number;
+    music: Array<Track>;
+    playingTrack: Track | null;
+}
+const initialState: MusicState = {
     count: 0,
     music: [
         {   id:1,
@@ -39,7 +50,8 @@ const initialState = {
     ],
     playingTrack : null
 };
-const reducer = (state, action) => {
+
+const reducer:Reducer<MusicState, any > = (state, action) => {
     switch (action.type) {
         case "increment":
             return {
@@ -71,48 +83,15 @@ const reducer = (state, action) => {
 }
 const Music = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const play = (track) => dispatch({type: "play", track});
+    const play = (track:Track) => dispatch({type: "play", track});
     const stopPlay = () => dispatch({type: "stopPlay"});
     return (
         <div>
             {state.music.map(m => <Audio key={m.title}
                                          track={m}
                                          playingTrack={state.playingTrack} play={play} stopPlay={stopPlay}/>)}
-           {/* <Mouse cats={state.count} cat={mouse => (<Cat mouse={mouse}/>)}/>*/}
-           {/* Count: {state.count}
-            <button onClick={() => dispatch({type: "increment"})}>+</button>
-            <button onClick={() => dispatch({type: "decrement"})}>-</button>*/}
         </div>
     );
 };
 export default Music;
 
-const Cat = (props) => {
-    const mouse = props.mouse;
-    return (
-        <>
-            <img src={cat} alt={"cat"} style={{position: "absolute", left: mouse.x - 150, top: mouse.y - 50}}
-                 height={150}/>
-        </>
-    );
-}
-
-const Mouse = (props) => {
-
-    let [state, setState] = useState({x: 0, y: 0});
-
-    const handleMouseMove = (event) => {
-        setState({
-            x: event.clientX,
-            y: event.clientY
-        });
-    }
-
-    return (
-        <div style={{height: '100vh'}} onMouseMove={handleMouseMove}>
-            <p>Текущее положение мыши: {state.x}, {state.y}</p>
-            {props.children}
-            {props.cat(state)}
-        </div>
-    )
-}

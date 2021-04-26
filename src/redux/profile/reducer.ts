@@ -30,7 +30,8 @@ let initialState:ProfileReducer = {
     ],
     profile: null,
     status: "",
-    showingUserId: null
+    showingUserId: null,
+    isFetching: false,
 }
 
 const profileReducer:Reducer<ProfileReducer, ProfileReducerActionType> = (state = initialState, action) => {
@@ -72,6 +73,8 @@ const profileReducer:Reducer<ProfileReducer, ProfileReducerActionType> = (state 
             else return state;
         case Actions.SET_STATUS:
             return {...state, status: action.status}
+        case Actions.SET_FETCHING:
+            return {...state, isFetching: !state.isFetching}
         case Actions.SET_SHOWING_USER_ID:
             return {
                 ...state,

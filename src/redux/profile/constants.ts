@@ -6,4 +6,5 @@ export enum Actions {
   SET_STATUS = 'social-network/profile/SET_STATUS',
   SET_SHOWING_USER_ID = 'social-network/profile/SET_SHOWING_USER_ID',
   SAVE_PHOTO_SUCCESS = 'social-network/profile/SAVE_PHOTO_SUCCESS',
+  SET_FETCHING = 'social-network/profile/SET_FETCHING',
 }

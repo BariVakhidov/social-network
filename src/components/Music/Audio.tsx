@@ -2,8 +2,14 @@ import React, {useState} from "react";
 import s from "./Music.module.css";
 import playIcon from "../../assets/images/play.svg";
 import pauseIcon from "../../assets/images/pause.png"
-
-const Audio = ({track, play, playingTrack, stopPlay}) => {
+import {Track} from "./Music";
+interface Props {
+    track: Track;
+    play: (track:Track) => void;
+    stopPlay: (track:Track) => void;
+    playingTrack:Track | null;
+}
+const Audio:React.FC<Props> = ({track, play, playingTrack}) => {
     let [isPaused, setPause] = useState(false);
     return (
         <div className={s.audio}>

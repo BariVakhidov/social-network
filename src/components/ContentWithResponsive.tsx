@@ -1,5 +1,4 @@
 import React, {Suspense} from "react";
-import NavContainer from "./Navbar/NavContainer";
 import Preloader from "./common/Preloader/Preloader";
 import {Redirect, Switch} from "react-router";
 import {Route} from "react-router-dom";
@@ -8,11 +7,12 @@ import ProfileContainer from "./Profile/ProfileContainer";
 import FriendsContainer from "./Friends/Friends";
 import Settings from "./Settings/Settings";
 import {useMediaQuery} from 'react-responsive'
-import HeaderContainer from "./Header/HeaderContainer";
+import {HeaderContainer} from "./Header/HeaderContainer";
 import s from './Content.module.css'
 import cn from 'classnames'
 import {BlackThemeContext} from '../contexts/theme-context';
-import UsersContainer from "./Users/UsersContainer";
+import { UsersContainer } from "./Users/UsersContainer";
+import {NavContainer} from "./Navbar/NavContainer";
 
 const DialogsContainer = React.lazy(() => import('./Dialogs/DialogsContainer'));
 const News = React.lazy(() => import('./News/News'));

@@ -7,5 +7,6 @@ export const deletePost = (postId:number):ProfileReducerActionType => ({type: Ac
 export const addLikeAC = (postId:number):ProfileReducerActionType => ({type: Actions.ADD_LIKE, postId});
 export const setUserProfile = (profile:Profile):ProfileReducerActionType => ({type: Actions.SET_PROFILE, profile});
 export const setStatus = (status:string):ProfileReducerActionType => ({type: Actions.SET_STATUS, status});
+export const setFetching = ():ProfileReducerActionType => ({type: Actions.SET_FETCHING});
 export const savePhotoSuccess = (photos:Photos):ProfileReducerActionType => ({type: Actions.SAVE_PHOTO_SUCCESS, photos});
 export const setShowingUserId = (showingUserId:number):ProfileReducerActionType => ({type: Actions.SET_SHOWING_USER_ID, showingUserId});

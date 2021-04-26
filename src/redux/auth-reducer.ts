@@ -4,7 +4,6 @@ import {AppThunk, RootState} from "./redux-store";
 import {AuthReducer, LoginData, Photos, Profile} from "../types/intefaces";
 import { ThunkAction } from "redux-thunk";
 import { Action } from "redux";
-import { LoginResponse } from "../api/response-types";
 
 let initialState: AuthReducer = {
     userId: null,
