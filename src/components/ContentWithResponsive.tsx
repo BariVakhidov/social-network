@@ -23,17 +23,11 @@ interface Props {
 }
 
 const ContentWithResponsive:React.FC<Props> = ({blackTheme}) => {
-    const isDesktop:boolean = useMediaQuery({query: '(min-width: 768px)'});
-    const isMobile:boolean = useMediaQuery({query: '(max-width: 767px)'});
+    const isDesktop: boolean = useMediaQuery({query: '(min-width: 768px)'});
     return (
         <>
             <BlackThemeContext.Provider value={blackTheme}>
-                {isDesktop && <>
-                    <Content isMobile={false}/>
-                </>}
-                {isMobile && <>
-                    <Content isMobile={true}/>
-                </>}
+                {isDesktop ? <Content isMobile={false}/> : <Content isMobile={true}/>}
             </BlackThemeContext.Provider>
         </>
 
