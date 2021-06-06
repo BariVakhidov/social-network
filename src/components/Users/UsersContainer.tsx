@@ -1,65 +1,64 @@
 import React, {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Users from './Users';
-import { setPage } from '../../redux/users/action-creators';
+import {usersActions} from '../../redux/users/action-creators';
 import {
-  requestUsers,
-  unfollowUser,
-  followUser,
+    requestUsers,
+    unfollowUser,
+    followUser,
 } from '../../redux/users/thunk';
-import Preloader from '../common/Preloader/Preloader';
 import {
-  getCurrentPage,
-  getFollowingProgress,
-  getIsFetching,
-  getPageSize,
-  getTotalUsers,
-  getUsers,
+    getCurrentPage,
+    getFollowingProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsers,
+    getUsers,
 } from '../../redux/users-selectors';
-import { RootState } from '../../redux/redux-store';
+import {RootState} from '../../redux/redux-store';
 
 interface UsersContainerProps {
-  isMobile:boolean;
+    isMobile: boolean;
 }
-export const UsersContainer:React.FC<UsersContainerProps> = ({isMobile}) => {
 
-  const users = useSelector((state:RootState) => getUsers(state));
-  const totalUsers = useSelector((state:RootState) => getTotalUsers(state));
-  const pageSize = useSelector((state:RootState) => getPageSize(state));
-  const currentPage = useSelector((state:RootState) => getCurrentPage(state));
-  const isFetching = useSelector((state:RootState) => getIsFetching(state));
-  const followingProgress = useSelector((state:RootState) => getFollowingProgress(state));
-  const dispatch = useDispatch();
+export const UsersContainer: React.FC<UsersContainerProps> = ({isMobile}) => {
 
-  useEffect(()=> {
-    dispatch(setPage());
-    dispatch(requestUsers(currentPage,pageSize));
-  }, [dispatch, currentPage, pageSize]);
+    const users = useSelector((state: RootState) => getUsers(state));
+    const totalUsers = useSelector((state: RootState) => getTotalUsers(state));
+    const pageSize = useSelector((state: RootState) => getPageSize(state));
+    const currentPage = useSelector((state: RootState) => getCurrentPage(state));
+    const isFetching = useSelector((state: RootState) => getIsFetching(state));
+    const followingProgress = useSelector((state: RootState) => getFollowingProgress(state));
+    const dispatch = useDispatch();
 
-  const onPageChange = useCallback((pageNumber:number) => {
-    dispatch(requestUsers(pageNumber,pageSize));
-  },[pageSize, dispatch]);
+    useEffect(() => {
+        dispatch(usersActions.setPage());
+        dispatch(requestUsers(currentPage, pageSize));
+    }, [dispatch, currentPage, pageSize]);
 
-  const onUnfollow = (userId:number) => {
-    dispatch(unfollowUser(userId));
-  }
+    const onPageChange = useCallback((pageNumber: number) => {
+        dispatch(requestUsers(pageNumber, pageSize));
+    }, [pageSize, dispatch]);
 
-  const onFollow = (userId:number) => {
-    dispatch(followUser(userId));
-  }
+    const onUnfollow = (userId: number) => {
+        dispatch(unfollowUser(userId));
+    }
 
-  return (
-      <>
-        {isFetching ? <Preloader /> : null}
-        <Users isMobile={isMobile}
-               users={users}
-               onPageChange={onPageChange}
-               currentPage={currentPage}
-               totalUsers={totalUsers}
-               pageSize={pageSize}
-               followingProgress={followingProgress}
-               unfollowUser={onUnfollow}
-               followUser={onFollow}/>
-      </>
-  )
+    const onFollow = (userId: number) => {
+        dispatch(followUser(userId));
+    }
+
+    return (
+        <Users
+            isFetching={isFetching}
+            isMobile={isMobile}
+            users={users}
+            onPageChange={onPageChange}
+            currentPage={currentPage}
+            totalUsers={totalUsers}
+            pageSize={pageSize}
+            followingProgress={followingProgress}
+            unfollowUser={onUnfollow}
+            followUser={onFollow}/>
+    )
 }

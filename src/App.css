@@ -1,11 +1,21 @@
+html, .root {
+    min-height: 100%;
+}
+
 h1, h2, h3, h4, p, a {
     margin: 0;
     font-size: 100%;
     font-weight: normal;
 }
+
 body {
     background-color: #222629;
     box-sizing: border-box;
+    height: 100%;
+}
+
+main {
+    height: 100%;
 }
 
 .app-wrapper {
@@ -21,6 +31,7 @@ body {
     background-color: #FBEEC1;
     border-radius: 10px;
 }
+
 .app-wrapper-content-black {
     background-color: #474B4F;
     color: wheat;

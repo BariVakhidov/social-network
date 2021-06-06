@@ -4,16 +4,20 @@
     margin-left: auto;
     margin-right: auto;
 }
+
 .start {
     text-align: center;
     margin: 60px;
 }
+
 .start p {
     margin: 20px;
     font-weight: bold;
 }
+
 .content {
     width: 100%;
+    flex-grow: 1;
     margin: 10px;
     background-color: #FBEEC1;
     border-radius: 10px;
@@ -24,6 +28,7 @@
     background-color: #222629;
     border-radius: 10px;
 }
+
 .contentM {
     width: 100%;
     background-color: #FBEEC1;

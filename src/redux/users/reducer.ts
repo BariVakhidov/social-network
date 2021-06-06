@@ -1,8 +1,8 @@
 import { updateObjectInArray } from '../../utils/objects-helpers/users-helper';
 import { UsersState } from '../../types/intefaces';
-import { UsersReducerActions } from './action-types';
 import { Actions } from './constants';
 import { Reducer } from 'redux';
+import {UsersReducerActions} from "./action-creators";
 
 let initialState: UsersState = {
   users: [],

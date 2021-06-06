@@ -48,6 +48,7 @@
 }
 
 .page:hover {
+    cursor: pointer;
     background-color: rgba(133, 133, 133, 0.3);
 }
 
@@ -90,4 +91,8 @@
 }
 .turnPageRight img {
     height: 100%;
+}
+
+.turnPageLeft, .turnPageRight:hover {
+    cursor: pointer;
 }
