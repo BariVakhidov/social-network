@@ -38,11 +38,15 @@ const FriendsContainer: FC<Props> = ({isMobile}) => {
     const onFollowUser = (userId: number) => dispatch(followUser(userId))
 
     return (
-        <Users isFetching={isFetching} users={friends} totalUsers={totalFriends} pageSize={pageSize}
+        <div>
+
+            {/* <Users  isFetching={isFetching} users={friends} totalUsers={totalFriends} pageSize={pageSize}
                onPageChange={onPageChange}
                isMobile={isMobile} currentPage={friendsCurrentPage} followingProgress={followingProgress}
-               unfollowUser={onUnfollowUser} followUser={onFollowUser}/>
-    );
+               unfollowUser={onUnfollowUser} followUser={onFollowUser}/> */}
+        </div>
+               
+               );
 }
 
 

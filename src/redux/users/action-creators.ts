@@ -1,6 +1,7 @@
 import {User} from '../../types/intefaces';
 import {Actions} from './constants';
 import {InferActionsType} from "../redux-store";
+import { Filter } from './types';
 
 export type UsersReducerActions = InferActionsType<typeof usersActions>
 
@@ -8,6 +9,7 @@ export const usersActions = {
     followSuccess: (userId: number) => ({type: Actions.FOLLOW, userId} as const),
     unfollowSuccess: (userId: number) => ({type: Actions.UNFOLLOW, userId} as const),
     setUsers: (users: Array<User>) => ({type: Actions.SET_USERS, users: users,} as const),
+    setFilter: (payload: Filter) => ({type: Actions.SET_FILTER, payload,} as const),
     setFriends: (friends: Array<User>) => ({type: Actions.SET_FRIENDS, friends: friends,} as const),
     setShowingFriends: (friends: Array<User>) => ({type: Actions.SET_SHOWING_FRIENDS, friends,} as const),
     setPage: () => ({type: Actions.SET_PAGE} as const),

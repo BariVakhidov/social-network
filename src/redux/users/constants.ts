@@ -5,6 +5,7 @@ export enum Actions {
     SET_FRIENDS = "social-network/users/SET_FRIENDS",
     SET_SHOWING_FRIENDS = "social-network/users/SET_SHOWING_FRIENDS",
     SET_PAGE = "social-network/users/SET_PAGE",
+    SET_FILTER = "social-network/users/SET_FILTER",
     SET_CURRENT_PAGE = "social-network/users/SET_CURRENT_PAGE",
     SET_FRIENDS_CURRENT_PAGE = "social-network/users/SET_FRIENDS_CURRENT_PAGE",
     SET_TOTAL_USERS = "social-network/users/SET_TOTAL_USERS",

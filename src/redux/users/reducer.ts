@@ -2,7 +2,7 @@ import { updateObjectInArray } from '../../utils/objects-helpers/users-helper';
 import { UsersState } from '../../types/intefaces';
 import { Actions } from './constants';
 import { Reducer } from 'redux';
-import {UsersReducerActions} from "./action-creators";
+import { UsersReducerActions } from './action-creators';
 
 let initialState: UsersState = {
   users: [],
@@ -15,9 +15,13 @@ let initialState: UsersState = {
   isFetching: true,
   followingProgress: [],
   showingFriends: [],
+  filter: {
+    friend: null,
+    term: '',
+  },
 };
 
-const usersReducer:Reducer<UsersState, UsersReducerActions> = (
+const usersReducer: Reducer<UsersState, UsersReducerActions> = (
   state = initialState,
   action
 ) => {
@@ -70,6 +74,11 @@ const usersReducer:Reducer<UsersState, UsersReducerActions> = (
         followingProgress: action.isFetching
           ? [...state.followingProgress, action.userId]
           : state.followingProgress.filter((id) => id !== action.userId),
+      };
+    case Actions.SET_FILTER:
+      return {
+        ...state,
+        filter: action.payload,
       };
     default:
       return state;

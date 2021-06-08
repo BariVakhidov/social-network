@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { RequestUsersParams } from '../redux/users/types';
 import { LoginData, Profile, ProfileData } from '../types/intefaces';
 import { instance } from './axiosInstance';
 import {
@@ -13,9 +14,9 @@ import {
 } from './response-types';
 
 export const usersAPI = {
-  getUsers(currentPage: number, pageSize: number): Promise<GetUsersResponse> {
+  getUsers(params: RequestUsersParams): Promise<GetUsersResponse> {
     return instance
-      .get<GetUsersResponse>(`users?page=${currentPage}&count=${pageSize}`)
+      .get<GetUsersResponse>(`users?page=${params.currentPage}&count=${params.pageSize}&term=${params.term}` + (params.friend === null ? '' : `&friend=${params.friend}`))
       .then((response) => response.data);
   },
   followUser(userId: number): Promise<FollowUnfollowRequest> {

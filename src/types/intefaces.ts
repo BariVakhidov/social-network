@@ -1,3 +1,5 @@
+import { Filter } from "../redux/users/types";
+
 export interface Contacts {
     github: (string);
     vk: (string);
@@ -89,6 +91,7 @@ export interface UsersState {
     isFetching: boolean;
     followingProgress: Array<number>;
     showingFriends: Array<User>;
+    filter: Filter;
 }
 export interface LoginData {
     email:string;
