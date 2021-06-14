@@ -8,7 +8,7 @@ import menu from '../../assets/images/menu.png';
 import carrot from '../../assets/images/carrot.jpg'
 import {BlackThemeContext} from "../../contexts/theme-context";
 import {Profile} from "../../types/intefaces";
-
+import { Button } from 'antd';
 interface Props {
     isMobile:boolean;
     isVisible: boolean;
@@ -28,21 +28,14 @@ const Header:React.FC<Props> = ({isMobile, isVisible, setNavVisible, isAuth, pro
     return (
         <header className={cn({[s.headerBlack]: blackTheme})}>
             <div className={s.header}>
-                <div className={s.logo}>
-                    <img
-                        alt="img"
-                        src={carrot}/>
-                    <div>{isMobile ? <button className={s.menuButton} onClick={()=> setNavVisible(!isVisible)}><img src={menu} alt=""/></button> :
-                        "Carrot"}</div>
-                </div>
                 <div className={s.auth}>
                     {isAuth && profile ?
                         <div className={s.authInfo}><img src={profile.photos.small}
-                                                         alt=""/> {!isMobile && profile.fullName}
+                                                         alt=""/> <span className={s.name}>{!isMobile && profile.fullName}</span>
                             {isMobile ?
                                 <img style={{width: "25px", height: "25px"}} onClick={logout} src={logoutIcon}
                                      alt="logout"/> :
-                                <StyledButton onClick={logout}>{"Logout"}</StyledButton>}
+                                <Button type={"primary"} onClick={logout}>{"Logout"}</Button>}
                         </div> : <NavLink to="/login">Login</NavLink>}
                 </div>
             </div>

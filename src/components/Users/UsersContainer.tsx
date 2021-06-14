@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
+import 'antd/dist/antd.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Users from './Users';
 import { usersActions } from '../../redux/users/action-creators';
