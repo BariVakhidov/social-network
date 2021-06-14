@@ -31,7 +31,8 @@ const ProfileContainer: React.FC<Props> = ({isMobile}) => {
     const refreshProfile = useCallback(() => {
         if (!params.userId && mainUserId) dispatch(getProfilePage(mainUserId));
         if (params.userId) dispatch(getProfilePage(parseInt(params.userId)));
-    }, [dispatch, mainUserId, params.userId])
+    }, [dispatch, mainUserId, params.userId]);
+    
     const onUpdateProfile = (profileData: ProfileData, userId: number) => dispatch(updateProfile(profileData, userId));
     const onSavePhoto = (file: File) => dispatch(savePhoto(file));
     const onUpdateStatus = (status: string) => dispatch(updateStatus(status));
