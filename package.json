@@ -15,6 +15,7 @@
     "antd": "^4.16.2",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
+    "craco-less": "^1.17.1",
     "formik": "^2.2.6",
     "jquery-1.8": "^1.8.3",
     "node-sass": "^4.0.0",
@@ -72,7 +73,7 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/redux-form": "^8.3.1",
     "eslint": "^7.15.0",
-    "gh-pages": "^3.1.0",
+    "gh-pages": "^3.2.1",
     "jquery": "^3.5.1",
     "react-test-renderer": "^17.0.1"
   }

@@ -7,7 +7,7 @@ import ProfileContainer from './Profile/ProfileContainer';
 import FriendsContainer from './Friends/Friends';
 import Settings from './Settings/Settings';
 import { useMediaQuery } from 'react-responsive';
-import { HeaderContainer } from './Header/HeaderContainer';
+import { HeaderComponent } from './Header/Header';
 //import s from './Content.module.css';
 import cn from 'classnames';
 import { BlackThemeContext } from '../contexts/theme-context';
@@ -21,6 +21,8 @@ import {
   VideoCameraOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
+import { ChatPage } from '../pages/Chat';
+import { Routes } from '../constants/routes';
 
 const { Header, Sider, Content } = Layout;
 
@@ -60,52 +62,47 @@ const ContentComponent: React.FC<ContentProps> = ({ isMobile }) => {
       <BlackThemeContext.Consumer>
         {(value) => (
           <Layout>
-              <NavContainer isMobile={isMobile} collapsed={collapsed}/>
+            <NavContainer isMobile={isMobile} collapsed={collapsed} />
             <Layout className="site-layout" style={{ marginLeft: 200 }}>
-            <Header className="site-layout-background" style={{ padding: 0 }}>
-                <HeaderContainer isMobile={isMobile} />
-            </Header>
-            
-            <Content 
-                style={{ margin: '24px 16px 0', overflow: 'initial' }}
-            >
-              <Suspense fallback={<Preloader />}>
-                <Switch>
-                  <Route
-                    exact
-                    path="/"
-                    render={() => <Redirect to={'/profile'} />}
-                  />
-                  <Route
-                    path="/dialogs"
-                    render={() => <DialogsContainer isMobile={isMobile} />}
-                  />
-                  <Route
-                    path="/login"
-                    render={() => <Login isMobile={isMobile} />}
-                  />
-                  <Route
-                    path="/profile/:userId?"
-                    render={() => <ProfileContainer isMobile={isMobile} />}
-                  />
-                  <Route path="/news" component={News} />
-                  <Route
-                    path="/users/:friends?"
-                    render={() => <UsersContainer isMobile={isMobile} />}
-                  />
-                  <Route path="/music" component={Music} />
-                  <Route
-                    path="/friends"
-                    render={() => <FriendsContainer isMobile={isMobile} />}
-                  />
-                  <Route path="/settings" component={Settings} />
-                  <Route
-                    path="*"
-                    render={() => <div>404 NOT FOUND</div>}
-                  />
-                </Switch>
-              </Suspense>
-            </Content>
+              <Header className="site-layout-background" style={{ padding: 0 }}>
+                <HeaderComponent isMobile={isMobile} />
+              </Header>
+              <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+                <Suspense fallback={<Preloader />}>
+                  <Switch>
+                    <Route
+                      exact
+                      path="/"
+                      render={() => <Redirect to={Routes.PROFILE} />}
+                    />
+                    <Route
+                      path={Routes.DIALOGS}
+                      render={() => <DialogsContainer isMobile={isMobile} />}
+                    />
+                    <Route
+                      path={Routes.LOGIN}
+                      render={() => <Login isMobile={isMobile} />}
+                    />
+                    <Route
+                      path={Routes.PROFILE}
+                      render={() => <ProfileContainer isMobile={isMobile} />}
+                    />
+                    <Route path={Routes.NEWS} component={News} />
+                    <Route
+                      path={Routes.USERS}
+                      render={() => <UsersContainer isMobile={isMobile} />}
+                    />
+                    <Route path={Routes.MUSIC} component={Music} />
+                    <Route
+                      path="/friends"
+                      render={() => <FriendsContainer isMobile={isMobile} />}
+                    />
+                    <Route path={Routes.SETTINGS} component={Settings} />
+                    <Route path={Routes.CHAT} component={ChatPage} />
+                    <Route path="*" render={() => <div>404 NOT FOUND</div>} />
+                  </Switch>
+                </Suspense>
+              </Content>
             </Layout>
           </Layout>
         )}

@@ -16,6 +16,7 @@ import {
   ProfileOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons';
+import { Routes } from '../../constants/routes';
 
 const { Sider } = Layout;
 interface Props extends PartOfFriendsProps {
@@ -52,36 +53,41 @@ const Nav: React.FC<Props> = ({
                 </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
           <Menu.Item key="1" icon={<UserOutlined />}>
-            <NavLink to="/profile">
+            <NavLink to={Routes.PROFILE }>
               Profile
             </NavLink>
           </Menu.Item>
           <Menu.Item key="2" icon={<MessageOutlined />}>
-            <NavLink to="/dialogs">
+            <NavLink to={Routes.DIALOGS}>
               Messages
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="3" icon={<ProfileOutlined />}>
-            <NavLink to="/news">
+          <Menu.Item key="3" icon={<MessageOutlined />}>
+            <NavLink to={Routes.CHAT}>
+              Chat
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="4" icon={<ProfileOutlined />}>
+            <NavLink to={Routes.NEWS}>
               News
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="4" icon={<UsergroupAddOutlined />}>
-            <NavLink to="/users">
+          <Menu.Item key="5" icon={<UsergroupAddOutlined />}>
+            <NavLink to={Routes.USERS}>
               Users
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="5" icon={<CustomerServiceFilled />}>
-            <NavLink to="/music">
+          <Menu.Item key="6" icon={<CustomerServiceFilled />}>
+            <NavLink to={Routes.MUSIC}>
               Music
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="6" icon={<SettingOutlined />}>
-            <NavLink to="/settings">
+          <Menu.Item key="7" icon={<SettingOutlined />}>
+            <NavLink to={Routes.SETTINGS}>
               Settings
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="7" icon={<TeamOutlined />}>
+          <Menu.Item key="8" icon={<TeamOutlined />}>
             <NavLink to="/friends">
               Friends
             </NavLink>

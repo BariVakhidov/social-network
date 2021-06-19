@@ -8,17 +8,30 @@ import menu from '../../assets/images/menu.png';
 import carrot from '../../assets/images/carrot.jpg'
 import {BlackThemeContext} from "../../contexts/theme-context";
 import {Profile} from "../../types/intefaces";
-import { Button } from 'antd';
+import { Button, Avatar } from 'antd';
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/redux-store";
+import { logout } from "../../redux/auth-reducer";
+import { setNavVisible } from "../../redux/app-reducer";
 interface Props {
     isMobile:boolean;
-    isVisible: boolean;
-    setNavVisible: (visible:boolean) => void;
-    isAuth: boolean;
-    profile: Profile | null;
-    logout: ()=> void;
 }
 
-const Header:React.FC<Props> = ({isMobile, isVisible, setNavVisible, isAuth, profile, logout}) => {
+export const HeaderComponent:React.FC<Props> = ({isMobile}) => {
+
+    const isAuth = useSelector((state:RootState) => state.auth.isAuth);
+    const profile = useSelector((state:RootState) => state.auth.currentUser);
+    const isVisible = useSelector((state:RootState) => state.app.isVisible);
+    const dispatch = useDispatch();
+
+    const onLogout = () => {
+        dispatch(logout());
+    }
+
+    const onSetNavVisible = (visible: boolean) => {
+        dispatch(setNavVisible(visible));
+    }
+
     useEffect(()=> {
         if (!isMobile && !isVisible) {
             setNavVisible(true);
@@ -30,7 +43,7 @@ const Header:React.FC<Props> = ({isMobile, isVisible, setNavVisible, isAuth, pro
             <div className={s.header}>
                 <div className={s.auth}>
                     {isAuth && profile ?
-                        <div className={s.authInfo}><img src={profile.photos.small}
+                        <div className={s.authInfo}><Avatar size={40} src={profile.photos.small}
                                                          alt=""/> <span className={s.name}>{!isMobile && profile.fullName}</span>
                             {isMobile ?
                                 <img style={{width: "25px", height: "25px"}} onClick={logout} src={logoutIcon}
@@ -42,5 +55,3 @@ const Header:React.FC<Props> = ({isMobile, isVisible, setNavVisible, isAuth, pro
         </header>
     );
 };
-
-export default Header;
