@@ -1,27 +1,34 @@
 import React, { FC } from 'react';
-import { useState } from 'react';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    startMessagesListening,
+    stopMessagesListening,
+} from '../../redux/chat/thunk';
+import { StatusType } from '../../redux/chat/types';
+import { RootState } from '../../redux/redux-store';
 import { AddMessageForm } from './AddMessageForm';
-import { Message, Messages } from './Messages';
-
-export const webSocket = new WebSocket(
-  'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
-);
+import { Messages } from './Messages';
 
 export const Chat: FC = React.memo(() => {
-    
-  const [messages, setMessages] = useState<Array<Message>>([]);
+    const { status } = useSelector((state: RootState) => state.chat);
 
-  useEffect(() => {
-    webSocket.addEventListener('message', (e: MessageEvent) => {
-      setMessages((prevState) => [...prevState, ...JSON.parse(e.data)]);
-    });
-  }, []);
-
-  return (
-    <div>
-      <Messages messages={messages} />
-      <AddMessageForm />
-    </div>
-  );
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(startMessagesListening());
+        return () => {
+            dispatch(stopMessagesListening());
+        };
+    }, [dispatch]);
+    return (
+        <div>
+            {status === StatusType.ERROR && (
+                <div>Some error occured... Please refresh page</div>
+            )}
+            <>
+                <Messages />
+                <AddMessageForm />
+            </>
+        </div>
+    );
 });

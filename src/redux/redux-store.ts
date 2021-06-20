@@ -1,3 +1,4 @@
+import { chatReducer } from './chat/reducer';
 import {Action, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import dialogReducer from "./dialogs/reducer";
 import usersReducer from "./users/reducer";
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
         usersPage: usersReducer,
         auth: authReducer,
         form: formReducer,
-        app: appReducer
+        app: appReducer,
+        chat: chatReducer,
     }
 );
 export type RootState = ReturnType<typeof rootReducer>;

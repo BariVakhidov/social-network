@@ -1,9 +1,11 @@
-import {authAPI, profileAPI, securityAPI} from "../api/api";
 import {getShowingFriends} from "./users/thunk";
 import {AppThunk, RootState} from "./redux-store";
 import {AuthReducer, LoginData, Photos, Profile} from "../types/intefaces";
 import { ThunkAction } from "redux-thunk";
 import { Action } from "redux";
+import { authAPI } from "../api/auth-api";
+import { profileAPI } from "../api/profile-api";
+import { securityAPI } from "../api/security-api";
 
 let initialState: AuthReducer = {
     userId: null,

@@ -8,27 +8,18 @@ import FriendsContainer from './Friends/Friends';
 import Settings from './Settings/Settings';
 import { useMediaQuery } from 'react-responsive';
 import { HeaderComponent } from './Header/Header';
-//import s from './Content.module.css';
-import cn from 'classnames';
 import { BlackThemeContext } from '../contexts/theme-context';
 import { UsersContainer } from './Users/UsersContainer';
 import { NavContainer } from './Navbar/NavContainer';
-import { Layout, Menu } from 'antd';
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from '@ant-design/icons';
-import { ChatPage } from '../pages/Chat';
+import { Layout } from 'antd';
 import { Routes } from '../constants/routes';
 
-const { Header, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 
 const DialogsContainer = React.lazy(() => import('./Dialogs/DialogsContainer'));
 const News = React.lazy(() => import('./News/News'));
 const Music = React.lazy(() => import('./Music/Music'));
+const ChatPage = React.lazy(() => import('../pages/Chat'));
 
 interface Props {
   blackTheme: boolean;

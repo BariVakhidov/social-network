@@ -1,9 +1,9 @@
-import {profileAPI} from "../../api/api";
 import {setCurrentUserPhotos} from "../auth-reducer";
 import {setShowingUserId, setUserProfile, setStatus, savePhotoSuccess, setFetching} from "./action-creators";
 import {AppThunk} from "../redux-store";
 import {ProfileData} from "../../types/intefaces";
 import {batch} from "react-redux";
+import { profileAPI } from "../../api/profile-api";
 
 export const getProfilePage = (userId: number): AppThunk => async (dispatch) => {
     dispatch(setShowingUserId(userId));

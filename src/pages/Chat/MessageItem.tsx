@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Message } from './Messages';
+import { Message } from '../../api/chat-api';
 import s from './Chat.module.css';
 
 interface Props {
@@ -8,12 +8,14 @@ interface Props {
 
 export const MessageItem: FC<Props> = React.memo(({ message }) => {
   return (
-    <div className={s.message}>
+    <div className={s.messageItem}>
       <div className={s.userInfo}>
-        <img src={message.photo} alt="avatar" height={40}/>
+        <img src={message.photo} alt="avatar" className={s.avatar} />
         <span>{message.userName}</span>
       </div>
-      <div>{message.message}</div>
+      <div className={s.message}>
+        <span>{message.message}</span>
+      </div>
     </div>
   );
 });
