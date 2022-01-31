@@ -11,7 +11,7 @@ header {
     max-width: 1200px;
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content:flex-end;
     align-items: center;
     margin: 0 auto;
     padding: 10px;
@@ -36,6 +36,11 @@ header {
     height: 40px;
     margin-right: 10px;
     border-radius: 10px;
+}
+
+.name {
+    margin-left: 10px;
+    margin-right: 20px;
 }
 
 .cont {

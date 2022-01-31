@@ -5,12 +5,12 @@ import {isBlackTheme} from "../../redux/app-reducer";
 import {RootState} from "../../redux/redux-store";
 
 type Props = {
-    isMobile: boolean
+    isMobile: boolean;
+    collapsed: boolean;
 }
-export const NavContainer: React.FC<Props> = ({isMobile}) => {
+export const NavContainer: React.FC<Props> = ({isMobile, collapsed}) => {
     const isAuth = useSelector((state: RootState) => state.auth.isAuth);
-    const friends = useSelector((state: RootState) => state.usersPage.showingFriends);
-    const friendsCount = useSelector((state: RootState) => state.usersPage.totalFriends);
+    const {showingFriends, totalFriends} = useSelector((state: RootState) => state.usersPage);
     const blackTheme = useSelector((state: RootState) => state.app.blackTheme);
     const isVisible = useSelector((state: RootState) => state.app.isVisible);
     const dispatch = useDispatch();
@@ -18,6 +18,6 @@ export const NavContainer: React.FC<Props> = ({isMobile}) => {
     const onThemeChange = (isBlack: boolean) => dispatch(isBlackTheme(isBlack));
 
     return <Nav blackTheme={blackTheme} isMobile={isMobile} isVisible={isVisible} isBlackTheme={onThemeChange} isAuth={isAuth}
-                friendsCount={friendsCount} friends={friends}/>
+                friendsCount={totalFriends} friends={showingFriends} collapsed={collapsed}/>
 }
 

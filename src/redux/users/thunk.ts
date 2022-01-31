@@ -1,8 +1,9 @@
-import { usersAPI, friendsAPI } from '../../api/api';
+import { friendsAPI } from '../../api/friends-api';
 import { AppThunk } from '../redux-store';
 import { usersActions, UsersReducerActions } from './action-creators';
 import { batch } from 'react-redux';
 import { RequestUsersParams } from './types';
+import { usersAPI } from '../../api/users-api';
 
 export const requestUsers = (params: RequestUsersParams): AppThunk => {
   return async (dispatch) => {

@@ -227,3 +227,17 @@ input:focus + .switchLeft + .switchRight {
 input:checked:focus + .switchLeft + .switchRight {
     color: #333;
 }
+
+.logo {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.logo img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 10px;
+}

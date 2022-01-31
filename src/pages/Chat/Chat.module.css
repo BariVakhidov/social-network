@@ -1,0 +1,54 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.messages {
+  height: 500px;
+  overflow: auto;
+}
+
+.messageItem {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.messageItem:hover {
+  background-color: rgb(196, 196, 196);
+  cursor: pointer;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 70px;
+  text-align: start;
+  margin-right: 20px;
+}
+
+.userInfo span {
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.avatar {
+  width: 50px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.message {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.message span {
+  font-size: large;
+  display: block;
+}

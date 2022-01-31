@@ -6,6 +6,7 @@ let initialState: AppReducer = {
   initialized: false,
   blackTheme: false,
   isVisible: false,
+  error: '',
 };
 
 interface InitializedSuccess {

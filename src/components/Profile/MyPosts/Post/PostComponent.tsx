@@ -15,7 +15,7 @@ interface Props {
     addLike: (postId:number)=>void;
 }
 
-const Post:React.FC<Props> = ({blackTheme, name, id, deletePost, likesCount,addLike, postText, userImg}) => {
+const PostComponent:React.FC<Props> = ({blackTheme, name, id, deletePost, likesCount,addLike, postText, userImg}) => {
     return (
         <div className={cn(!blackTheme ? s.post : s.postBlack)}>
             <div className={s.cont}>
@@ -42,4 +42,4 @@ const Post:React.FC<Props> = ({blackTheme, name, id, deletePost, likesCount,addL
     );
 };
 
-export default Post;
+export default PostComponent;

@@ -1,6 +1,6 @@
 import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import Preloader from "../common/Preloader/Preloader";
 import {Profile, ProfileData} from "../../types/intefaces";
 import {useSelector} from "react-redux";
@@ -11,23 +11,28 @@ interface ProfileProps {
     blackTheme: boolean;
     isMobile: boolean;
     isOwner: boolean;
-    status:string;
-    savePhoto: (file:File) => void;
-    updateStatus: (status:string)=>void;
-    updateProfile: (profileData:ProfileData,userId:number)=>void;
+    status: string;
+    savePhoto: (file: File) => void;
+    updateStatus: (status: string) => void;
+    updateProfile: (profileData: ProfileData, userId: number) => void;
 }
-const ProfileComponent:React.FC<ProfileProps> = ({profile,
-                                            isOwner,
-                                            isMobile,
-                                            blackTheme,
-                                            savePhoto,
-                                            status,
-                                            updateStatus,
-                                            updateProfile}) => {
-    const isFetching = useSelector((state:RootState)=> state.profilePage.isFetching);
+
+const ProfileComponent: React.FC<ProfileProps> = ({
+                                                      profile,
+                                                      isOwner,
+                                                      isMobile,
+                                                      blackTheme,
+                                                      savePhoto,
+                                                      status,
+                                                      updateStatus,
+                                                      updateProfile
+                                                  }) => {
+    const isFetching = useSelector((state: RootState) => state.profilePage.isFetching);
+
     if (!profile || isFetching) {
-        return <Preloader/>
+        return <Preloader />
     }
+
     return (
         <>
             <ProfileInfo
@@ -38,9 +43,9 @@ const ProfileComponent:React.FC<ProfileProps> = ({profile,
                 status={status}
                 savePhoto={savePhoto}
                 updateStatus={updateStatus}
-                updateProfile={updateProfile}/>
-            {blackTheme && <hr/>}
-            <MyPostsContainer />
+                updateProfile={updateProfile} />
+            {blackTheme && <hr />}
+            <MyPostsContainer blackTheme={blackTheme} />
         </>
     );
 };

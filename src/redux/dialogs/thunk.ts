@@ -1,4 +1,4 @@
-import { friendsAPI } from "../../api/api";
+import { friendsAPI } from "../../api/friends-api";
 import { setCurrentChatFriendsPage, setChatFriends } from "./action-creators";
 import { AppThunk } from "../redux-store";
 
