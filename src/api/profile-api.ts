@@ -1,29 +1,28 @@
-import { AxiosResponse } from "axios";
-import { Profile, ProfileData } from "../types/intefaces";
-import { instance } from "./axiosInstance";
-import { UpdateStatus, UpdateProfile, UpdatePhoto } from "./response-types";
+import {Profile, ProfileData} from "../types/intefaces";
+import {instance} from "./axiosInstance";
+import {UpdateStatus, UpdateProfile, UpdatePhoto} from "./response-types";
 
 export const profileAPI = {
-    getProfile(id: number):Promise<AxiosResponse<Profile>> {
-      return instance.get<Profile>(`profile/${id}`);
+    getProfile(id: number): Promise<Profile> {
+        return instance.get<Profile>(`profile/${id}`).then(response => response.data);
     },
-    getStatus(userId: number):Promise<AxiosResponse<string>> {
-      return instance.get<string>(`profile/status/${userId}`);
+    getStatus(userId: number): Promise<string> {
+        return instance.get<string>(`profile/status/${userId}`).then(response => response.data);
     },
-    updateStatus(status: string):Promise<AxiosResponse<UpdateStatus>> {
-      return instance.put<UpdateStatus>(`profile/status`, { status: status });
+    updateStatus(status: string): Promise<UpdateStatus> {
+        return instance.put<UpdateStatus>(`profile/status`, {status: status}).then(response => response.data);
     },
-    updateProfile(profileData:ProfileData):Promise<AxiosResponse<UpdateProfile>> {
-      return instance.put<UpdateProfile>(`profile`, profileData);
+    updateProfile(profileData: ProfileData): Promise<UpdateProfile> {
+        return instance.put<UpdateProfile>(`profile`, profileData).then(response => response.data);
     },
-  
-    savePhoto(photoFile:File):Promise<AxiosResponse<UpdatePhoto>> {
-      const formData = new FormData();
-      formData.append('image', photoFile);
-      return instance.put<UpdatePhoto>(`profile/photo`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+
+    savePhoto(photoFile: File): Promise<UpdatePhoto> {
+        const formData = new FormData();
+        formData.append("image", photoFile);
+        return instance.put<UpdatePhoto>(`profile/photo`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }).then(response => response.data);
     },
-  };
+};

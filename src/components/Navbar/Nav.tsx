@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { memo } from 'react';
 import s from './Nav.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import PartOfFriends, { PartOfFriendsProps } from './PartOfFriends';
 import carrot from '../../assets/images/carrot.jpg'
-import cn from 'classnames';
 import Switcher from './Switcher';
 import { Layout, Menu } from 'antd';
 import {
   UserOutlined,
   TeamOutlined,
-  UploadOutlined,
   MessageOutlined,
   SettingOutlined,
   CustomerServiceFilled,
@@ -27,16 +25,15 @@ interface Props extends PartOfFriendsProps {
   collapsed: boolean;
 }
 
-const Nav: React.FC<Props> = ({
+const Nav: React.FC<Props> = memo(({
   blackTheme,
   isMobile,
   isBlackTheme,
-  isVisible,
   friends,
   isAuth,
   friendsCount,
-  collapsed,
 }) => {
+  const location = useLocation();
   return (
     <>
       <Sider style={{
@@ -51,43 +48,43 @@ const Nav: React.FC<Props> = ({
                         src={carrot}/>
                     <div>Carrot</div>
                 </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1" icon={<UserOutlined />}>
-            <NavLink to={Routes.PROFILE }>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={[location.pathname]}>
+          <Menu.Item key={Routes.PROFILE_MAIN} icon={<UserOutlined />}>
+            <NavLink to={Routes.PROFILE_MAIN}>
               Profile
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="2" icon={<MessageOutlined />}>
+          <Menu.Item key={Routes.DIALOGS} icon={<MessageOutlined />}>
             <NavLink to={Routes.DIALOGS}>
               Messages
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="3" icon={<MessageOutlined />}>
+          <Menu.Item key={Routes.CHAT} icon={<MessageOutlined />}>
             <NavLink to={Routes.CHAT}>
               Chat
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="4" icon={<ProfileOutlined />}>
+          <Menu.Item key={Routes.NEWS} icon={<ProfileOutlined />}>
             <NavLink to={Routes.NEWS}>
               News
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="5" icon={<UsergroupAddOutlined />}>
+          <Menu.Item key={Routes.USERS} icon={<UsergroupAddOutlined />}>
             <NavLink to={Routes.USERS}>
               Users
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="6" icon={<CustomerServiceFilled />}>
+          <Menu.Item key={Routes.MUSIC} icon={<CustomerServiceFilled />}>
             <NavLink to={Routes.MUSIC}>
               Music
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="7" icon={<SettingOutlined />}>
+          <Menu.Item key={Routes.SETTINGS} icon={<SettingOutlined />}>
             <NavLink to={Routes.SETTINGS}>
               Settings
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="8" icon={<TeamOutlined />}>
+          <Menu.Item key="/friends" icon={<TeamOutlined />}>
             <NavLink to="/friends">
               Friends
             </NavLink>
@@ -106,6 +103,6 @@ const Nav: React.FC<Props> = ({
       </Sider>
     </>
   );
-};
+});
 
 export default Nav;

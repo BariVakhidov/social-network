@@ -65,6 +65,7 @@ export interface AppReducer {
     initialized: boolean;
     blackTheme: boolean;
     isVisible: boolean;
+    error: string;
 }
 
 export interface Photos {

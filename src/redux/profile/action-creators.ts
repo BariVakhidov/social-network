@@ -1,12 +1,25 @@
-import { Profile, Photos } from "../../types/intefaces";
-import { ProfileReducerActionType } from "./action-types";
-import { Actions } from "./constants";
+import {Profile, Photos, ProfileData} from "../../types/intefaces";
+import {ProfileActions} from "./constants";
+import {InferActionsType} from "../redux-store";
+import {AddPostPayload} from "./types";
 
-export const addPostAC = (newText:string, photo:string):ProfileReducerActionType => ({type: Actions.ADD_POST, newText, photo});
-export const deletePost = (postId:number):ProfileReducerActionType => ({type: Actions.DELETE_POST, postId});
-export const addLikeAC = (postId:number):ProfileReducerActionType => ({type: Actions.ADD_LIKE, postId});
-export const setUserProfile = (profile:Profile):ProfileReducerActionType => ({type: Actions.SET_PROFILE, profile});
-export const setStatus = (status:string):ProfileReducerActionType => ({type: Actions.SET_STATUS, status});
-export const setFetching = ():ProfileReducerActionType => ({type: Actions.SET_FETCHING});
-export const savePhotoSuccess = (photos:Photos):ProfileReducerActionType => ({type: Actions.SAVE_PHOTO_SUCCESS, photos});
-export const setShowingUserId = (showingUserId:number):ProfileReducerActionType => ({type: Actions.SET_SHOWING_USER_ID, showingUserId});
+export const profileActions = {
+    addPostAC: (payload: AddPostPayload) => ({type: ProfileActions.ADD_POST, payload} as const),
+    deletePost: (payload: number) => ({type: ProfileActions.DELETE_POST, payload} as const),
+    addLikeAC: (payload: number) => ({type: ProfileActions.ADD_LIKE, payload} as const),
+    setUserProfile: (payload: Profile | null) => ({type: ProfileActions.SET_PROFILE, payload} as const),
+    getUserProfile: (payload: number) => ({type: ProfileActions.GET_PROFILE, payload} as const),
+    updateProfile: (payload: { profileData: ProfileData, userId: number }) => ({
+        type: ProfileActions.UPDATE_PROFILE,
+        payload
+    } as const),
+    setStatus: (payload: string) => ({type: ProfileActions.SET_STATUS, payload} as const),
+    getStatus: (payload: number) => ({type: ProfileActions.GET_STATUS, payload} as const),
+    updateStatus: (payload: string) => ({type: ProfileActions.UPDATE_STATUS, payload} as const),
+    setFetching: (payload: boolean) => ({type: ProfileActions.SET_FETCHING, payload} as const),
+    savePhotoSuccess: (payload: Photos) => ({type: ProfileActions.SAVE_PHOTO_SUCCESS, payload} as const),
+    savePhoto: (payload: File) => ({type: ProfileActions.SAVE_PHOTO, payload} as const),
+    setShowingUserId: (payload: number) => ({type: ProfileActions.SET_SHOWING_USER_ID, payload} as const),
+}
+
+export type ProfileActionsType = InferActionsType<typeof profileActions>

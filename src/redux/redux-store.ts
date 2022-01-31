@@ -1,4 +1,4 @@
-import { chatReducer } from './chat/reducer';
+import {chatReducer} from "./chat/reducer";
 import {Action, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import dialogReducer from "./dialogs/reducer";
 import usersReducer from "./users/reducer";
@@ -8,6 +8,8 @@ import {reducer as formReducer} from "redux-form";
 import appReducer from "./app-reducer";
 import authReducer from "./auth-reducer";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import createSagaMiddleware from "redux-saga"
+import {rootSaga} from "./sagas";
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     RootState,
@@ -26,15 +28,17 @@ const rootReducer = combineReducers({
 );
 export type RootState = ReturnType<typeof rootReducer>;
 
+const saga = createSagaMiddleware();
+
 declare global {
     interface Window {
         __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
     }
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware, saga)
 ));
-
+saga.run(rootSaga);
 export type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch = () => useDispatch<AppDispatch | AppThunk>();

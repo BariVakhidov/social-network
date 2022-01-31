@@ -1,11 +1,12 @@
 import {getShowingFriends} from "./users/thunk";
 import {AppThunk, RootState} from "./redux-store";
 import {AuthReducer, LoginData, Photos, Profile} from "../types/intefaces";
-import { ThunkAction } from "redux-thunk";
-import { Action } from "redux";
-import { authAPI } from "../api/auth-api";
-import { profileAPI } from "../api/profile-api";
-import { securityAPI } from "../api/security-api";
+import {ThunkAction} from "redux-thunk";
+import {Action} from "redux";
+import {authAPI} from "../api/auth-api";
+import {profileAPI} from "../api/profile-api";
+import {securityAPI} from "../api/security-api";
+import {batch} from "react-redux";
 
 let initialState: AuthReducer = {
     userId: null,
@@ -61,7 +62,7 @@ export const setCurrentUserPhotos = (photos: Photos): AuthReducerActionTypes => 
 });
 export const setCaptchaURL = (url: string | null): AuthReducerActionTypes => ({type: SET_CAPTCHA_URL, url});
 
-const authReducer = (state:AuthReducer = initialState, action: AuthReducerActionTypes):AuthReducer => {
+const authReducer = (state: AuthReducer = initialState, action: AuthReducerActionTypes): AuthReducer => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
@@ -74,13 +75,12 @@ const authReducer = (state:AuthReducer = initialState, action: AuthReducerAction
                 currentUser: action.profile
             }
         case SET_CURRENT_USER_PHOTO:
-           if (state.currentUser != null) {
-               return {
-                   ...state,
-                   currentUser: {...state.currentUser, photos: action.photos}
-               }
-           }
-           else  return state;
+            if (state.currentUser != null) {
+                return {
+                    ...state,
+                    currentUser: {...state.currentUser, photos: action.photos}
+                }
+            } else return state;
         case SET_CAPTCHA_URL:
             return {
                 ...state,
@@ -97,18 +97,20 @@ export default authReducer;
 export const getAuthUserData = (): AppThunk => async (dispatch) => {
     let response = await authAPI.authMe();
     if (response.data.resultCode === 0) {
-        let {id, login, email} = response.data.data;
+        const {id, login, email} = response.data.data;
         dispatch(setUserData(id, login, email, true));
-        let response2 = await profileAPI.getProfile(id);
-        dispatch(setCurrentUser(response2.data));
-        dispatch(getShowingFriends());
+        const profile = await profileAPI.getProfile(id);
+        batch(() => {
+            dispatch(setCurrentUser(profile));
+            dispatch(getShowingFriends());
+        })
     }
 };
 
 export const login = (loginData: LoginData): ThunkAction<Promise<string[] | undefined>,
-RootState,
-unknown,
-Action<string>> => async (dispatch) => {
+    RootState,
+    unknown,
+    Action<string>> => async (dispatch) => {
     let data = await authAPI.login(loginData);
     if (data.resultCode === 0) {
         dispatch(getAuthUserData());
@@ -128,8 +130,10 @@ export const getCaptchaURL = (): AppThunk => async (dispatch) => {
 export const logout = (): AppThunk => async (dispatch) => {
     let data = await authAPI.logout();
     if (data.resultCode === 0) {
-        dispatch(setUserData(null, null, null, false));
-        dispatch(setCaptchaURL(null))
+        batch(() => {
+            dispatch(setUserData(null, null, null, false));
+            dispatch(setCaptchaURL(null))
+        })
     }
 };
 

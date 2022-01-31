@@ -1,10 +1,10 @@
 import { Reducer } from 'redux';
 import { ProfileReducer } from '../../types/intefaces';
 import profileImg from '../../assets/images/profile.jpg'
-import { ProfileReducerActionType } from './action-types';
-import { Actions } from './constants';
+import { ProfileActions } from './constants';
+import {ProfileActionsType} from "./action-creators";
 
-let initialState:ProfileReducer = {
+let initialState:Readonly<ProfileReducer> = {
     posts: [
         {
             id: 1,
@@ -34,14 +34,14 @@ let initialState:ProfileReducer = {
     isFetching: false,
 }
 
-const profileReducer:Reducer<ProfileReducer, ProfileReducerActionType> = (state = initialState, action) => {
+const profileReducer:Reducer<ProfileReducer, ProfileActionsType> = (state = initialState, action) => {
     switch (action.type) {
-        case Actions.ADD_POST:
+        case ProfileActions.ADD_POST:
             let newPost = {
                 id: state.posts.length + 1,
                 name: "Bary",
-                userImage: action.photo,
-                postText: action.newText,
+                userImage: action.payload.photo,
+                postText: action.payload.newText,
                 likesCount: 0,
                 comments: [],
                 newCommentText: ""
@@ -50,35 +50,35 @@ const profileReducer:Reducer<ProfileReducer, ProfileReducerActionType> = (state 
                 ...state,
                 posts: [...state.posts, newPost]
             };
-        case Actions.DELETE_POST:
+        case ProfileActions.DELETE_POST:
             return {
-                ...state, posts: state.posts.filter(p => p.id !== action.postId)
+                ...state, posts: state.posts.filter(p => p.id !== action.payload)
             }
-        case Actions.ADD_LIKE:
+        case ProfileActions.ADD_LIKE:
             return {
                 ...state,
                 posts: state.posts.map(p => {
-                    if (p.id === action.postId) {
+                    if (p.id === action.payload) {
                         return {...p, likesCount: ++p.likesCount};
                     }
                     return p;
                 })
             }
-        case Actions.SET_PROFILE:
-            return {...state, profile: action.profile};
-        case Actions.SAVE_PHOTO_SUCCESS:
+        case ProfileActions.SET_PROFILE:
+            return {...state, profile: action.payload};
+        case ProfileActions.SAVE_PHOTO_SUCCESS:
             if (state.profile) {
-                return {...state, profile: {...state.profile, photos: action.photos}};
+                return {...state, profile: {...state.profile, photos: action.payload}};
             }
             else return state;
-        case Actions.SET_STATUS:
-            return {...state, status: action.status}
-        case Actions.SET_FETCHING:
+        case ProfileActions.SET_STATUS:
+            return {...state, status: action.payload}
+        case ProfileActions.SET_FETCHING:
             return {...state, isFetching: !state.isFetching}
-        case Actions.SET_SHOWING_USER_ID:
+        case ProfileActions.SET_SHOWING_USER_ID:
             return {
                 ...state,
-                showingUserId: action.showingUserId
+                showingUserId: action.payload
             }
         default:
             return state;
