@@ -229,6 +229,7 @@ input:checked:focus + .switchLeft + .switchRight {
 }
 
 .logo {
+    padding: 10px;
     margin-left: 10px;
     display: flex;
     align-items: center;

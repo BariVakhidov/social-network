@@ -39,3 +39,17 @@
     background-color: #474B4F;
     color: wheat;
 }
+
+.layout {
+    min-height: 100%;
+    align-self: stretch;
+}
+
+.layoutContent {
+    margin: 24px 16px;
+    padding: 24px;
+}
+
+.footer {
+    text-align: center;
+}

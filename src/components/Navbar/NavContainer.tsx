@@ -6,9 +6,8 @@ import {RootState} from "../../redux/redux-store";
 
 type Props = {
     isMobile: boolean;
-    collapsed: boolean;
 }
-export const NavContainer: React.FC<Props> = ({isMobile, collapsed}) => {
+export const NavContainer: React.FC<Props> = ({isMobile}) => {
     const isAuth = useSelector((state: RootState) => state.auth.isAuth);
     const {showingFriends, totalFriends} = useSelector((state: RootState) => state.usersPage);
     const blackTheme = useSelector((state: RootState) => state.app.blackTheme);
@@ -18,6 +17,6 @@ export const NavContainer: React.FC<Props> = ({isMobile, collapsed}) => {
     const onThemeChange = (isBlack: boolean) => dispatch(isBlackTheme(isBlack));
 
     return <Nav blackTheme={blackTheme} isMobile={isMobile} isVisible={isVisible} isBlackTheme={onThemeChange} isAuth={isAuth}
-                friendsCount={totalFriends} friends={showingFriends} collapsed={collapsed}/>
+                friendsCount={totalFriends} friends={showingFriends}/>
 }
 
